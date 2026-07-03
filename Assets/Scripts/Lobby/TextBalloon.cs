@@ -20,6 +20,11 @@ public class TextBalloon : MonoBehaviour
         sequence.Chain(Tween.Alpha(canvasGroup, 0f, duration));
     }
 
+    public virtual void ImmediatelyDisappear()
+    {
+        canvasGroup.alpha = 0f;
+    }
+
     public virtual void SetText(string str)
     {
         text.SetText(str);

@@ -10,6 +10,14 @@ public class JokeBalloon : TextBalloon
 
     private Sequence sequence;
     
+    void Update()
+    {
+        if (LobbyManager.instance.State != State.STANDBY)
+        {
+            ImmediatelyDisappear();
+        }
+    }
+
     public void Joke()
     {
         if (!isAvailable) return;
