@@ -41,6 +41,8 @@ public class UnitSelection : MonoBehaviour
 
     void ChangeState()
     {
+        LobbyManager.instance.Camera.ZoomAndMove(new Vector3(0, 0, -10), 5, 0f);
+        
         if (selectedCommander == null || selectedAttacker == null || selectedSupporter == null)
         {
             LobbyManager.instance.ChangeState(State.BOSS_SELECTED);

@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] State state;
     [SerializeField] BossSelection bossSelection;
     [SerializeField] UnitSelection unitSelection;
+    [SerializeField] LobbyCamera lobbyCamera;
 
     [SerializeField] Button startButton;
     [SerializeField] Button goButton;
@@ -26,6 +27,7 @@ public class LobbyManager : MonoBehaviour
     public State State => state;
     public BossSelection BossSelection => bossSelection;
     public UnitSelection UnitSelection => unitSelection;
+    public LobbyCamera Camera => lobbyCamera;
 
     void Awake()
     {
