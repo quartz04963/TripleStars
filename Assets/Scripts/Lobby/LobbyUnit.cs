@@ -6,6 +6,8 @@ public class LobbyUnit : MonoBehaviour
     [SerializeField] UnitLobbyData unitData;
     [SerializeField] JokeBalloon jokeBalloon;
 
+    [SerializeField] SpriteRenderer spriteRenderer;
+
     public UnitLobbyData UnitData => unitData; 
 
     public void OnClicked()
@@ -24,14 +26,12 @@ public class LobbyUnit : MonoBehaviour
     public void Select()
     {
         unitData.IsSelected = true;
-
-        // TODO: 윤곽선 하이라이트 활성화
+        spriteRenderer.material.SetFloat("_OutlineEnabled", 1f);
     }
 
     public void Deselect()
     {
         unitData.IsSelected = false;
-
-        // TODO: 윤곽선 하이라이트 비활성화
+        spriteRenderer.material.SetFloat("_OutlineEnabled", 0f);
     }
 }

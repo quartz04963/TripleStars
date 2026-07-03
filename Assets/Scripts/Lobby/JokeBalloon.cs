@@ -26,9 +26,9 @@ public class JokeBalloon : TextBalloon
         ChainDisappear(sequence, fadeOutDuration);
     }
     
+    // 추후 요청 시 기능 구현
     public string GetJokeText()
     {
-        // TODO: 추후 요청 시 기능 구현
         return "Joke";
     }
 }

@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f53e467f58f93e14882f91c5cfaf1ffa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
     skillDescription1: 
     skillDescription2: 
   jokeBalloon: {fileID: 7870738437418699745}
+  spriteRenderer: {fileID: 7322939796954172480}
 --- !u!1 &4700410794325575325
 GameObject:
   m_ObjectHideFlags: 0

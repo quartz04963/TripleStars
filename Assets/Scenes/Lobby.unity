@@ -6443,6 +6443,10 @@ PrefabInstance:
       propertyPath: unitData.skillDescription2
       value: Skill 2 Description
       objectReference: {fileID: 0}
+    - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f53e467f58f93e14882f91c5cfaf1ffa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
