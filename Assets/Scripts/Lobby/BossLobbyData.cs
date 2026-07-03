@@ -1,8 +1,9 @@
 using System;
+using UnityEngine;
 
 public enum BossCode
 {
-    None,
+    NULL,
     BOSS_1,
     BOSS_2,
     BOSS_3,
@@ -19,11 +20,15 @@ public enum Difficulty
 }
 
 [Serializable]
-public readonly struct BossLobbyData
+public class BossLobbyData
 {
-    public readonly BossCode bossCode;
-    public readonly string name;
-    public readonly Difficulty difficulty;
+    [SerializeField] BossCode bossCode;
+    [SerializeField] string name;
+    [SerializeField] Difficulty difficulty;
+
+    public BossCode BossCode => bossCode;
+    public string Name => name;
+    public Difficulty Difficulty => difficulty;
 
     public BossLobbyData(BossCode bossCode, string name, Difficulty difficulty)
     {

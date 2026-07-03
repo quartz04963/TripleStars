@@ -1,26 +1,31 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
+public enum State
+{
+    STANDBY,
+    SELECTING_BOSS, 
+    BOSS_SELECTED,
+    SELECTING_UNIT,
+    READY,
+}
 
 public class LobbyManager : MonoBehaviour
 {
-    enum State
-    {
-        STANDBY,
-        SELECTING_BOSS, 
-        BOSS_SELECTED,
-        SELECTING_CHARACTER,
-        READY,
-    }
     [SerializeField] State state;
-    [SerializeField] BossCode selectedBoss;
+    [SerializeField] BossSelection bossSelection;
+    [SerializeField] UnitSelection unitSelection;
+
     [SerializeField] Button startButton;
     [SerializeField] Button goButton;
     [SerializeField] Button menuButton;
     [SerializeField] Button backButton;
-    [SerializeField] GameObject bossSelectionPanel;
 
     public static LobbyManager instance;
+
+    public State State => state;
+    public BossSelection BossSelection => bossSelection;
+    public UnitSelection UnitSelection => unitSelection;
 
     void Awake()
     {
@@ -35,60 +40,34 @@ public class LobbyManager : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            Back();
-        }
+
     }
     
-    void ChangeState(State toState)
+    public void ChangeState(State toState)
     {
         state = toState;
 
-        switch (toState)
+        bool startActive = toState == State.STANDBY ? true : false;
+        bool goActive = toState == State.BOSS_SELECTED || toState == State.READY ? true : false;
+        bool menuActive = toState == State.SELECTING_UNIT ? false : true;
+        bool backActive = toState == State.STANDBY || toState == State.SELECTING_UNIT ? false : true;
+        bool bossSelectionActive = toState == State.SELECTING_BOSS ? true : false;
+        bool unitSelectionActive = toState == State.SELECTING_UNIT ? true : false;
+
+        startButton.gameObject.SetActive(startActive);
+        goButton.gameObject.SetActive(goActive);
+        menuButton.gameObject.SetActive(menuActive);
+        backButton.gameObject.SetActive(backActive);
+        bossSelection.gameObject.SetActive(bossSelectionActive);
+        unitSelection.gameObject.SetActive(unitSelectionActive);
+
+        goButton.interactable = toState == State.READY ? true : false;
+
+        if (toState == State.STANDBY) 
         {
-            case State.STANDBY:
-                startButton.gameObject.SetActive(true);
-                goButton.gameObject.SetActive(false);
-                menuButton.gameObject.SetActive(true);
-                backButton.gameObject.SetActive(false);
-                bossSelectionPanel.gameObject.SetActive(false);
-                break;
-
-            case State.SELECTING_BOSS:
-                startButton.gameObject.SetActive(false);
-                goButton.gameObject.SetActive(false);
-                menuButton.gameObject.SetActive(true);
-                backButton.gameObject.SetActive(true);
-                bossSelectionPanel.gameObject.SetActive(true);
-                break;
-
-            case State.BOSS_SELECTED:
-                startButton.gameObject.SetActive(false);
-                goButton.gameObject.SetActive(true);
-                menuButton.gameObject.SetActive(true);
-                backButton.gameObject.SetActive(true);
-                bossSelectionPanel.gameObject.SetActive(false);
-                goButton.interactable = false;
-                break;
-
-            case State.SELECTING_CHARACTER:
-                startButton.gameObject.SetActive(false);
-                goButton.gameObject.SetActive(false);
-                menuButton.gameObject.SetActive(false);
-                backButton.gameObject.SetActive(false);
-                bossSelectionPanel.gameObject.SetActive(false);
-                break;
-
-            case State.READY:
-                startButton.gameObject.SetActive(false);
-                goButton.gameObject.SetActive(true);
-                menuButton.gameObject.SetActive(true);
-                backButton.gameObject.SetActive(true);
-                bossSelectionPanel.gameObject.SetActive(false);
-                goButton.interactable = true;
-                break;
+            unitSelection.RemoveSelectedUnits();
         }
+        // unitSelection.ShowSelectedUnits();
     }
 
     #region 버튼 클릭
@@ -103,25 +82,19 @@ public class LobbyManager : MonoBehaviour
     {
         if (state != State.READY) return;
 
-        // 스테이지 돌입
+        // TODO: 스테이지 돌입
     }
 
     public void Back()
     {
         switch (state)
         {
-            case State.SELECTING_BOSS: ChangeState(State.STANDBY); break;
-            case State.BOSS_SELECTED: ChangeState(State.SELECTING_BOSS); break;
-            case State.READY: ChangeState(State.SELECTING_BOSS); break;
+            case State.SELECTING_BOSS: 
+            case State.BOSS_SELECTED:
+            case State.READY: 
+                ChangeState(State.STANDBY);
+                break;
         }
     }
     #endregion
-
-    public void SelectBoss(BossCode bossCode)
-    {
-        if (state != State.SELECTING_BOSS) return;
-
-        selectedBoss = bossCode;
-        ChangeState(State.BOSS_SELECTED);
-    }
 }
