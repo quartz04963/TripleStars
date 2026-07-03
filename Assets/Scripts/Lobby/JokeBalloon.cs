@@ -14,7 +14,7 @@ public class JokeBalloon : TextBalloon
     {
         if (LobbyManager.instance.State != State.STANDBY)
         {
-            ImmediatelyDisappear();
+            if (sequence.isAlive) sequence.Complete();
         }
     }
 
