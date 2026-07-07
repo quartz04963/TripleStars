@@ -40,11 +40,6 @@ public class LobbyManager : MonoBehaviour
         ChangeState(State.STANDBY);
     }
 
-    void Update()
-    {
-
-    }
-    
     public void ChangeState(State toState)
     {
         state = toState;

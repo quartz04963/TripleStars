@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,29 +6,29 @@ using UnityEngine.UI;
 public class HpInfo : MonoBehaviour
 {
     [SerializeField] string unitName;
-    [SerializeField] int maxHp;
-    [SerializeField] int currentHp;
+    [SerializeField] float maxHp;
+    [SerializeField] float currentHp;
 
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] Image hpBarImg;
 
-    public void Init(string unitName, int maxHp)
+    public void Init(string unitName, float maxHp)
     {
         this.unitName = unitName;
         this.maxHp = maxHp;
         currentHp = maxHp;
 
         nameText.SetText(unitName);
-        hpText.SetText(currentHp + " / " + maxHp);
+        hpText.SetText((int)currentHp + " / " + (int)maxHp);
         hpBarImg.fillAmount = 1f;
     }
 
-    public void SetHp(int currentHp)
+    public void AddHp(float delta)
     {
-        this.currentHp = currentHp;
+        currentHp = delta < 0 ? Math.Max(currentHp + delta, 0) : Math.Min(currentHp + delta, maxHp);
         
-        hpText.SetText(currentHp + " / " + maxHp);
-        hpBarImg.fillAmount = currentHp / maxHp;
+        hpText.SetText((int)currentHp + " / " + (int)maxHp);
+        hpBarImg.fillAmount = delta / maxHp;
     }
 }

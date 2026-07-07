@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class JokeBalloon : TextBalloon
 {
-    [SerializeField] bool isAvailable = true;
     [SerializeField] float fadeInDuration;
     [SerializeField] float remainingDuration;
     [SerializeField] float fadeOutDuration;
 
+    private bool isAvailable = true;
     private Sequence sequence;
     
     void Update()

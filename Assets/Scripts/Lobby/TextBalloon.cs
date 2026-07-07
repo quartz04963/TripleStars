@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class TextBalloon : MonoBehaviour
 {
-    [SerializeField] Image background;
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] protected Image background;
+    [SerializeField] protected TextMeshProUGUI text;
+    [SerializeField] protected CanvasGroup canvasGroup;
 
     public virtual void ChainAppear(Sequence sequence, float duration)
     {
