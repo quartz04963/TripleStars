@@ -65,8 +65,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 35f23c48db908de47a926c4bb1831818, type: 3}
-  m_Type: 3
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HpInfo
   unitName: 
   maxHp: 0
-  currentHp: 0
+  hp: 0
   nameText: {fileID: 7472079516546980178}
   hpText: {fileID: 343838553451804361}
   hpBarImg: {fileID: 620954950689902924}

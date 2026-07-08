@@ -33,9 +33,12 @@ abstract public class Unit : MonoBehaviour
     [SerializeField] protected bool isTargetable = true;
     [SerializeField] protected bool isMovable = true;
     [SerializeField] protected bool isAttackable = true;
+    [SerializeField] protected bool isHealable = true;
 
     private ContactFilter2D enemySearchFilter;
     private readonly List<Collider2D> enemiesInReach = new();
+
+    public bool IsHealable => isHealable;
 
     protected virtual void Awake()
     {
@@ -64,9 +67,13 @@ abstract public class Unit : MonoBehaviour
     {
         skillInfo1.Init(skillName1, cooldown1, skillKey1);
 
-        if (skillInfo2 != null)
+        if (skillName2 != null)
         {
             skillInfo2.Init(skillName2, cooldown2, skillKey2);
+        }
+        else if (skillInfo2 != null)
+        {
+            skillInfo2.gameObject.SetActive(false);
         }
     }
 

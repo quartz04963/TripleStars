@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-abstract public class Attacker : Unit
+abstract public class Follower : Unit
 {
     [SerializeField] private LineRenderer lineRenderer;
 

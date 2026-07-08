@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Archer : Attacker
+public class Archer : Follower
 {
     void Start()
     {
@@ -34,6 +34,9 @@ public class Archer : Attacker
 
     protected override void HandlePassiveSkill()
     {
+        // 스킬명: 도주
+        // 효과: 어그로 끌렸을 때 이동속도 VERYFAST로 증가
+        
         if (isTargeted)
         {
             moveSpeed = VERYFAST;
