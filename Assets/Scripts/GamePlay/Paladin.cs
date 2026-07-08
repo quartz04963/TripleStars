@@ -8,6 +8,8 @@ public class Paladin : Commander
     {
         InitStats("Paladin", 100, 0.8f, 600, 15, 0.3f, 1, 240);
         InitSkills("Defense", 5, Keyboard.current.spaceKey, "I'm your opponent", 30, Keyboard.current.qKey);
+
+        ShowAttackReachArea(true);
     }
 
     void Update()

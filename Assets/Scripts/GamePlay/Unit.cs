@@ -14,7 +14,7 @@ abstract public class Unit : MonoBehaviour
     [Header("유닛 정보")]
     [SerializeField] protected string unitName;
     [SerializeField] protected float hitRatio;
-    [SerializeField] protected float attackReach;
+    [SerializeField] protected float attackRange;
     [SerializeField] protected float attackDamage;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackPeriod;
@@ -26,7 +26,7 @@ abstract public class Unit : MonoBehaviour
     [Header("컴포넌트 및 기타 참조")]
     [SerializeField] protected Rigidbody2D rigidbody;
     [SerializeField] protected LayerMask enemyLayer;
-
+    [SerializeField] protected SpriteRenderer attackRangeSR;
     [SerializeField] protected GameObject baseAttackProjectilePrf;
 
     [Header("상태 변수")]
@@ -53,7 +53,7 @@ abstract public class Unit : MonoBehaviour
     {
         this.unitName = unitName;
         this.hitRatio = hitRatio;
-        this.attackReach = attackReach;
+        this.attackRange = attackReach;
         this.attackDamage = attackDamage;
         this.attackDelay = attackDelay;
         this.attackPeriod = attackPeriod;
@@ -101,6 +101,13 @@ abstract public class Unit : MonoBehaviour
         // 추후 애니메이션 넣기
     }
 
+    public virtual void ShowAttackReachArea(bool isActive)
+    {
+        attackRangeSR.transform.localScale = new Vector3(attackRange / MAGNITUDE, attackRange / MAGNITUDE, 1);
+        attackRangeSR.material.SetFloat("_Thickness", 5f * MAGNITUDE / attackRange);
+        attackRangeSR.gameObject.SetActive(isActive);
+    }
+
     abstract protected void HandleMove();
     abstract protected void HandleAttack();
     abstract protected void HandlePassiveSkill();
@@ -108,7 +115,7 @@ abstract public class Unit : MonoBehaviour
     abstract protected void UseSkill2();
 
     #region 유틸리티
-    protected virtual int FindEnemiesInReach(float radius)
+    protected virtual int FindEnemiesInRange(float radius)
     {
         enemiesInReach.Clear();
 
@@ -117,7 +124,7 @@ abstract public class Unit : MonoBehaviour
 
     protected virtual Enemy FindNearestEnemy(float radius)
     {
-        FindEnemiesInReach(radius);
+        FindEnemiesInRange(radius);
 
         Enemy nearest = null;
         float minSqrDist = float.MaxValue;

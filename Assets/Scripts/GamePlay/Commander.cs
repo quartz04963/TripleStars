@@ -36,7 +36,7 @@ abstract public class Commander : Unit
 
         if (isMovable && rigidbody.linearVelocity.magnitude > 0) return; // 이동 중 공격 불가
 
-        Enemy target = FindNearestEnemy(attackReach);
+        Enemy target = FindNearestEnemy(attackRange / MAGNITUDE);
         if (target == null) return;
 
         lastAttackTime = Time.time;
