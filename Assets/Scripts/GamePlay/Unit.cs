@@ -89,8 +89,13 @@ abstract public class Unit : MonoBehaviour
     {
         if (isImmune) return false;
 
-        hpInfo.AddHp(damage * hitRatio);
+        hpInfo.AddHp(-1 * damage * hitRatio);
         // 추후 애니메이션 넣기
+
+        if (hpInfo.Hp <= 0)
+        {
+            Die();
+        }
 
         return true;
     }
@@ -101,9 +106,16 @@ abstract public class Unit : MonoBehaviour
         // 추후 애니메이션 넣기
     }
 
+    public virtual void Die()
+    {
+        // 추후 애니메이션 넣기
+
+        Destroy(gameObject);
+    }
+
     public virtual void ShowAttackReachArea(bool isActive)
     {
-        float radius = attackRange / MAGNITUDE;
+        float radius = 2 * attackRange / MAGNITUDE;
 
         attackRangeSR.transform.localScale = new Vector3(radius, radius, 1);
         attackRangeSR.material.SetFloat("_Thickness", 5f / radius);
