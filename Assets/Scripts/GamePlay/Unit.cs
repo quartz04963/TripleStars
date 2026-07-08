@@ -4,8 +4,6 @@ using UnityEngine.InputSystem.Controls;
 
 abstract public class Unit : MonoBehaviour
 {
-    public static readonly float MAGNITUDE = 100;
-
     public static readonly float SLOW = 240;
     public static readonly float NORMAL = 360;
     public static readonly float FAST = 480;
@@ -115,7 +113,7 @@ abstract public class Unit : MonoBehaviour
 
     public virtual void ShowAttackReachArea(bool isActive)
     {
-        float radius = 2 * attackRange / MAGNITUDE;
+        float radius = 2 * attackRange / GamePlayUtils.MAGNITUDE;
 
         attackRangeSR.transform.localScale = new Vector3(radius, radius, 1);
         attackRangeSR.material.SetFloat("_Thickness", 5f / radius);
@@ -125,6 +123,7 @@ abstract public class Unit : MonoBehaviour
     abstract protected void HandleMove();
     abstract protected void HandleAttack();
     abstract protected void HandlePassiveSkill();
+    abstract protected void HandleSkillUse();
     abstract protected void UseSkill1();
     abstract protected void UseSkill2();
 

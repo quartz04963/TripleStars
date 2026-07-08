@@ -6,8 +6,8 @@ public class Paladin : Commander
 {
     void Start()
     {
-        InitStats("Paladin", 100, 0.8f, 600, 15, 0.3f, 1, 240);
-        InitSkills("Defense", 5, Keyboard.current.spaceKey, "I'm your opponent", 30, Keyboard.current.qKey);
+        InitStats("Paladin", 100, 0.8f, 600, 15, 0.3f, 1f, SLOW);
+        InitSkills("Defense", 5, Keyboard.current.spaceKey, "I'm Your Opponent", 30, Keyboard.current.qKey);
 
         ShowAttackReachArea(true);
     }
@@ -24,8 +24,10 @@ public class Paladin : Commander
         HandleMove();
     }
 
+    protected override void HandlePassiveSkill() { }
+
     // 테스트 용
-    void HandleSkillUse()
+    protected override void HandleSkillUse()
     {
         if (isAttackable)
         {
@@ -39,8 +41,6 @@ public class Paladin : Commander
             }
         }
     }
-
-    protected override void HandlePassiveSkill() { }
 
     protected override async void UseSkill1()
     {

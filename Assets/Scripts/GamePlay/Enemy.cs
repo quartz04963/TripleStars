@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        hpInfo.Init(unitName, 100);
+        hpInfo.Init(unitName, 5000);
     }
 
     public virtual void TakeDamage(float damage)
