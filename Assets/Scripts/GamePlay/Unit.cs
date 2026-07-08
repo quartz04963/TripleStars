@@ -37,7 +37,7 @@ abstract public class Unit : MonoBehaviour
     [SerializeField] protected bool isAttackable = true;
 
     private ContactFilter2D enemySearchFilter;
-    private readonly List<Collider2D> enemiesInReach = new(); 
+    private readonly List<Collider2D> enemiesInReach = new();
 
     protected virtual void Awake()
     {
@@ -103,8 +103,10 @@ abstract public class Unit : MonoBehaviour
 
     public virtual void ShowAttackReachArea(bool isActive)
     {
-        attackRangeSR.transform.localScale = new Vector3(attackRange / MAGNITUDE, attackRange / MAGNITUDE, 1);
-        attackRangeSR.material.SetFloat("_Thickness", 5f * MAGNITUDE / attackRange);
+        float radius = attackRange / MAGNITUDE;
+
+        attackRangeSR.transform.localScale = new Vector3(radius, radius, 1);
+        attackRangeSR.material.SetFloat("_Thickness", 5f / radius);
         attackRangeSR.gameObject.SetActive(isActive);
     }
 
@@ -144,6 +146,11 @@ abstract public class Unit : MonoBehaviour
         }
 
         return nearest;
+    }
+
+    protected virtual bool GetInRange(Transform transform, float radius)
+    {
+        return (this.transform.position - transform.position).sqrMagnitude <= radius * radius;
     }
     #endregion
 }

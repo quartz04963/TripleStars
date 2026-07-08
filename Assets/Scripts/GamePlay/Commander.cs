@@ -6,6 +6,7 @@ abstract public class Commander : Unit
 {
     private Vector2 moveDirection;
     private float lastAttackTime;
+    private Enemy target;
 
     protected virtual void GetDirection()
     {
@@ -36,7 +37,11 @@ abstract public class Commander : Unit
 
         if (isMovable && rigidbody.linearVelocity.magnitude > 0) return; // 이동 중 공격 불가
 
-        Enemy target = FindNearestEnemy(attackRange / MAGNITUDE);
+        if (target == null || !GetInRange(target.transform, attackRange / MAGNITUDE)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
+        {
+            target = FindNearestEnemy(attackRange / MAGNITUDE);
+        }
+
         if (target == null) return;
 
         lastAttackTime = Time.time;
