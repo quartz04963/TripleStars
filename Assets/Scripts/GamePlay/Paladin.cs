@@ -26,7 +26,6 @@ public class Paladin : Commander
 
     protected override void HandlePassiveSkill() { }
 
-    // 테스트 용
     protected override void HandleSkillUse()
     {
         if (isAttackable)
@@ -57,12 +56,12 @@ public class Paladin : Commander
 
     protected override void UseSkill2()
     {
-        // TODO: 스킬 2 구현
-
         // 스킬명: 네 상대는 나다
         // 효과: 보스 어그로 끌기
 
         if (!skillInfo2.StartCooldown()) return;
         // 추후 애니메이션 넣기
+
+        GamePlayManager.instance.Boss.ChangeTarget(this);
     }
 }

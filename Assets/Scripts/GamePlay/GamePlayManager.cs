@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GamePlayManager : MonoBehaviour
 {
+    [SerializeField] Boss boss;
     [SerializeField] Commander commander;
     [SerializeField] Follower attacker;
     [SerializeField] Follower supporter;
@@ -9,6 +10,7 @@ public class GamePlayManager : MonoBehaviour
 
     public static GamePlayManager instance;
 
+    public Boss Boss => boss;
     public Commander Commander => commander;
 
     void Awake()

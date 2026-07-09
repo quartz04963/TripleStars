@@ -65,7 +65,7 @@ public class Saintess : Follower
 
         lastHealTime = Time.time;
 
-        // 추후 애니메이션 넣기
+        // 추후 애니메이션(VFX) 넣기
 
         unitsInReach.Clear();
 

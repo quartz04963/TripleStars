@@ -70,7 +70,8 @@ public class Archer : Follower
         if (target == null) return;
         
         if (!skillInfo1.StartCooldown()) return;
-
+        // 추후 애니메이션 넣기
+        
         await Task.Delay(0);
 
         Projectile projectile = Instantiate(explosiveArrowPrf, transform.position, transform.rotation).GetComponent<Projectile>();

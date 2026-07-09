@@ -1435,6 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a079facd380a9fe48b8abc50e198712e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GamePlayManager
+  boss: {fileID: 0}
   commander: {fileID: 1525048747}
   attacker: {fileID: 1558029794}
   supporter: {fileID: 193283759}
@@ -1810,7 +1811,7 @@ GameObject:
   - component: {fileID: 1928327276}
   - component: {fileID: 1928327277}
   m_Layer: 7
-  m_Name: Enemy (Test)
+  m_Name: Boss (Test)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1936,10 +1937,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1928327273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da86a749360af24e84fc9df54817db9, type: 3}
+  m_Script: {fileID: 11500000, guid: 14d8d6ff168c03f42a12e8a99ef591ee, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  unitName: Enemy 1
+  m_EditorClassIdentifier: Assembly-CSharp::Boss
+  unitName: Boss 1
   hpInfo: {fileID: 805069170}
 --- !u!114 &1941148544 stripped
 MonoBehaviour:

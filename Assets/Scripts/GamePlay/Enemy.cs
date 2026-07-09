@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected string unitName;
+    [SerializeField] protected string enemyName;
     [SerializeField] protected HpInfo hpInfo;
 
-    void Start()
-    {
-        hpInfo.Init(unitName, 5000);
-    }
+    private Unit target;
 
     public virtual void TakeDamage(float damage)
     {
         hpInfo.AddHp(-1 * damage);
+    }
+
+    public virtual void ChangeTarget(Unit newTarget)
+    {
+        target.Untarget();
+        
+        target = newTarget;
+        newTarget.Target();
     }
 }
