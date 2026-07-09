@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a079facd380a9fe48b8abc50e198712e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GamePlayManager
-  boss: {fileID: 0}
+  boss: {fileID: 1928327277}
   commander: {fileID: 1525048747}
   attacker: {fileID: 1558029794}
   supporter: {fileID: 193283759}
@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d8d6ff168c03f42a12e8a99ef591ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  unitName: Boss 1
+  enemyName: 
   hpInfo: {fileID: 805069170}
 --- !u!114 &1941148544 stripped
 MonoBehaviour:
@@ -2175,6 +2175,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baaeac64474cf54e9fda65e44550dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HpInfo
+--- !u!1001 &2093374770773497410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2811224764019538959, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_Name
+      value: Vanguard
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261425907487105249, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: hpInfo
+      value: 
+      objectReference: {fileID: 1941148544}
+    - target: {fileID: 3261425907487105249, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: skillInfo1
+      value: 
+      objectReference: {fileID: 904877837}
+    - target: {fileID: 3261425907487105249, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: skillInfo2
+      value: 
+      objectReference: {fileID: 1925940781}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3970206851804039359, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}
 --- !u!1001 &4571312242404576819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2512,6 +2581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saintess
       objectReference: {fileID: 0}
+    - target: {fileID: 4787701836050194201, guid: cbe8c91726a961b47ae7eb27e35c8509, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7355610277391542581, guid: cbe8c91726a961b47ae7eb27e35c8509, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -2638,8 +2711,9 @@ SceneRoots:
   - {fileID: 1767525459}
   - {fileID: 913787277}
   - {fileID: 2063303273}
+  - {fileID: 1521195499}
   - {fileID: 1928327275}
   - {fileID: 8243475656936992122}
   - {fileID: 5314463886423933120}
   - {fileID: 7130072946801350571}
-  - {fileID: 1521195499}
+  - {fileID: 2093374770773497410}

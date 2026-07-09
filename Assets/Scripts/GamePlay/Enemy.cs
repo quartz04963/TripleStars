@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void ChangeTarget(Unit newTarget)
     {
-        target.Untarget();
+        if (target != null) target.Untarget();
         
         target = newTarget;
         newTarget.Target();

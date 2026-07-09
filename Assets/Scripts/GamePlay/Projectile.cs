@@ -13,9 +13,10 @@ public class Projectile : MonoBehaviour
         Move();
     }
     
-    public void Init(Enemy target)
+    public void Init(Enemy target, float damage)
     {
         this.target = target;
+        this.damage = damage;
     }
 
     void Move()

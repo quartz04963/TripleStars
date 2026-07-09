@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class Archer : Follower
 {
     [Header("Archer")]
+    [SerializeField] float explosiveArrowDmg;
     [SerializeField] GameObject explosiveArrowPrf;
 
     void Start()
@@ -75,7 +76,7 @@ public class Archer : Follower
         await Task.Delay(0);
 
         Projectile projectile = Instantiate(explosiveArrowPrf, transform.position, transform.rotation).GetComponent<Projectile>();
-        projectile.Init(target);
+        projectile.Init(target, explosiveArrowDmg * attackFactor);
     }
 
     protected override void UseSkill2() { }

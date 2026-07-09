@@ -48,6 +48,6 @@ abstract public class Commander : Unit
         // 추후 애니메이션 넣기
 
         await Task.Delay((int)(attackDelay * 1000)); // 데미지가 들어가기까지 모션 딜레이는 있으나 도중에 캔슬되지는 않음
-        target.TakeDamage(attackDamage);
+        target.TakeDamage(attackDamage * attackFactor);
     }
 }

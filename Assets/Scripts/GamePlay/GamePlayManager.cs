@@ -12,6 +12,7 @@ public class GamePlayManager : MonoBehaviour
 
     public Boss Boss => boss;
     public Commander Commander => commander;
+    public Follower Attacker => attacker;
 
     void Awake()
     {

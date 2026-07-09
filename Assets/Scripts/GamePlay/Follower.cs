@@ -20,11 +20,20 @@ abstract public class Follower : Unit
         destination = transform.position;
     }
 
+    #region 이동 관련
     protected virtual void GetDestination()
     {
         if (!moveButton.isPressed) return;
 
         destination = MouseToWorldPoint();
+    }
+
+    protected virtual void ResetDestination()
+    {
+        destination = transform.position;
+        moveDirection = Vector2.zero;
+        rigidbody.linearVelocity = Vector2.zero;
+        ShowPath(false);
     }
 
     protected virtual void ShowPath(bool isActive)
@@ -40,12 +49,10 @@ abstract public class Follower : Unit
         lineRenderer.SetPosition(1, destination);
     }
 
-    protected virtual void StopMove()
+    public override void Teleport(Vector3 destination)
     {
-        destination = transform.position;
-        moveDirection = Vector2.zero;
-        rigidbody.linearVelocity = Vector2.zero;
-        ShowPath(false);
+        base.Teleport(destination);
+        ResetDestination();
     }
 
     protected override void HandleMove()
@@ -54,7 +61,7 @@ abstract public class Follower : Unit
 
         if ((destination - (Vector2)transform.position).sqrMagnitude < moveSpeed / GamePlayUtils.MAGNITUDE * Time.deltaTime)
         {
-            StopMove();
+            ResetDestination();
             return;
         }
 
@@ -64,6 +71,7 @@ abstract public class Follower : Unit
 
         // 추후 애니메이션 넣기
     }
+    #endregion
 
     protected override async void HandleAttack()
     {
@@ -86,7 +94,7 @@ abstract public class Follower : Unit
         await Task.Delay((int)(attackDelay * 1000)); // 투사체 발사까지 모션 딜레이는 있으나 도중에 캔슬되지는 않음
 
         Projectile projectile = Instantiate(baseAttackProjectilePrf, transform.position, transform.rotation).GetComponent<Projectile>();
-        projectile.Init(target);
+        projectile.Init(target, attackDamage * attackFactor);
     }
 
     #region 유틸리티

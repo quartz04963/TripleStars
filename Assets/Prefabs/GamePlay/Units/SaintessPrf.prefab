@@ -102,10 +102,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7355610277391542581}
   - component: {fileID: 1310703555654136248}
-  - component: {fileID: 4994150863446125405}
   - component: {fileID: 2027737955202505760}
-  - component: {fileID: 8529779778959482961}
+  - component: {fileID: 4994150863446125405}
   - component: {fileID: 3914418537687981384}
+  - component: {fileID: 8529779778959482961}
   m_Layer: 6
   m_Name: SaintessPrf
   m_TagString: Untagged
@@ -189,6 +189,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &2027737955202505760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787701836050194201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90e717ef7bc5444cad6bb8a5e688e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Saintess
+  unitName: Saintess
+  damageFactor: 0
+  attackRange: 1400
+  attackDamage: 7
+  attackDelay: 0.2
+  attackPeriod: 0.5
+  moveSpeed: 480
+  hpInfo: {fileID: 0}
+  skillInfo1: {fileID: 0}
+  skillInfo2: {fileID: 0}
+  rigidbody: {fileID: 4994150863446125405}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRangeSR: {fileID: 4544654959013051696}
+  baseAttackProjectilePrf: {fileID: 8887096522397417136, guid: 74bd64fb4e15cf740b42206f78e2eed3, type: 3}
+  isImmune: 0
+  isTargeted: 0
+  isTargetable: 1
+  isMovable: 1
+  isAttackable: 1
+  isHealable: 1
+  attackFactor: 1
+  lineRenderer: {fileID: 8529779778959482961}
+  passiveHealRange: 1400
+  passiveHealAmount: 1
+  passiveHealPeriod: 0.5
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &4994150863446125405
 Rigidbody2D:
   serializedVersion: 5
@@ -216,47 +258,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2027737955202505760
-MonoBehaviour:
+--- !u!58 &3914418537687981384
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4787701836050194201}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90e717ef7bc5444cad6bb8a5e688e20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Saintess
-  unitName: Saintess
-  hitRatio: 1.6
-  attackRange: 1400
-  attackDamage: 7
-  attackDelay: 0.2
-  attackPeriod: 0.5
-  moveSpeed: 480
-  hpInfo: {fileID: 0}
-  skillInfo1: {fileID: 0}
-  skillInfo2: {fileID: 0}
-  rigidbody: {fileID: 4994150863446125405}
-  enemyLayer:
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
-  attackRangeSR: {fileID: 4544654959013051696}
-  baseAttackProjectilePrf: {fileID: 8887096522397417136, guid: 74bd64fb4e15cf740b42206f78e2eed3, type: 3}
-  isImmune: 0
-  isTargeted: 0
-  isTargetable: 1
-  isMovable: 1
-  isAttackable: 1
-  isHealable: 1
-  lineRenderer: {fileID: 8529779778959482961}
-  passiveHealRange: 1400
-  passiveHealAmount: 1
-  passiveHealPeriod: 0.5
-  unitLayer:
+    m_Bits: 0
+  m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!120 &8529779778959482961
 LineRenderer:
   serializedVersion: 3
@@ -367,39 +404,3 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!58 &3914418537687981384
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4787701836050194201}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5

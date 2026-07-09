@@ -93,13 +93,13 @@ public class UnitSelection : MonoBehaviour
 
     public void RemoveSelectedUnits()
     {
-        selectedCommander?.Deselect();
+        if (selectedCommander != null) selectedCommander.Deselect();
         selectedCommander = null;
 
-        selectedAttacker?.Deselect();
+        if (selectedAttacker != null) selectedAttacker.Deselect();
         selectedAttacker = null;
 
-        selectedSupporter?.Deselect();
+        if (selectedSupporter != null) selectedSupporter.Deselect();
         selectedSupporter = null;
     }
 
@@ -109,15 +109,15 @@ public class UnitSelection : MonoBehaviour
         switch (currentUnit.UnitData.Role)
         {
             case Role.COMMANDER: 
-                selectedCommander?.Deselect();
+                if (selectedCommander != null) selectedCommander.Deselect();
                 selectedCommander = currentUnit; 
                 break;
             case Role.ATTACKER: 
-                selectedAttacker?.Deselect();
+                if (selectedAttacker != null) selectedAttacker.Deselect();
                 selectedAttacker = currentUnit; 
                 break;
             case Role.SUPPORTER: 
-                selectedSupporter?.Deselect();
+                if (selectedSupporter != null) selectedSupporter.Deselect();
                 selectedSupporter = currentUnit; 
                 break;
         }

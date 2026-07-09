@@ -11,7 +11,7 @@ abstract public class Unit : MonoBehaviour
 
     [Header("유닛 정보")]
     [SerializeField] protected string unitName;
-    [SerializeField] protected float hitRatio;
+    [SerializeField] protected float damageFactor;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float attackDamage;
     [SerializeField] protected float attackDelay;
@@ -34,6 +34,7 @@ abstract public class Unit : MonoBehaviour
     [SerializeField] protected bool isMovable = true;
     [SerializeField] protected bool isAttackable = true;
     [SerializeField] protected bool isHealable = true;
+    [SerializeField] protected float attackFactor = 1.0f;
 
     private ContactFilter2D enemySearchFilter;
     private readonly List<Collider2D> enemiesInReach = new();
@@ -53,7 +54,7 @@ abstract public class Unit : MonoBehaviour
     public virtual void InitStats(string unitName, float maxHp, float hitRatio, float attackReach, float attackDamage, float attackDelay, float attackPeriod, float moveSpeed)
     {
         this.unitName = unitName;
-        this.hitRatio = hitRatio;
+        this.damageFactor = hitRatio;
         this.attackRange = attackReach;
         this.attackDamage = attackDamage;
         this.attackDelay = attackDelay;
@@ -94,7 +95,7 @@ abstract public class Unit : MonoBehaviour
     {
         if (isImmune) return false;
 
-        hpInfo.AddHp(-1 * damage * hitRatio);
+        hpInfo.AddHp(-1 * damage * damageFactor);
         // 추후 애니메이션 넣기
 
         if (hpInfo.Hp <= 0)
@@ -118,6 +119,11 @@ abstract public class Unit : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public virtual void Teleport(Vector3 destination)
+    {
+        transform.position = destination;
+    }
+
     public virtual void ShowAttackReachArea(bool isActive)
     {
         float radius = 2 * attackRange / GamePlayUtils.MAGNITUDE;
@@ -125,6 +131,11 @@ abstract public class Unit : MonoBehaviour
         attackRangeSR.transform.localScale = new Vector3(radius, radius, 1);
         attackRangeSR.material.SetFloat("_Thickness", 5f / radius);
         attackRangeSR.gameObject.SetActive(isActive);
+    }
+
+    public virtual void AddAttackFactor(float delta)
+    {
+        attackFactor += delta;
     }
 
     abstract protected void HandleMove();
@@ -151,8 +162,7 @@ abstract public class Unit : MonoBehaviour
 
         foreach (Collider2D col in enemiesInReach)
         {
-            Enemy enemy = col.GetComponent<Enemy>();
-            if (enemy == null) continue;
+            if (!col.TryGetComponent<Enemy>(out var enemy)) continue;
 
             float sqrDist = (col.transform.position - transform.position).sqrMagnitude;
 
