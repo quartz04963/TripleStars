@@ -5,14 +5,15 @@ using UnityEngine.InputSystem.Controls;
 
 abstract public class Follower : Unit
 {
+    [Header("Follower")]
     [SerializeField] private LineRenderer lineRenderer;
 
     protected ButtonControl moveButton; // 초기화 필수
+    protected Enemy target;
 
     private Vector2 destination;
     private Vector2 moveDirection;
     private float lastAttackTime;
-    private Enemy target;
 
     protected virtual void Init()
     {
@@ -39,17 +40,21 @@ abstract public class Follower : Unit
         lineRenderer.SetPosition(1, destination);
     }
 
+    protected virtual void StopMove()
+    {
+        destination = transform.position;
+        moveDirection = Vector2.zero;
+        rigidbody.linearVelocity = Vector2.zero;
+        ShowPath(false);
+    }
+
     protected override void HandleMove()
     {
         if (!isMovable) return;
 
         if ((destination - (Vector2)transform.position).sqrMagnitude < moveSpeed / GamePlayUtils.MAGNITUDE * Time.deltaTime)
         {
-            destination = transform.position;
-            moveDirection = Vector2.zero;
-            rigidbody.linearVelocity = Vector2.zero;
-            ShowPath(false);
-
+            StopMove();
             return;
         }
 

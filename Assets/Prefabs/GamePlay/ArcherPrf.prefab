@@ -159,6 +159,7 @@ MonoBehaviour:
   isAttackable: 1
   isHealable: 1
   lineRenderer: {fileID: 7921721335830844888}
+  explosiveArrowPrf: {fileID: 8005351218550307742, guid: 0e0f538fa890e6f438c0e745255ddbcb, type: 3}
 --- !u!120 &7921721335830844888
 LineRenderer:
   serializedVersion: 3

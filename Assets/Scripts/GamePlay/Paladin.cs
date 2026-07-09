@@ -47,7 +47,7 @@ public class Paladin : Commander
         // 스킬명: 방어
         // 효과: 사용 시 1초 간 무적
 
-        skillInfo1.StartCooldown();
+        if (!skillInfo1.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
         isImmune = true;
@@ -62,6 +62,7 @@ public class Paladin : Commander
         // 스킬명: 네 상대는 나다
         // 효과: 보스 어그로 끌기
 
-        skillInfo2.StartCooldown();
+        if (!skillInfo2.StartCooldown()) return;
+        // 추후 애니메이션 넣기
     }
 }

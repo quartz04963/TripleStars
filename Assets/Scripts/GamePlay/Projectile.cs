@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMove();
+        Move();
     }
     
     public void Init(Enemy target)
@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
         this.target = target;
     }
 
-    void HandleMove()
+    void Move()
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;
         rigidbody.linearVelocity = direction * speed / GamePlayUtils.MAGNITUDE;
@@ -31,8 +31,13 @@ public class Projectile : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy) && enemy == target)
         {
-            target.TakeDamage(damage);
-            Destroy(gameObject);
+            Hit();
         }
+    }
+
+    void Hit()
+    {
+        target.TakeDamage(damage);
+        Destroy(gameObject);
     }
 }

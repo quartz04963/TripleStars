@@ -1,8 +1,12 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Archer : Follower
 {
+    [Header("Archer")]
+    [SerializeField] GameObject explosiveArrowPrf;
+
     void Start()
     {
         Init();
@@ -58,14 +62,19 @@ public class Archer : Follower
         }
     }
 
-    protected override void UseSkill1()
+    protected override async void UseSkill1()
     {
-        // TODO: 스킬 구현
-
         // 스킬명: 폭탄 화살
         // 효과: 300 대미지 화살 발사
 
-        skillInfo1.StartCooldown();
+        if (target == null) return;
+        
+        if (!skillInfo1.StartCooldown()) return;
+
+        await Task.Delay(0);
+
+        Projectile projectile = Instantiate(explosiveArrowPrf, transform.position, transform.rotation).GetComponent<Projectile>();
+        projectile.Init(target);
     }
 
     protected override void UseSkill2() { }

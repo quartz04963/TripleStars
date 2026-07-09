@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Saintess : Follower
 {
+    [Header("Saintess")]
     [SerializeField] private float passiveHealRange;
     [SerializeField] private float passiveHealAmount;
     [SerializeField] private float passiveHealPeriod;
@@ -58,6 +60,7 @@ public class Saintess : Follower
     {
         // 스킬명: 힐
         // 효과: 0.5초마다 범위 내 아군의 hp를 1씩 회복
+        
         if (Time.time < lastHealTime + passiveHealPeriod) return;
 
         lastHealTime = Time.time;
@@ -89,14 +92,18 @@ public class Saintess : Follower
         }
     }
 
-    protected override void UseSkill1()
+    protected override async void UseSkill1()
     {
-        // TODO: 스킬 구현
-
         // 스킬명: 텔레포트
         // 효과: 지휘관에게 텔레포트
 
-        skillInfo1.StartCooldown();
+        if (!skillInfo1.StartCooldown()) return;
+        // 추후 애니메이션 넣기
+
+        await Task.Delay(0);
+
+        transform.position = GamePlayManager.instance.Commander.transform.position;
+        StopMove();
     }
 
     protected override void UseSkill2() { }
