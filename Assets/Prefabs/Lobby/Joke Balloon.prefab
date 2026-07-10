@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 8907968135562875630}
   - component: {fileID: 4933473758070424543}
   m_Layer: 0
-  m_Name: JokeBalloonPrf
+  m_Name: Joke Balloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

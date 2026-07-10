@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7322939796954172480}
   - component: {fileID: 6020835544450939739}
   m_Layer: 0
-  m_Name: LobbyUnitPrf
+  m_Name: Lobby Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
