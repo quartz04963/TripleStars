@@ -30,12 +30,12 @@ public class UnitSelection : MonoBehaviour
     {
         unitArtDict = new Dictionary<UnitCode, Sprite>
         {
-            {UnitCode.UNIT_1, unitArtList[0]},
-            {UnitCode.UNIT_2, unitArtList[1]},
-            {UnitCode.UNIT_3, unitArtList[2]},
-            {UnitCode.UNIT_4, unitArtList[3]},
-            {UnitCode.UNIT_5, unitArtList[4]},
-            {UnitCode.UNIT_6, unitArtList[5]},
+            {UnitCode.PALADIN, unitArtList[0]},
+            {UnitCode.ARCHER, unitArtList[1]},
+            {UnitCode.SAINTESS, unitArtList[2]},
+            {UnitCode.SWORDSMAN, unitArtList[3]},
+            {UnitCode.ASSASSIN, unitArtList[4]},
+            {UnitCode.VANGUARD, unitArtList[5]},
         };
     }
 

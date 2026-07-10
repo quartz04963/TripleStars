@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GamePlayManager : MonoBehaviour
+public class GameplayManager : MonoBehaviour
 {
     [SerializeField] Boss boss;
     [SerializeField] Commander commander;
@@ -8,7 +8,7 @@ public class GamePlayManager : MonoBehaviour
     [SerializeField] Follower supporter;
     [SerializeField] GameObject[] unitPrefabs;
 
-    public static GamePlayManager instance;
+    public static GameplayManager instance;
 
     public Boss Boss => boss;
     public Commander Commander => commander;

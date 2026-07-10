@@ -88,7 +88,7 @@ public class Swordsman : Commander
         // 추후 애니메이션 넣기
         
         isRolling = true;
-        rigidbody.linearVelocity = lastMoveDirection * rollingSpeed / GamePlayUtils.MAGNITUDE;
+        rigidbody.linearVelocity = lastMoveDirection * rollingSpeed / GameplayUtils.MAGNITUDE;
 
         cts1 = new CancellationTokenSource();
 

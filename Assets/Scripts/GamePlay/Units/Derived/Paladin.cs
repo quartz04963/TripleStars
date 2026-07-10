@@ -61,6 +61,6 @@ public class Paladin : Commander
         if (!skillInfo2.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
-        GamePlayManager.instance.Boss.ChangeTarget(this);
+        GameplayManager.instance.Boss.ChangeTarget(this);
     }
 }

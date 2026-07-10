@@ -2869,7 +2869,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 3
+      value: Saintess
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2917,7 +2917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 3
+      value: Saintess
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.role
@@ -2929,7 +2929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 3 Description
+      value: Saintess Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1
@@ -2941,15 +2941,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.b
-      value: 0.1960784
+      value: 0.9333334
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.g
-      value: 0.8039216
+      value: 0.9333334
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.r
-      value: 0.6039216
+      value: 0.6862745
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4028,7 +4028,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 2
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4076,7 +4076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 2
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.role
@@ -4088,7 +4088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 2 Description
+      value: Archer Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1
@@ -4100,15 +4100,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.1960784
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.g
-      value: 0.6470588
+      value: 0.8039216
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.6039216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4734,11 +4734,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 6
+      value: Vanguard
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4782,7 +4782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 6
+      value: Vanguard
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.role
@@ -4794,7 +4794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 6 Description
+      value: Vanguard Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1
@@ -5083,7 +5083,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 5
+      value: Assassin
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5131,7 +5131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 5
+      value: Assassin
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.role
@@ -5143,7 +5143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 5 Description
+      value: Assassin Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1
@@ -5155,15 +5155,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.b
-      value: 0.9333334
+      value: 0.6039216
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.g
-      value: 0.9333334
+      value: 0.9803922
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.r
-      value: 0.6862745
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6034,11 +6034,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 4
+      value: Swordsman
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6082,7 +6082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 4
+      value: Swordsman
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitCode
@@ -6090,7 +6090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 4 Description
+      value: Swordsman Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1
@@ -6102,15 +6102,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.b
-      value: 0.6039216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.g
-      value: 0.9803922
+      value: 0.6470588
       objectReference: {fileID: 0}
     - target: {fileID: 7322939796954172480, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6392,7 +6392,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 390462702249455622, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_Name
-      value: Unit 1
+      value: Paladin
       objectReference: {fileID: 0}
     - target: {fileID: 4934062727716507442, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6440,7 +6440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.name
-      value: Character 1
+      value: Paladin
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitCode
@@ -6448,7 +6448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.unitDescription
-      value: Character 1 Description
+      value: Paladin Description
       objectReference: {fileID: 0}
     - target: {fileID: 6020835544450939739, guid: 35bf429607692694486f7f9f83c6b16f, type: 3}
       propertyPath: unitData.skillDescription1

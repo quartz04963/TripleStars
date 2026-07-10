@@ -69,7 +69,7 @@ public class Saintess : Follower
 
         unitsInReach.Clear();
 
-        Physics2D.OverlapCircle(transform.position, passiveHealRange / GamePlayUtils.MAGNITUDE, unitSearchFilter, unitsInReach);
+        Physics2D.OverlapCircle(transform.position, passiveHealRange / GameplayUtils.MAGNITUDE, unitSearchFilter, unitsInReach);
 
         foreach (Collider2D col in unitsInReach)
         {
@@ -101,7 +101,7 @@ public class Saintess : Follower
 
         await Task.Delay(0);
 
-        transform.position = GamePlayManager.instance.Commander.transform.position;
+        transform.position = GameplayManager.instance.Commander.transform.position;
         ResetDestination();
     }
 

@@ -126,7 +126,7 @@ abstract public class Unit : MonoBehaviour
 
     public virtual void ShowAttackReachArea(bool isActive)
     {
-        float radius = 2 * attackRange / GamePlayUtils.MAGNITUDE;
+        float radius = 2 * attackRange / GameplayUtils.MAGNITUDE;
 
         attackRangeSR.transform.localScale = new Vector3(radius, radius, 1);
         attackRangeSR.material.SetFloat("_Thickness", 5f / radius);

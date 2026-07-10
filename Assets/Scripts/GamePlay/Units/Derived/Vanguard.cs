@@ -71,7 +71,7 @@ public class Vanguard : Follower
         buffedUnitList.Clear();
         unitsInReach.Clear();
 
-        Physics2D.OverlapCircle(transform.position, passiveHealRange / GamePlayUtils.MAGNITUDE, unitSearchFilter, unitsInReach);
+        Physics2D.OverlapCircle(transform.position, passiveHealRange / GameplayUtils.MAGNITUDE, unitSearchFilter, unitsInReach);
 
         foreach (Collider2D col in unitsInReach)
         {
@@ -120,8 +120,8 @@ public class Vanguard : Follower
 
         await Task.Delay(0);
 
-        GamePlayManager.instance.Commander.transform.position = transform.position;
-        GamePlayManager.instance.Attacker.Teleport(transform.position);
+        GameplayManager.instance.Commander.transform.position = transform.position;
+        GameplayManager.instance.Attacker.Teleport(transform.position);
     }
 
     protected override void UseSkill2() { }

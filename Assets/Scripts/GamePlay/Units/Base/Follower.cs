@@ -59,14 +59,14 @@ abstract public class Follower : Unit
     {
         if (!isMovable) return;
 
-        if ((destination - (Vector2)transform.position).sqrMagnitude < moveSpeed / GamePlayUtils.MAGNITUDE * Time.deltaTime)
+        if ((destination - (Vector2)transform.position).sqrMagnitude < moveSpeed / GameplayUtils.MAGNITUDE * Time.deltaTime)
         {
             ResetDestination();
             return;
         }
 
         moveDirection = (destination - (Vector2)transform.position).normalized;
-        rigidbody.linearVelocity = moveDirection * moveSpeed / GamePlayUtils.MAGNITUDE;
+        rigidbody.linearVelocity = moveDirection * moveSpeed / GameplayUtils.MAGNITUDE;
         ShowPath(true);
 
         // 추후 애니메이션 넣기
@@ -81,9 +81,9 @@ abstract public class Follower : Unit
 
         if (isMovable && rigidbody.linearVelocity.magnitude > 0) return; // 이동 중 공격 불가
 
-        if (target == null || !GetInRange(target.transform, attackRange / GamePlayUtils.MAGNITUDE)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
+        if (target == null || !GetInRange(target.transform, attackRange / GameplayUtils.MAGNITUDE)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
         {
-            target = FindNearestEnemy(attackRange / GamePlayUtils.MAGNITUDE);
+            target = FindNearestEnemy(attackRange / GameplayUtils.MAGNITUDE);
         }
 
         if (target == null) return;

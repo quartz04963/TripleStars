@@ -4,12 +4,12 @@ using UnityEngine;
 public enum UnitCode
 {
     NULL,
-    UNIT_1,
-    UNIT_2,
-    UNIT_3,
-    UNIT_4,
-    UNIT_5,
-    UNIT_6,
+    PALADIN,
+    ARCHER,
+    SAINTESS,
+    SWORDSMAN,
+    ASSASSIN,
+    VANGUARD,
 }
 
 public enum Role
