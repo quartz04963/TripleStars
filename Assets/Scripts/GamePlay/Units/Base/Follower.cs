@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Controls;
 abstract public class Follower : Unit
 {
     [Header("Follower")]
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] LineRenderer lineRenderer;
 
     protected ButtonControl moveButton; // 초기화 필수
     protected Enemy target;

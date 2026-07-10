@@ -4,13 +4,14 @@ using UnityEngine.InputSystem;
 
 abstract public class Commander : Unit
 {
-    private Vector2 moveDirection;
+    protected Vector2 moveDirection;
+    protected Enemy target;
+    
     private float lastAttackTime;
-    private Enemy target;
 
     protected virtual void GetDirection()
     {
-        moveDirection = Vector3.zero;
+        moveDirection = Vector2.zero;
 
         if (Keyboard.current.wKey.isPressed) moveDirection += Vector2.up;
         if (Keyboard.current.aKey.isPressed) moveDirection += Vector2.left;

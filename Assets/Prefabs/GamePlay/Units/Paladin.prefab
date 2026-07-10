@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6230936323590288741}
   - component: {fileID: 780288940777048900}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Attack Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paladin
   unitName: Paladin
-  hitRatio: 0.8
+  damageFactor: 0
   attackRange: 600
   attackDamage: 15
   attackDelay: 0.3
@@ -222,6 +222,7 @@ MonoBehaviour:
   isMovable: 1
   isAttackable: 1
   isHealable: 1
+  attackFactor: 1
 --- !u!50 &2778057742961557174
 Rigidbody2D:
   serializedVersion: 5
