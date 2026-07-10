@@ -25,7 +25,11 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] List<Sprite> unitArtList;
     public static Dictionary<UnitCode, Sprite> unitArtDict;
 
-    // 추후 딕셔너리 정리 필요
+    public UnitCode SelectedCommander => selectedCommander != null ? selectedCommander.UnitData.UnitCode : UnitCode.NULL;
+    public UnitCode SelectedAttacker => selectedAttacker != null ? selectedAttacker.UnitData.UnitCode : UnitCode.NULL;
+    public UnitCode SelectedSupporter => selectedSupporter != null ? selectedSupporter.UnitData.UnitCode : UnitCode.NULL;
+
+    // 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
     void InitLists()
     {
         unitArtDict = new Dictionary<UnitCode, Sprite>

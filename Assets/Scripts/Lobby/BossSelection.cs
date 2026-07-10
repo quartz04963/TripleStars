@@ -16,7 +16,9 @@ public class BossSelection : MonoBehaviour
     [SerializeField] List<Sprite> bossSpriteList;
     public static Dictionary<BossCode, Sprite> bossSpriteDict;
 
-    // 하드코딩, 추후 딕셔너리 정리 필요
+    public BossCode SelectedBoss => selectedBoss != null ? selectedBoss.BossCode : BossCode.NULL;
+
+    // 하드코딩, 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
     void InitLists()
     {
         bossDataList = new List<BossLobbyData>

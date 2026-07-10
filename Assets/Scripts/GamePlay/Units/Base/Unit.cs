@@ -50,11 +50,18 @@ abstract public class Unit : MonoBehaviour
             useTriggers = true,
         };
     }
+
+    public virtual void SetInfos(HpInfo hpInfo, SkillUseInfo skillInfo1, SkillUseInfo skillInfo2)
+    {
+        this.hpInfo = hpInfo;
+        this.skillInfo1 = skillInfo1;
+        this.skillInfo2 = skillInfo2;
+    }
     
-    public virtual void InitStats(string unitName, float maxHp, float hitRatio, float attackReach, float attackDamage, float attackDelay, float attackPeriod, float moveSpeed)
+    public virtual void InitStats(string unitName, float maxHp, float damageFactor, float attackReach, float attackDamage, float attackDelay, float attackPeriod, float moveSpeed)
     {
         this.unitName = unitName;
-        this.damageFactor = hitRatio;
+        this.damageFactor = damageFactor;
         this.attackRange = attackReach;
         this.attackDamage = attackDamage;
         this.attackDelay = attackDelay;

@@ -5,6 +5,6 @@ public class Boss : Enemy
     void Start()
     {
         // 임시
-        hpInfo.Init(enemyName, 5000);
+        hpInfo.Init(enemyName, 10000);
     }
 }

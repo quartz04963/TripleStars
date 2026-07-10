@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5294f73922010364b968658fe410cdd6, type: 3}
+  m_Name: SelectionData
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionData
+  bossCode: 0
+  commanderCode: 0
+  attackerCode: 0
+  supporterCode: 0
+  bossPrefabs: []
+  unitPrefabs:
+  - {fileID: 6494637025410487217, guid: 40cbe33e6dbe0f04bbad65c290fdb560, type: 3}
+  - {fileID: 2434303864947373378, guid: b396ee4fa85fc77438464d5d174e7585, type: 3}
+  - {fileID: 4787701836050194201, guid: cbe8c91726a961b47ae7eb27e35c8509, type: 3}
+  - {fileID: 6703608696931655466, guid: 805c00aabdc432c4f87f295558684ba9, type: 3}
+  - {fileID: 547389781456550408, guid: cf416ea7a1a67d047ae93bbb290857cd, type: 3}
+  - {fileID: 2811224764019538959, guid: 2bfdda34c551f6c428cb80e7eda86061, type: 3}

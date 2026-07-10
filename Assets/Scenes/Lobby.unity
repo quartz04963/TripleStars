@@ -3206,6 +3206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyManager
   state: 0
+  selectionData: {fileID: 11400000, guid: e74e16fa3762b624d8ad13d6b288e7f6, type: 2}
   bossSelection: {fileID: 1842364742}
   unitSelection: {fileID: 696464969}
   lobbyCamera: {fileID: 519420033}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum State
@@ -13,6 +14,7 @@ public enum State
 public class LobbyManager : MonoBehaviour
 {
     [SerializeField] State state;
+    [SerializeField] SelectionData selectionData;
     [SerializeField] BossSelection bossSelection;
     [SerializeField] UnitSelection unitSelection;
     [SerializeField] LobbyCamera lobbyCamera;
@@ -79,7 +81,12 @@ public class LobbyManager : MonoBehaviour
     {
         if (state != State.READY) return;
 
-        // TODO: 스테이지 돌입
+        selectionData.bossCode = bossSelection.SelectedBoss;
+        selectionData.commanderCode = unitSelection.SelectedCommander;
+        selectionData.attackerCode = unitSelection.SelectedAttacker;
+        selectionData.supporterCode = unitSelection.SelectedSupporter;
+
+        SceneManager.LoadScene("Gameplay");
     }
 
     public void Back()
