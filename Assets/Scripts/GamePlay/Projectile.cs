@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] Rigidbody2D rigidbody;
 
-    private Enemy target;
+    protected Enemy target;
 
     void FixedUpdate()
     {
@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
         this.damage = damage;
     }
 
-    void Move()
+    protected virtual void Move()
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;
         rigidbody.linearVelocity = direction * speed / GamePlayUtils.MAGNITUDE;
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Enemy enemy) && enemy == target)
         {
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void Hit()
+    protected virtual void Hit()
     {
         target.TakeDamage(damage);
         Destroy(gameObject);

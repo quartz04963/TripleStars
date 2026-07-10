@@ -11,7 +11,7 @@ public class Archer : Follower
     void Start()
     {
         Init();
-        InitStats("Archer", 60, 2f, 2000, 200, 0.3f, 2f, FAST);
+        InitStats("Archer", 60, 2f, 2000, 200, 0.4f, 2f, FAST);
         InitSkills("Explosive Arrow", 15, Keyboard.current.eKey);
 
         ShowAttackReachArea(true);
@@ -68,7 +68,7 @@ public class Archer : Follower
         // 스킬명: 폭탄 화살
         // 효과: 300 대미지 화살 발사
 
-        if (target == null) return;
+        if (target == null) return; // 일단 타겟팅된 적에게 발사
         
         if (!skillInfo1.StartCooldown()) return;
         // 추후 애니메이션 넣기

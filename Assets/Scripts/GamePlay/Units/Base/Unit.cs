@@ -91,7 +91,7 @@ abstract public class Unit : MonoBehaviour
         isTargeted = false;
     }
 
-    public virtual bool TakeDamage(float damage)
+    public virtual bool TakeDamage(float damage, bool isAvoidable = true)
     {
         if (isImmune) return false;
 
