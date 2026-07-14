@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Saintess
   unitName: Saintess
   damageFactor: 0
-  attackRange: 1400
+  attackRange: 700
   attackDamage: 7
   attackDelay: 0.2
   attackPeriod: 0.5
@@ -225,7 +225,7 @@ MonoBehaviour:
   isHealable: 1
   attackFactor: 1
   lineRenderer: {fileID: 8529779778959482961}
-  passiveHealRange: 1400
+  passiveHealRange: 700
   passiveHealAmount: 1
   passiveHealPeriod: 0.5
   unitLayer:

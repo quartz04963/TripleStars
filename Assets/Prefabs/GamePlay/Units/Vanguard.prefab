@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Vanguard
   unitName: Vanguard
   damageFactor: 1.8
-  attackRange: 1800
+  attackRange: 900
   attackDamage: 10
   attackDelay: 0.3
   attackPeriod: 1
@@ -225,7 +225,7 @@ MonoBehaviour:
   isHealable: 1
   attackFactor: 1
   lineRenderer: {fileID: 7255702742235599025}
-  passiveHealRange: 1800
+  passiveHealRange: 900
   passiveHealAmount: 1
   passiveAtkBuffRate: 0.1
   passiveHealPeriod: 1

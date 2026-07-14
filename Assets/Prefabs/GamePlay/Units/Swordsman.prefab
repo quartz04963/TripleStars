@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Swordsman
   unitName: Swordsman
   damageFactor: 1
-  attackRange: 1000
+  attackRange: 500
   attackDamage: 22
   attackDelay: 0.3
   attackPeriod: 1

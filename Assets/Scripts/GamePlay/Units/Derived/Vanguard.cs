@@ -32,7 +32,7 @@ public class Vanguard : Follower
     void Start()
     {
         Init();
-        InitStats("Vanguard", 70, 1.8f, 1800, 10, 0.3f, 1f, NORMAL);
+        InitStats("Vanguard", 70, 1.8f, 900, 10, 0.3f, 1f, NORMAL);
         InitSkills("Assemble", 50, Keyboard.current.digit1Key);
 
         ShowAttackReachArea(true);

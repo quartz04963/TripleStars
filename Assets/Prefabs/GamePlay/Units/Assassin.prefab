@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assassin
   unitName: Assassin
   damageFactor: 1.8
-  attackRange: 1300
+  attackRange: 650
   attackDamage: 40
   attackDelay: 0.2
   attackPeriod: 0.5

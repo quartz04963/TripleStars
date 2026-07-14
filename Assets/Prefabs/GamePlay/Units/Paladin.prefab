@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Paladin
   unitName: Paladin
   damageFactor: 0
-  attackRange: 600
+  attackRange: 300
   attackDamage: 15
   attackDelay: 0.3
   attackPeriod: 1

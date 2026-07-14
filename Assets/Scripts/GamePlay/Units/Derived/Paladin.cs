@@ -5,7 +5,7 @@ public class Paladin : Commander
 {
     void Start()
     {
-        InitStats("Paladin", 100, 0.8f, 600, 15, 0.3f, 1f, SLOW);
+        InitStats("Paladin", 100, 0.8f, 300, 15, 0.3f, 1f, SLOW);
         InitSkills("Defense", 5, Keyboard.current.spaceKey, "I'm Your Opponent", 30, Keyboard.current.qKey);
 
         ShowAttackReachArea(true);

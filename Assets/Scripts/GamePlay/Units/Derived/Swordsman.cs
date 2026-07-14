@@ -21,7 +21,7 @@ public class Swordsman : Commander
 
     void Start()
     {
-        InitStats("Swordsman", 100, 1f, 1000, 22, 0.3f, 1f, FAST);
+        InitStats("Swordsman", 100, 1f, 500, 22, 0.3f, 1f, FAST);
         InitSkills("Roll", 2, Keyboard.current.spaceKey, "Flaming Sword", 15, Keyboard.current.qKey);
 
         ShowAttackReachArea(true);

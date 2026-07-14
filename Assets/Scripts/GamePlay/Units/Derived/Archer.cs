@@ -11,7 +11,7 @@ public class Archer : Follower
     void Start()
     {
         Init();
-        InitStats("Archer", 60, 2f, 2000, 200, 0.4f, 2f, FAST);
+        InitStats("Archer", 60, 2f, 1000, 200, 0.4f, 2f, FAST);
         InitSkills("Explosive Arrow", 15, Keyboard.current.eKey);
 
         ShowAttackReachArea(true);

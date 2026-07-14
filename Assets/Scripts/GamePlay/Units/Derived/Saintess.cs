@@ -30,7 +30,7 @@ public class Saintess : Follower
     void Start()
     {
         Init();
-        InitStats("Saintess", 60, 1.6f, 1400, 7, 0.2f, 0.5f, FAST);
+        InitStats("Saintess", 60, 1.6f, 700, 7, 0.2f, 0.5f, FAST);
         InitSkills("Teleport", 30, Keyboard.current.digit1Key);
 
         ShowAttackReachArea(true);

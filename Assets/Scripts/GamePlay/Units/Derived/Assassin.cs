@@ -22,7 +22,7 @@ public class Assassin : Follower
     void Start()
     {
         Init();
-        InitStats("Assassin", 50, 1.8f, 1300, 40, 0.2f, 0.5f, VERYFAST);
+        InitStats("Assassin", 50, 1.8f, 650, 40, 0.2f, 0.5f, VERYFAST);
         InitSkills("Posion Shuriken", 8, Keyboard.current.eKey);
 
         ShowAttackReachArea(true);
