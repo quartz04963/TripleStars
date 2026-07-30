@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum State
+public enum LobbyState
 {
     STANDBY,
     SELECTING_BOSS, 
@@ -13,7 +13,7 @@ public enum State
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] State state;
+    [SerializeField] LobbyState state;
     [SerializeField] SelectionData selectionData;
     [SerializeField] BossSelection bossSelection;
     [SerializeField] UnitSelection unitSelection;
@@ -26,7 +26,7 @@ public class LobbyManager : MonoBehaviour
 
     public static LobbyManager instance;
 
-    public State State => state;
+    public LobbyState State => state;
     public BossSelection BossSelection => bossSelection;
     public UnitSelection UnitSelection => unitSelection;
     public LobbyCamera Camera => lobbyCamera;
@@ -39,19 +39,19 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        ChangeState(State.STANDBY);
+        ChangeState(LobbyState.STANDBY);
     }
 
-    public void ChangeState(State toState)
+    public void ChangeState(LobbyState toState)
     {
         state = toState;
 
-        bool startActive = toState == State.STANDBY ? true : false;
-        bool goActive = toState == State.BOSS_SELECTED || toState == State.READY ? true : false;
-        bool menuActive = toState == State.SELECTING_UNIT ? false : true;
-        bool backActive = toState == State.STANDBY || toState == State.SELECTING_UNIT ? false : true;
-        bool bossSelectionActive = toState == State.SELECTING_BOSS ? true : false;
-        bool unitSelectionActive = toState == State.SELECTING_UNIT ? true : false;
+        bool startActive = toState == LobbyState.STANDBY ? true : false;
+        bool goActive = toState == LobbyState.BOSS_SELECTED || toState == LobbyState.READY ? true : false;
+        bool menuActive = toState == LobbyState.SELECTING_UNIT ? false : true;
+        bool backActive = toState == LobbyState.STANDBY || toState == LobbyState.SELECTING_UNIT ? false : true;
+        bool bossSelectionActive = toState == LobbyState.SELECTING_BOSS ? true : false;
+        bool unitSelectionActive = toState == LobbyState.SELECTING_UNIT ? true : false;
 
         startButton.gameObject.SetActive(startActive);
         goButton.gameObject.SetActive(goActive);
@@ -60,9 +60,9 @@ public class LobbyManager : MonoBehaviour
         bossSelection.gameObject.SetActive(bossSelectionActive);
         unitSelection.gameObject.SetActive(unitSelectionActive);
 
-        goButton.interactable = toState == State.READY ? true : false;
+        goButton.interactable = toState == LobbyState.READY ? true : false;
 
-        if (toState == State.STANDBY) 
+        if (toState == LobbyState.STANDBY) 
         {
             unitSelection.RemoveSelectedUnits();
         }
@@ -72,14 +72,14 @@ public class LobbyManager : MonoBehaviour
     #region 버튼 클릭
     public void GameStart()
     {
-        if (state != State.STANDBY) return;
+        if (state != LobbyState.STANDBY) return;
 
-        ChangeState(State.SELECTING_BOSS);
+        ChangeState(LobbyState.SELECTING_BOSS);
     }
 
     public void Go()
     {
-        if (state != State.READY) return;
+        if (state != LobbyState.READY) return;
 
         selectionData.bossCode = bossSelection.SelectedBoss;
         selectionData.commanderCode = unitSelection.SelectedCommander;
@@ -93,10 +93,10 @@ public class LobbyManager : MonoBehaviour
     {
         switch (state)
         {
-            case State.SELECTING_BOSS: 
-            case State.BOSS_SELECTED:
-            case State.READY: 
-                ChangeState(State.STANDBY);
+            case LobbyState.SELECTING_BOSS: 
+            case LobbyState.BOSS_SELECTED:
+            case LobbyState.READY: 
+                ChangeState(LobbyState.STANDBY);
                 break;
         }
     }

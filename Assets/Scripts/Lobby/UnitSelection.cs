@@ -49,11 +49,11 @@ public class UnitSelection : MonoBehaviour
         
         if (selectedCommander == null || selectedAttacker == null || selectedSupporter == null)
         {
-            LobbyManager.instance.ChangeState(State.BOSS_SELECTED);
+            LobbyManager.instance.ChangeState(LobbyState.BOSS_SELECTED);
         }
         else
         {
-            LobbyManager.instance.ChangeState(State.READY);
+            LobbyManager.instance.ChangeState(LobbyState.READY);
         }
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5905877255528839150}
   - component: {fileID: 3725878631753192914}
   - component: {fileID: 9184445541742369032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assassin Base Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

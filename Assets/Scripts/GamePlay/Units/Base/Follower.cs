@@ -8,12 +8,19 @@ abstract public class Follower : Unit
     [Header("Follower")]
     [SerializeField] LineRenderer lineRenderer;
 
-    protected ButtonControl moveButton; // 초기화 필수
     protected Enemy target;
+    protected ButtonControl moveButton; // 초기화 필수
 
     private Vector2 destination;
     private Vector2 moveDirection;
     private float lastAttackTime;
+
+    protected override void Update()
+    {
+        base.Update();
+
+        GetDestination();
+    }
 
     protected virtual void Init()
     {
@@ -25,15 +32,7 @@ abstract public class Follower : Unit
     {
         if (!moveButton.isPressed) return;
 
-        destination = MouseToWorldPoint();
-    }
-
-    protected virtual void ResetDestination()
-    {
-        destination = transform.position;
-        moveDirection = Vector2.zero;
-        rigidbody.linearVelocity = Vector2.zero;
-        ShowPath(false);
+        destination = GameplayUtils.MouseToWorldPoint();
     }
 
     protected virtual void ShowPath(bool isActive)
@@ -49,41 +48,44 @@ abstract public class Follower : Unit
         lineRenderer.SetPosition(1, destination);
     }
 
-    public override void Teleport(Vector3 destination)
-    {
-        base.Teleport(destination);
-        ResetDestination();
-    }
-
     protected override void HandleMove()
     {
-        if (!isMovable) return;
+        if (!CanMove()) return;
 
-        if ((destination - (Vector2)transform.position).sqrMagnitude < moveSpeed / GameplayUtils.MAGNITUDE * Time.deltaTime)
+        if ((destination - (Vector2)transform.position).sqrMagnitude < GameplayUtils.ToWorldDistance(moveSpeed) * Time.deltaTime)
         {
-            ResetDestination();
+            StopMove();
             return;
         }
 
         moveDirection = (destination - (Vector2)transform.position).normalized;
-        rigidbody.linearVelocity = moveDirection * moveSpeed / GameplayUtils.MAGNITUDE;
+        rigidbody.linearVelocity = moveDirection * GameplayUtils.ToWorldDistance(moveSpeed);
         ShowPath(true);
 
-        // 추후 애니메이션 넣기
+        if (moveDirection.x < 0) characterSR.transform.localScale = new Vector3(1, 1, 1);
+        else if (moveDirection.x > 0) characterSR.transform.localScale = new Vector3(-1, 1, 1);
     }
+
+    protected override void StopMove()
+    {
+        destination = transform.position;
+        moveDirection = Vector2.zero;
+        rigidbody.linearVelocity = Vector2.zero;
+        ShowPath(false);
+    }
+
     #endregion
 
     protected override async void HandleAttack()
     {
-        if (!isAttackable) return;
+        if (!CanAttack()) return;
 
         if (Time.time < lastAttackTime + attackPeriod) return;
 
-        if (isMovable && rigidbody.linearVelocity.magnitude > 0) return; // 이동 중 공격 불가
-
-        if (target == null || !GetInRange(target.transform, attackRange / GameplayUtils.MAGNITUDE)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
+        if (target == null || !GameplayUtils.IsInRange(transform, target.transform, attackRange)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
         {
-            target = FindNearestEnemy(attackRange / GameplayUtils.MAGNITUDE);
+            GameplayUtils.FindAllInRange(transform, attackRange, enemyFilter, enemiesInRange);
+            target = GameplayUtils.FindNearest<Enemy>(transform, enemiesInRange); // 일단 근접 캐릭터도 약점 타격 가능
         }
 
         if (target == null) return;
@@ -96,14 +98,4 @@ abstract public class Follower : Unit
         Projectile projectile = Instantiate(baseAttackProjectilePrf, transform.position, transform.rotation).GetComponent<Projectile>();
         projectile.Init(target, attackDamage * attackFactor);
     }
-
-    #region 유틸리티
-    protected Vector2 MouseToWorldPoint()
-    {
-        Vector3 screenPos = Mouse.current.position.ReadValue();
-        screenPos.z = 0;
-
-        return Camera.main.ScreenToWorldPoint(screenPos);
-    }
-    #endregion
 }

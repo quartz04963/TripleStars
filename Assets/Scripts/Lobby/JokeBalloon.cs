@@ -12,7 +12,7 @@ public class JokeBalloon : TextBalloon
     
     void Update()
     {
-        if (LobbyManager.instance.State != State.STANDBY)
+        if (LobbyManager.instance.State != LobbyState.STANDBY)
         {
             if (sequence.isAlive) sequence.Complete();
         }

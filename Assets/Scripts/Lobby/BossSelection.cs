@@ -89,6 +89,6 @@ public class BossSelection : MonoBehaviour
     public void SelectBoss(BossLobbyData bossData)
     {
         selectedBoss = bossData;
-        LobbyManager.instance.ChangeState(State.BOSS_SELECTED);
+        LobbyManager.instance.ChangeState(LobbyState.BOSS_SELECTED);
     }
 }

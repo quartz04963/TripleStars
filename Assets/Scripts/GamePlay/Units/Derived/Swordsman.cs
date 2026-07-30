@@ -21,22 +21,10 @@ public class Swordsman : Commander
 
     void Start()
     {
-        InitStats("Swordsman", 100, 1f, 500, 22, 0.3f, 1f, FAST);
+        InitStats("Swordsman", 100, 1f, 80, 22, 0.3f, 1f, FAST);
         InitSkills("Roll", 2, Keyboard.current.spaceKey, "Flaming Sword", 15, Keyboard.current.qKey);
 
-        ShowAttackReachArea(true);
-    }
-
-    void Update()
-    {
-        GetDirection();
-        HandleAttack();
-        HandleSkillUse();
-    }
-
-    void FixedUpdate()
-    {
-        HandleMove();
+        ShowAttackRange(true);
     }
 
     protected override void GetDirection()
@@ -55,29 +43,26 @@ public class Swordsman : Commander
         if (moveDirection != Vector2.zero) lastMoveDirection = moveDirection;
     }
 
-    protected override void HandleMove()
+    protected override bool CanMove()
     {
-        if (isRolling) return;
+        return !isRolling && base.CanMove();
+    }
 
-        base.HandleMove();
+    public override void Stun(int frame)
+    {
+        if (!isImmune) cts2?.Cancel();
+
+        base.Stun(frame);
+    }
+
+    public override void Knockback(Vector2 direction, float distance, float chainDamage = 0)
+    {
+        if (!isImmune) cts2?.Cancel();
+        
+        base.Knockback(direction, distance, chainDamage);
     }
 
     protected override void HandlePassiveSkill() { }
-
-    protected override void HandleSkillUse()
-    {
-        if (isAttackable)
-        {
-            if (skillInfo1.KeyControl.isPressed)
-            {
-                UseSkill1();
-            }
-            if (skillInfo2.KeyControl.isPressed)
-            {
-                UseSkill2();
-            }
-        }
-    }
 
     protected override async void UseSkill1()
     {
@@ -88,7 +73,7 @@ public class Swordsman : Commander
         // 추후 애니메이션 넣기
         
         isRolling = true;
-        rigidbody.linearVelocity = lastMoveDirection * rollingSpeed / GameplayUtils.MAGNITUDE;
+        rigidbody.linearVelocity = lastMoveDirection * GameplayUtils.ToWorldDistance(rollingSpeed);
 
         cts1 = new CancellationTokenSource();
 
@@ -112,7 +97,7 @@ public class Swordsman : Commander
         if (!skillInfo2.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
-        isAttackable = false;
+        isPredelaying = true;
 
         cts2 = new CancellationTokenSource();
 
@@ -122,15 +107,18 @@ public class Swordsman : Commander
         }
         catch (OperationCanceledException)
         {
-            isAttackable = true;
+            isPredelaying = false;
         }
 
-        for (int i = 0; i < flameSwordHitTime; i++)
+        if (target != null && GameplayUtils.IsInRange(target.transform, transform, attackRange))
         {
-            target.TakeDamage(flameSwordDmg * attackFactor);
-            await Task.Delay((int)(flameSwordHitInterval * 1000));
+            for (int i = 0; i < flameSwordHitTime; i++)
+            {
+                target.TakeDamage(flameSwordDmg * attackFactor);
+                await Task.Delay((int)(flameSwordHitInterval * 1000));
+            }
         }
 
-        isAttackable = true;
+        isPredelaying = false;
     }
 }

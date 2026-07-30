@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PoisonShuriken : Projectile
 {
-    protected override void Hit()
+    protected override void Hit(Enemy enemy)
     {
         if (GameplayManager.instance.Attacker is Assassin assassin)
         {
-            assassin.IncreasePoisonStack(target);
+            assassin.IncreasePoisonStack(enemy);
         }
         
-        base.Hit();
+        base.Hit(enemy);
     }
 }

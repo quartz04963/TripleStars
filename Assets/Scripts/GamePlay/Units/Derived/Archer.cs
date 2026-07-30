@@ -14,20 +14,7 @@ public class Archer : Follower
         InitStats("Archer", 60, 2f, 1000, 200, 0.4f, 2f, FAST);
         InitSkills("Explosive Arrow", 15, Keyboard.current.eKey);
 
-        ShowAttackReachArea(true);
-    }
-
-    void Update()
-    {
-        GetDestination();
-        HandleAttack();
-        HandlePassiveSkill();
-        HandleSkillUse();
-    }
-
-    void FixedUpdate()
-    {
-        HandleMove();
+        ShowAttackRange(true);
     }
 
     protected override void Init()
@@ -42,24 +29,13 @@ public class Archer : Follower
         // 스킬명: 도주
         // 효과: 어그로 끌렸을 때 이동속도 VERYFAST로 증가
         
-        if (isTargeted)
+        if (GameplayManager.instance.Boss.IsTargeting(this))
         {
             moveSpeed = VERYFAST;
         }
         else
         {
             moveSpeed = FAST;
-        }
-    }
-
-    protected override void HandleSkillUse()
-    {
-        if (isAttackable)
-        {
-            if (skillInfo1.KeyControl.isPressed)
-            {
-                UseSkill1();
-            }
         }
     }
 

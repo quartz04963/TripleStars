@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5929623194064153196}
   - component: {fileID: 5224256202018893090}
   - component: {fileID: 2322349550560409085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assassin Posion Shuriken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

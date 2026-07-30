@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4944632294215979393}
   - component: {fileID: 6699082250208240404}
   - component: {fileID: 469281969160390462}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Archer Explosive Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

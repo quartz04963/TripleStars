@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] SkillUseInfo supporterSkillInfo2;
     
     public static GameplayManager instance;
+    public readonly List<Unit> allUnits = new();
 
     public Boss Boss => boss;
     public Commander Commander => commander;
@@ -36,11 +38,14 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         InitUnits();
+        InitBoss();
     }
 
     void InitBoss()
     {
         // TODO: 보스 코드에 따라 보스 소환하기
+
+        boss.Target(commander);
     }
 
     void InitUnits()
@@ -56,5 +61,14 @@ public class GameplayManager : MonoBehaviour
         commander.SetInfos(commanderHpInfo, commanderSkillInfo1, commanderSkillInfo2);
         attacker.SetInfos(attackerHpInfo, attackerSkillInfo, null);
         supporter.SetInfos(supporterHpInfo, supporterSkillInfo1, supporterSkillInfo2);
+
+        allUnits.Add(commander);
+        allUnits.Add(attacker);
+        allUnits.Add(supporter);
+    }
+
+    public void AddUnit(Unit unit)
+    {
+        allUnits.Add(unit);
     }
 }

@@ -1,44 +1,21 @@
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Paladin : Commander
 {
+    [Header("Paladin")]
+    [SerializeField] float immuneDuration;
+
     void Start()
     {
-        InitStats("Paladin", 100, 0.8f, 300, 15, 0.3f, 1f, SLOW);
+        InitStats("Paladin", 100, 0.8f, 50, 15, 0.3f, 1f, SLOW);
         InitSkills("Defense", 5, Keyboard.current.spaceKey, "I'm Your Opponent", 30, Keyboard.current.qKey);
 
-        ShowAttackReachArea(true);
-    }
-
-    void Update()
-    {
-        GetDirection();
-        HandleAttack();
-        HandleSkillUse();
-    }
-
-    void FixedUpdate()
-    {
-        HandleMove();
+        ShowAttackRange(true);
     }
 
     protected override void HandlePassiveSkill() { }
-
-    protected override void HandleSkillUse()
-    {
-        if (isAttackable)
-        {
-            if (skillInfo1.KeyControl.isPressed)
-            {
-                UseSkill1();
-            }
-            if (skillInfo2.KeyControl.isPressed)
-            {
-                UseSkill2();
-            }
-        }
-    }
 
     protected override async void UseSkill1()
     {
@@ -48,9 +25,7 @@ public class Paladin : Commander
         if (!skillInfo1.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
-        isImmune = true;
-        await Task.Delay(1000);
-        isImmune = false;
+        await Immune(immuneDuration);
     }
 
     protected override void UseSkill2()
@@ -61,6 +36,6 @@ public class Paladin : Commander
         if (!skillInfo2.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
-        GameplayManager.instance.Boss.ChangeTarget(this);
+        GameplayManager.instance.Boss.Target(this);
     }
 }

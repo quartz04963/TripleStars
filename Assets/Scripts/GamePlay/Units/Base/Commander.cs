@@ -9,6 +9,13 @@ abstract public class Commander : Unit
     
     private float lastAttackTime;
 
+    protected override void Update()
+    {
+        base.Update();
+
+        GetDirection();
+    }
+
     protected virtual void GetDirection()
     {
         moveDirection = Vector2.zero;
@@ -23,24 +30,29 @@ abstract public class Commander : Unit
 
     protected override void HandleMove()
     {
-        if (!isMovable) return;
+        if (!CanMove()) return;
 
-        rigidbody.linearVelocity = moveDirection * moveSpeed / GameplayUtils.MAGNITUDE;
-        
-        // 추후 애니메이션 넣기
+        rigidbody.linearVelocity = moveDirection * GameplayUtils.ToWorldDistance(moveSpeed);
+
+        if (moveDirection.x < 0) characterSR.transform.localScale = new Vector3(1, 1, 1);
+        else if (moveDirection.x > 0) characterSR.transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    protected override void StopMove()
+    {
+        rigidbody.linearVelocity = moveDirection = Vector2.zero;
     }
 
     protected override async void HandleAttack()
     {
-        if (!isAttackable) return;
+        if (!CanAttack()) return;
 
         if (Time.time < lastAttackTime + attackPeriod) return;
 
-        if (isMovable && rigidbody.linearVelocity.magnitude > 0) return; // 이동 중 공격 불가
-
-        if (target == null || !GetInRange(target.transform, attackRange / GameplayUtils.MAGNITUDE)) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
+        if (target == null || !GameplayUtils.IsInRange(transform, target.transform, GameplayUtils.ToWorldDistance(attackRange))) // 우선 때리던 적을 계속 때리고 다음으로 가장 가까운 적을 타겟팅
         {
-            target = FindNearestEnemy(attackRange / GameplayUtils.MAGNITUDE);
+            GameplayUtils.FindAllInRange(transform, GameplayUtils.ToWorldDistance(attackRange), enemyFilter, enemiesInRange);
+            target = GameplayUtils.FindNearest<Enemy>(transform, enemiesInRange); // 일단 근접 캐릭터도 약점 타격 가능
         }
 
         if (target == null) return;

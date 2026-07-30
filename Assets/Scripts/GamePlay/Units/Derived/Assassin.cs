@@ -17,7 +17,7 @@ public class Assassin : Follower
     private bool isHiding;
     private float unmovedTime;
     private float lastPoisonDmgTime;
-    private Dictionary<Enemy, int> poisionStackDict = new();
+    private readonly Dictionary<Enemy, int> poisionStackDict = new();
 
     void Start()
     {
@@ -25,24 +25,17 @@ public class Assassin : Follower
         InitStats("Assassin", 50, 1.8f, 650, 40, 0.2f, 0.5f, VERYFAST);
         InitSkills("Posion Shuriken", 8, Keyboard.current.eKey);
 
-        ShowAttackReachArea(true);
+        ShowAttackRange(true);
     }
 
-    void Update()
+    protected override void Update()
     {
-        GetDestination();
-        HandleAttack();
-        HandlePassiveSkill();
-        HandleSkillUse();
-        HandleSkillLastingEffect();
+        base.Update();
+        
+        UpdateSkillLastingEffect();
     }
 
-    void FixedUpdate()
-    {
-        HandleMove();
-    }
-
-    public override bool TakeDamage(float damage, bool isAvoidable = false)
+    public override bool TakeDamage(float damage, bool isAvoidable = true)
     {
         if (!isHiding || !isAvoidable)
         {
@@ -74,7 +67,7 @@ public class Assassin : Follower
     {
         // 스킬명: 은신
         // 효과: 3초 동안 가만히 있으면 보스 어그로 설정 대상에서 제외 및 논타겟 공격이 50% 확률로 빗나감
-        if (isMovable)
+        if (CanMove())
         {
             if (rigidbody.linearVelocity.magnitude > 0)
             {
@@ -98,17 +91,6 @@ public class Assassin : Follower
         }
     }
 
-    protected override void HandleSkillUse()
-    {
-        if (isAttackable)
-        {
-            if (skillInfo1.KeyControl.isPressed)
-            {
-                UseSkill1();
-            }
-        }
-    }
-
     protected override async void UseSkill1()
     {
         // 스킬명: 독 수리검
@@ -129,6 +111,8 @@ public class Assassin : Follower
 
     public void IncreasePoisonStack(Enemy enemy)
     {
+        if (enemy is BossBody bossBody) enemy = bossBody.Boss;
+
         if (poisionStackDict.TryGetValue(enemy, out int stack))
         {
             if (stack < poisonMaxStack) poisionStackDict[enemy]++;
@@ -139,7 +123,7 @@ public class Assassin : Follower
         }
     }
 
-    void HandleSkillLastingEffect()
+    void UpdateSkillLastingEffect()
     {
         // 적중 시 초당 10 독 대미지
         if (Time.time >= lastPoisonDmgTime + poisonDmgPeriod)

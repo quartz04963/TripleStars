@@ -12,16 +12,16 @@ public class LobbyUnit : MonoBehaviour
 
     public async void OnClicked()
     {
-        if (LobbyManager.instance.State == State.STANDBY)
+        if (LobbyManager.instance.State == LobbyState.STANDBY)
         {
             jokeBalloon.Joke();
         }
-        else if (LobbyManager.instance.State == State.BOSS_SELECTED || LobbyManager.instance.State == State.READY)
+        else if (LobbyManager.instance.State == LobbyState.BOSS_SELECTED || LobbyManager.instance.State == LobbyState.READY)
         {
             LobbyManager.instance.Camera.ZoomAndMove(transform.position + new Vector3(1.11f, -0.22f, -10f), 1.25f, 0.5f);
             await Task.Delay(500);
 
-            LobbyManager.instance.ChangeState(State.SELECTING_UNIT);
+            LobbyManager.instance.ChangeState(LobbyState.SELECTING_UNIT);
             LobbyManager.instance.UnitSelection.ChangePanel(this);
         }
     }

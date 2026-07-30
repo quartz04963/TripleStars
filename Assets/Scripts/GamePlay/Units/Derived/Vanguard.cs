@@ -10,24 +10,11 @@ public class Vanguard : Follower
     [SerializeField] float passiveHealAmount;
     [SerializeField] float passiveAtkBuffRate;
     [SerializeField] float passiveHealPeriod;
-    [SerializeField] LayerMask unitLayer;
 
     private float lastHealTime;
-    private ContactFilter2D unitSearchFilter;
+
     private readonly List<Collider2D> unitsInReach = new();
-    private List<Unit> buffedUnitList = new();
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        unitSearchFilter = new ContactFilter2D()
-        {
-            useLayerMask = true,
-            layerMask = unitLayer,
-            useTriggers = true,
-        };
-    }
+    private readonly List<Unit> buffedUnitList = new();
 
     void Start()
     {
@@ -35,20 +22,7 @@ public class Vanguard : Follower
         InitStats("Vanguard", 70, 1.8f, 900, 10, 0.3f, 1f, NORMAL);
         InitSkills("Assemble", 50, Keyboard.current.digit1Key);
 
-        ShowAttackReachArea(true);
-    }
-
-    void Update()
-    {
-        GetDestination();
-        HandleAttack();
-        HandlePassiveSkill();
-        HandleSkillUse();
-    }
-
-    void FixedUpdate()
-    {
-        HandleMove();
+        ShowAttackRange(true);
     }
 
     protected override void Init()
@@ -69,13 +43,13 @@ public class Vanguard : Follower
         }
 
         buffedUnitList.Clear();
-        unitsInReach.Clear();
 
-        Physics2D.OverlapCircle(transform.position, passiveHealRange / GameplayUtils.MAGNITUDE, unitSearchFilter, unitsInReach);
+        GameplayUtils.FindAllInRange(transform, passiveHealRange, unitFilter, unitsInReach);
 
         foreach (Collider2D col in unitsInReach)
         {
-            if (!col.TryGetComponent<Unit>(out var unit)) continue;
+            Unit unit = col.GetComponentInParent<Unit>();
+            if (unit == null) continue;
 
             buffedUnitList.Add(unit);
             unit.AddAttackFactor(passiveAtkBuffRate);
@@ -91,21 +65,10 @@ public class Vanguard : Follower
 
         foreach (Collider2D col in unitsInReach)
         {
-            Unit unit = col.GetComponent<Unit>();
+            Unit unit = col.GetComponentInParent<Unit>();
             if (unit != null && unit.IsHealable)
             {
                 unit.TakeHeal(passiveHealAmount);
-            }
-        }
-    }
-
-    protected override void HandleSkillUse()
-    {
-        if (isAttackable)
-        {
-            if (skillInfo1.KeyControl.isPressed)
-            {
-                UseSkill1();
             }
         }
     }
@@ -120,7 +83,7 @@ public class Vanguard : Follower
 
         await Task.Delay(0);
 
-        GameplayManager.instance.Commander.transform.position = transform.position;
+        GameplayManager.instance.Commander.Teleport(transform.position);
         GameplayManager.instance.Attacker.Teleport(transform.position);
     }
 

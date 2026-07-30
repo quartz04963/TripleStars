@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e7fb7a7d403194a8ba554a4ffaaabd, type: 3}
+  m_Name: BoarStats
+  m_EditorClassIdentifier: Assembly-CSharp::BoarStats
+  maxHp: 60000
+  criticalFactor: 2
+  moveSpeed: 1500
+  bodyScale: 400
+  headScale: 200
+  headbuttRangeRadius: 400
+  headbuttRangeAngle: 45
+  headbuttPredelay: 44
+  headbuttPostdelay: 318
+  headbuttStunDuration: 360
+  headbuttKnockbackDistance: 1500
+  headbuttDamage: 10
+  headbuttChainDamage: 10
+  rushRangeWidth: 600
+  rushDistance: 3000
+  rushPredelay: 182
+  rushPostdelay: 228
+  rushAimingDuration: 82
+  rushLastingDuration: 57
+  rushGroggyDuration: 310
+  rushStunDuration: 270
+  rushKnockbackDistance: 3000
+  rushDamage: 30
+  rushChainDamage: 30
+  roarPredelay: 72
+  roarPostdelay: 319
+  roarLastingDuration: 10
+  roarStunDuration: 310
+  roamPostdelay: 66
+  roamDistance: 200
+  roamDuration: 60
