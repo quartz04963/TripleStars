@@ -1,33 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField] SelectionData selectionData;
-    [SerializeField] Boss boss;
-    [SerializeField] Commander commander;
-    [SerializeField] Follower attacker;
-    [SerializeField] Follower supporter;
     [SerializeField] GameObject[] bossPrefabs;
     [SerializeField] GameObject[] unitPrefabs;
+    public Boss boss;
+    public Unit commander;
+    public Unit attacker;
+    public Unit supporter;
 
     [Header("Info Classes")]
     [SerializeField] HpInfo commanderHpInfo;
     [SerializeField] HpInfo attackerHpInfo;
     [SerializeField] HpInfo supporterHpInfo;
-    [SerializeField] SkillUseInfo commanderSkillInfo1;
-    [SerializeField] SkillUseInfo commanderSkillInfo2;
+    [SerializeField] SkillUseInfo commanderSkill1Info;
+    [SerializeField] SkillUseInfo commanderSkill2Info;
     [SerializeField] SkillUseInfo attackerSkillInfo;
-    [SerializeField] SkillUseInfo supporterSkillInfo1;
-    [SerializeField] SkillUseInfo supporterSkillInfo2;
-    
+    [SerializeField] SkillUseInfo supporterSkill1Info;
+    [SerializeField] SkillUseInfo supporterSkill2Info;
+
+    private KeyControl commanderSkill1Key = Keyboard.current.spaceKey;
+    private KeyControl commanderSkill2Key = Keyboard.current.qKey;
+    private KeyControl attackerSkill1Key = Keyboard.current.eKey;
+    private KeyControl supporterSkill1Key = Keyboard.current.digit1Key;
+    private KeyControl supporterSkill2Key = Keyboard.current.digit2Key;
+    private ButtonControl attackerMoveButton = Mouse.current.leftButton;
+    private ButtonControl supporterMoveButton = Mouse.current.rightButton;
+
     public static GameplayManager instance;
     public readonly List<Unit> allUnits = new();
-
-    public Boss Boss => boss;
-    public Commander Commander => commander;
-    public Follower Attacker => attacker;
-    public Follower Supporter => supporter;
 
     void Awake()
     {
@@ -58,9 +63,9 @@ public class GameplayManager : MonoBehaviour
         Instantiate(attackerPrf).TryGetComponent(out attacker);
         Instantiate(supporterPrf).TryGetComponent(out supporter);
 
-        commander.SetInfos(commanderHpInfo, commanderSkillInfo1, commanderSkillInfo2);
-        attacker.SetInfos(attackerHpInfo, attackerSkillInfo, null);
-        supporter.SetInfos(supporterHpInfo, supporterSkillInfo1, supporterSkillInfo2);
+        commander.Init(commanderHpInfo, null, commanderSkill1Info, commanderSkill1Key, commanderSkill2Info, commanderSkill2Key);
+        attacker.Init(attackerHpInfo, attackerMoveButton, attackerSkillInfo, attackerSkill1Key, null, null);
+        supporter.Init(supporterHpInfo, supporterMoveButton, supporterSkill1Info, supporterSkill1Key, supporterSkill2Info, supporterSkill2Key);
 
         allUnits.Add(commander);
         allUnits.Add(attacker);

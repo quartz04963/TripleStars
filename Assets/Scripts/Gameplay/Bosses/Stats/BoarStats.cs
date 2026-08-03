@@ -4,7 +4,7 @@ using UnityEngine;
 public class BoarStats : ScriptableObject
 {
     [Header("기본")]
-    public float maxHp;
+    public int maxHp;
     public float criticalFactor;
     public float moveSpeed;
     public int bodyScale;
@@ -17,8 +17,8 @@ public class BoarStats : ScriptableObject
     public int headbuttPostdelay;
     public int headbuttStunDuration;
     public int headbuttKnockbackDistance;
-    public float headbuttDamage;
-    public float headbuttChainDamage;
+    public int headbuttDamage;
+    public int headbuttChainDamage;
     
     [Header("폭주 돌진")]
     public int rushRangeWidth;
@@ -30,8 +30,8 @@ public class BoarStats : ScriptableObject
     public int rushGroggyDuration;
     public int rushStunDuration;
     public int rushKnockbackDistance;
-    public float rushDamage;
-    public float rushChainDamage;
+    public int rushDamage;
+    public int rushChainDamage;
 
     [Header("포효")]
     public int roarPredelay;

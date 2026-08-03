@@ -20,31 +20,61 @@ abstract public class Boss : Enemy
     [SerializeField] protected BossState state;
     [SerializeField] protected Rigidbody2D rigidbody;
 
-    protected Unit target;
+    [SerializeField] protected float commanderAccumulativeDamage;
+    [SerializeField] protected float commanderAggroThreshold;
+
+    [SerializeField] protected Unit target;
+    
     protected int patternCount;
     protected List<int> patternBalls = new();
 
     public float CriticalFactor => criticalFactor;
 
+    public override void TakeDamage(float damage, Unit unit)
+    {
+        base.TakeDamage(damage, unit);
+
+        if (unit == GameplayManager.instance.commander)
+        {
+            commanderAccumulativeDamage += damage;
+
+            if (commanderAccumulativeDamage >= commanderAggroThreshold)
+            {
+                Target(GameplayManager.instance.commander);
+            }
+        }
+    }
+
     public virtual bool Target(Unit newTarget)
     {
-        if (newTarget.IsTargetable) target = newTarget;
+        if (newTarget.state.IsTargetable()) 
+        {
+            if (target == GameplayManager.instance.commander && newTarget != target)
+            {
+                commanderAccumulativeDamage = 0;
+            }
 
-        return newTarget.IsTargetable;
+            target = newTarget;
+        }
+
+        return newTarget.state.IsTargetable();
     }
 
     public virtual void ChangeTarget()
     {
-        List<Unit> candidates = GameplayManager.instance.allUnits.FindAll(unit => unit != target && unit.IsAlive);
+        List<Unit> candidates = GameplayManager.instance.allUnits.FindAll(unit => unit != target && unit.state.IsTargetable());
 
+        if (candidates.Count == 0) return;
+        
         int next = Random.Range(0, candidates.Count);
-        target = candidates[next];
+        Target(candidates[next]);
     }
 
     public virtual bool IsTargeting(Unit unit)
     {
         return unit == target;
     }
+
 
     protected virtual void Chase()
     {

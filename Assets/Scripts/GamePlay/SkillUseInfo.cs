@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class SkillUseInfo : MonoBehaviour
 {
-    [SerializeField] string skillName;
     [SerializeField] float cooldown;
-    private KeyControl keyControl;
 
     [SerializeField] Image iconImg;
-    [SerializeField] TextMeshProUGUI iconText;
-    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI iconTmp;
+    [SerializeField] TextMeshProUGUI nameTmp;
+
+    private KeyControl skillKey;
 
     private bool isCoolingDown;
     private float remainCooldown = 0;
 
-    public KeyControl KeyControl
+    public KeyControl SkillKey
     {
-        get => keyControl;
-        set => keyControl = value;
+        get => skillKey;
+        set => skillKey = value;
     }
 
     void Update()
@@ -30,23 +30,22 @@ public class SkillUseInfo : MonoBehaviour
         {
             remainCooldown -= Time.deltaTime;
             iconImg.fillAmount = 1f - remainCooldown / cooldown;
-            iconText.SetText("" + (int)(remainCooldown + 1));
+            iconTmp.SetText("" + (int)(remainCooldown + 1));
         }
         else
         {
             isCoolingDown = false;
-            iconText.SetText(keyControl.displayName);
+            iconTmp.SetText(skillKey.displayName);
         }
     }
 
-    public void Init(string skillName, float cooldown, KeyControl keyControl)
+    public void Init(string skillName, KeyControl keyControl, float cooldown)
     {
-        this.skillName = skillName;
+        this.skillKey = keyControl;
         this.cooldown = cooldown;
-        this.keyControl = keyControl;
 
-        iconText.SetText(keyControl.displayName);
-        nameText.SetText(skillName);
+        nameTmp.SetText(skillName);
+        iconTmp.SetText(keyControl.displayName);
     }
 
     public bool StartCooldown()

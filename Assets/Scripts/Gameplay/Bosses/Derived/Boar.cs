@@ -24,7 +24,8 @@ public class Boar : Boss
 
     private bool isRoaming = false;
     private bool isClockwise;
-    private float roamInitialAngle;
+    private bool isInRoamRange;
+    public float rotationTime;
     private Vector3 roamCenter;  
     private CancellationTokenSource roamCTS;  
 
@@ -48,12 +49,12 @@ public class Boar : Boss
 
     void Update()
     {
-        if (target.IsStunned || !target.IsAlive)
+        if (target.state.IsStunned || !target.state.IsAlive)
         {
             ChangeTarget();
         }
 
-        if (state == BossState.READY && GameplayUtils.IsInRange(transform, target.transform, attackRange)) 
+        if (state == BossState.READY && GameplayUtils.IsInRange(transform, target, attackRange, unitFilter)) 
         {
             DoNextPattern(1, 1);
         }
@@ -63,7 +64,7 @@ public class Boar : Boss
     {
         if (state == BossState.READY)
         {
-            if (!GameplayUtils.IsInRange(transform, target.transform, attackRange))
+            if (!GameplayUtils.IsInRange(transform, target, attackRange, unitFilter))
             {
                 Chase();
                 return;
@@ -89,7 +90,7 @@ public class Boar : Boss
 
     void Init()
     {
-        hpInfo.Init(enemyName, stats.maxHp);
+        hpInfo.Init("Boar", stats.maxHp);
 
         criticalFactor = stats.criticalFactor;
         moveSpeed = stats.moveSpeed;
@@ -191,12 +192,12 @@ public class Boar : Boss
             Unit unit = col.GetComponentInParent<Unit>();
             if (unit == null) continue;
             
-            if (unit.TakeDamage(stats.headbuttDamage))
+            if (unit.state.TakeDamage(stats.headbuttDamage))
             {
                 Vector2 direction = transform.right; // 스프라이트가 오른쪽을 바라보고 있음 전제
 
-                unit.Knockback(direction, stats.headbuttKnockbackDistance, stats.headbuttChainDamage);
-                unit.Stun(stats.headbuttStunDuration);
+                unit.state.Knockback(direction, stats.headbuttKnockbackDistance, stats.headbuttChainDamage);
+                unit.state.Stun(stats.headbuttStunDuration);
             }
         }
 
@@ -258,10 +259,10 @@ public class Boar : Boss
         {
             Unit nearest = GameplayUtils.FindNearest<Unit>(rushRange.transform, hitResults);
 
-            if (nearest.TakeDamage(stats.rushDamage))
+            if (nearest.state.TakeDamage(stats.rushDamage))
             {
-                nearest.Knockback(delta, stats.rushKnockbackDistance, stats.rushChainDamage);
-                nearest.Stun(stats.rushStunDuration);
+                nearest.state.Knockback(delta, stats.rushKnockbackDistance, stats.rushChainDamage);
+                nearest.state.Stun(stats.rushStunDuration);
             }
 
             rushCTS.Cancel();
@@ -294,9 +295,10 @@ public class Boar : Boss
         {
             time += Time.deltaTime;
 
-            GameplayManager.instance.Commander.Stun(stats.roarStunDuration);
-            GameplayManager.instance.Attacker.Stun(stats.roarStunDuration);
-            GameplayManager.instance.Supporter.Stun(stats.roarStunDuration);
+            foreach (Unit unit in GameplayManager.instance.allUnits)
+            {
+                unit.state.Stun(stats.roarStunDuration);
+            }
 
             await Task.Yield();
         }
@@ -309,12 +311,10 @@ public class Boar : Boss
         Debug.Log("돌아들어가기");
 
         isRoaming = true;
+        isInRoamRange = false;
         isClockwise = UnityEngine.Random.Range(0f, 1f) < 0.5f;
 
         roamCenter = target.transform.position;
-
-        Vector3 longitude = transform.position - roamCenter; 
-        roamInitialAngle = Mathf.Atan2(longitude.y, longitude.x) * Mathf.Rad2Deg;
 
         roamCTS = new CancellationTokenSource();
         try
@@ -333,34 +333,43 @@ public class Boar : Boss
     void UpdateRoam()
     {
         Vector3 longitude = transform.position - roamCenter; 
-        float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;
 
-        if (longitude.magnitude > GameplayUtils.ToWorldDistance(stats.roamDistance) + epsilon) // 먼저 적당한 거리까지 직선 이동
+        if (!isInRoamRange) // 먼저 적당한 거리까지 직선 이동
         {
-            rigidbody.linearVelocity = -longitude.normalized * GameplayUtils.ToWorldDistance(moveSpeed);
-            return;
+            float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;
+
+            if (longitude.magnitude > GameplayUtils.ToWorldDistance(stats.roamDistance) + epsilon) 
+            {
+                rigidbody.linearVelocity = -longitude.normalized * GameplayUtils.ToWorldDistance(moveSpeed);
+            }
+            else if (longitude.magnitude < GameplayUtils.ToWorldDistance(stats.roamDistance) - epsilon)
+            {
+                rigidbody.linearVelocity = longitude.normalized * GameplayUtils.ToWorldDistance(moveSpeed);
+            }
+            else
+            {
+                isInRoamRange = true;
+                rotationTime = 0;
+            }
         }
 
-        if (longitude.magnitude < GameplayUtils.ToWorldDistance(stats.roamDistance) - epsilon)
+        else
         {
-            rigidbody.linearVelocity = longitude.normalized * GameplayUtils.ToWorldDistance(moveSpeed);
-            return;
+            rotationTime += Time.deltaTime;
+
+            float angle = Mathf.Atan2(longitude.y, longitude.x) * Mathf.Rad2Deg;
+            float speed = GameplayUtils.ToWorldDistance(stats.roamDistance) * MathF.PI * 0.5f;  
+            angle += isClockwise? -90 : 90;
+
+            rigidbody.linearVelocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * speed;
+
+            FaceTarget();
+
+            if (rotationTime > 1f)
+            {
+                roamCTS.Cancel();
+            }
         }
-
-        float angle = Mathf.Atan2(longitude.y, longitude.x) * Mathf.Rad2Deg;
-
-        if (Mathf.Abs(angle - roamInitialAngle) >= 90)
-        {
-            roamCTS.Cancel();
-            return;
-        }
-
-        float speed = GameplayUtils.ToWorldDistance(stats.roamDistance) * MathF.PI * 0.5f;  
-        angle += isClockwise? -90 : 90;
-
-        rigidbody.linearVelocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * speed;
-
-        FaceTarget();
     }
 
     #endregion

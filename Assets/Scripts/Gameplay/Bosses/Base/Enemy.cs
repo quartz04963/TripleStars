@@ -4,7 +4,6 @@ using UnityEngine;
 abstract public class Enemy : MonoBehaviour
 {
     [Header("Enemy")]
-    [SerializeField] protected string enemyName;
     [SerializeField] protected HpInfo hpInfo;
 
     protected ContactFilter2D unitFilter;
@@ -26,7 +25,7 @@ abstract public class Enemy : MonoBehaviour
         };
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, Unit unit)
     {
         hpInfo.AddHp(-damage);
 

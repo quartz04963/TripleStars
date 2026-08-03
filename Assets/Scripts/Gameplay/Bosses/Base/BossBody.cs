@@ -13,15 +13,10 @@ public class BossBody : Enemy
     }
     public Boss Boss => boss;
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Unit unit)
     {
-        if (isWeakPoint)
-        {
-            boss.TakeDamage(damage * boss.CriticalFactor);
-        } 
-        else
-        {
-            boss.TakeDamage(damage);
-        }
+        float finalDamage = damage * (isWeakPoint ? boss.CriticalFactor : 1f);
+
+        boss.TakeDamage(finalDamage, unit);
     }
 }

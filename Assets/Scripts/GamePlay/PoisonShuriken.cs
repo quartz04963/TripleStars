@@ -4,7 +4,7 @@ public class PoisonShuriken : Projectile
 {
     protected override void Hit(Enemy enemy)
     {
-        if (GameplayManager.instance.Attacker is Assassin assassin)
+        if (caster is Assassin assassin)
         {
             assassin.IncreasePoisonStack(enemy);
         }
