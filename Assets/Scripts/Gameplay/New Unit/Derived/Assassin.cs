@@ -19,11 +19,6 @@ public class Assassin : Unit
     public MouseMovementController Movement => (MouseMovementController)movement;
 
 
-    void Start()
-    {
-        baseAttack.ShowRange(true);
-    }
-
     void Update()
     {
         UpdateHide();

@@ -23,22 +23,22 @@ public class BossSelection : MonoBehaviour
     {
         bossDataList = new List<BossLobbyData>
         {
-            new BossLobbyData(BossCode.BOSS_1, "Boss 1", Difficulty.EASY),
-            new BossLobbyData(BossCode.BOSS_2, "Boss 2", Difficulty.EASY),
-            new BossLobbyData(BossCode.BOSS_3, "Boss 3", Difficulty.NORMAL),
-            new BossLobbyData(BossCode.BOSS_4, "Boss 4", Difficulty.NORMAL),
-            new BossLobbyData(BossCode.BOSS_5, "Boss 5", Difficulty.HARD),
-            new BossLobbyData(BossCode.BOSS_6, "Boss 6", Difficulty.HARD),
+            new BossLobbyData(BossCode.BOSS_1, "Boar", Difficulty.EASY),
+            // new BossLobbyData(BossCode.BOSS_2, "Boss 2", Difficulty.EASY),
+            // new BossLobbyData(BossCode.BOSS_3, "Boss 3", Difficulty.NORMAL),
+            // new BossLobbyData(BossCode.BOSS_4, "Boss 4", Difficulty.NORMAL),
+            // new BossLobbyData(BossCode.BOSS_5, "Boss 5", Difficulty.HARD),
+            // new BossLobbyData(BossCode.BOSS_6, "Boss 6", Difficulty.HARD),
         };
 
         bossSpriteDict = new Dictionary<BossCode, Sprite>
         {
             {BossCode.BOSS_1, bossSpriteList[0]},
-            {BossCode.BOSS_2, bossSpriteList[1]},
-            {BossCode.BOSS_3, bossSpriteList[2]},
-            {BossCode.BOSS_4, bossSpriteList[3]},
-            {BossCode.BOSS_5, bossSpriteList[4]},
-            {BossCode.BOSS_6, bossSpriteList[5]},
+            // {BossCode.BOSS_2, bossSpriteList[1]},
+            // {BossCode.BOSS_3, bossSpriteList[2]},
+            // {BossCode.BOSS_4, bossSpriteList[3]},
+            // {BossCode.BOSS_5, bossSpriteList[4]},
+            // {BossCode.BOSS_6, bossSpriteList[5]},
         };
     }
 

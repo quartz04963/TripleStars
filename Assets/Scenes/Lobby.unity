@@ -5296,11 +5296,6 @@ MonoBehaviour:
   bossDataList: []
   bossSpriteList:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1852373636
 GameObject:
   m_ObjectHideFlags: 0

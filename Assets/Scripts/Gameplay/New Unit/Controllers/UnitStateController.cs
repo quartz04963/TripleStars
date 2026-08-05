@@ -75,7 +75,7 @@ public class UnitStateController : MonoBehaviour
 
         // 추후 애니메이션 넣기
 
-        gameObject.SetActive(false);
+        unit.gameObject.SetActive(false);
     }
 
     public virtual void TakeHeal(int heal)

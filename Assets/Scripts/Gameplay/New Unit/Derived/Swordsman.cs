@@ -17,9 +17,21 @@ public class Swordsman : Unit
     public SwordsmanMovementController Movement => (SwordsmanMovementController)movement;
     public MeleeAttackController BaseAttack => (MeleeAttackController)baseAttack;
 
-    void Start()
+
+    void Update()
     {
-        baseAttack.ShowRange(true);
+        if (state.CanAttack())
+        {
+            if (roll.SkillKey.isPressed)
+            {
+                Roll();
+            }
+
+            if (flameSword.SkillKey.isPressed)
+            {
+                FlameSword();
+            }
+        }
     }
 
     public override void Init(HpInfo hp, ButtonControl mouseButton, SkillUseInfo skill1, KeyControl skill1Key, SkillUseInfo skill2, KeyControl skill2Key)
@@ -50,6 +62,7 @@ public class Swordsman : Unit
         {
             await GameplayUtils.DelayForSeconds(Stats.rollDuration, rollCTS.Token);
         }
+        catch {}
         finally
         {
             State.EndRoll();
@@ -73,7 +86,7 @@ public class Swordsman : Unit
         {
             await state.Predelay(Stats.flameSwordPredelay, flameSwordCTS.Token);
         }
-        catch { }
+        catch {}
 
         if (target != BaseAttack.PeakNextTarget()) return;
 

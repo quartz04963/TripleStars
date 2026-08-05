@@ -116,9 +116,9 @@ abstract public class UnitMovementController : MonoBehaviour
 
     public virtual void Teleport(Vector3 pos)
     {
-        StopMove();
+        unit.transform.position = pos;
 
-        transform.position = pos;
+        StopMove();
     }
 
     abstract public void StopMove();

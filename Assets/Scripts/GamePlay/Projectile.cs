@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
 
             if (nearest != null)
             {
-                
+                Hit(nearest);
             }
         }
     }

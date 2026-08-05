@@ -32,6 +32,8 @@ abstract public class UnitBaseAttackController : MonoBehaviour
         period = unit.stats.baseAttackPeriod;
 
         rangeCollider.radius = GameplayUtils.ToWorldDistance(range);
+
+        ShowRange(true);
     }
 
     protected virtual void Update()
@@ -60,8 +62,8 @@ abstract public class UnitBaseAttackController : MonoBehaviour
             {
                 float angle = 2 * Mathf.PI * i / segments;
 
-                float x = Mathf.Cos(angle) * rangeCollider.radius;
-                float y = Mathf.Sin(angle) * rangeCollider.radius;
+                float x = Mathf.Cos(angle) * GameplayUtils.ToWorldDistance(range);
+                float y = Mathf.Sin(angle) * GameplayUtils.ToWorldDistance(range);
 
                 rangeOutline.SetPosition(i, new Vector3(x, y, 0));
             }

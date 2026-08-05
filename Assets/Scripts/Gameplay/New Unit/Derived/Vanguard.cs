@@ -18,10 +18,9 @@ public class Vanguard : Unit
 
     void Start()
     {
-        baseAttack.ShowRange(true);
-
         healCollider.radius = GameplayUtils.ToWorldDistance(Stats.healRange);
     }
+    
     void Update()
     {
         Heal();

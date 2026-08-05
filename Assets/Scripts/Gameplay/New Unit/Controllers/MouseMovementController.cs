@@ -19,7 +19,7 @@ public class MouseMovementController : UnitMovementController
     {
         base.Start();
 
-        destination = transform.position;
+        destination = unit.transform.position;
     }
 
     void Update()
@@ -56,7 +56,7 @@ public class MouseMovementController : UnitMovementController
 
     protected override void Move()
     {
-        Vector2 direction = destination - (Vector2)transform.position;
+        Vector2 direction = destination - (Vector2)unit.transform.position;
         float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;
         
         if (direction.sqrMagnitude < epsilon * epsilon)
@@ -80,7 +80,7 @@ public class MouseMovementController : UnitMovementController
 
         rigidbody.linearVelocity = Vector2.zero;
         
-        destination = transform.position;
+        destination = unit.transform.position;
 
         ShowPath(false);
     }

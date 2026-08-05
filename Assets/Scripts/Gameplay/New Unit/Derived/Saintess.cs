@@ -17,8 +17,6 @@ public class Saintess : Unit
 
     void Start()
     {
-        baseAttack.ShowRange(true);
-
         healCollider.radius = GameplayUtils.ToWorldDistance(Stats.healRange);
     }
 

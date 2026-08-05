@@ -8,11 +8,6 @@ public class Paladin : Unit
     public PaladinStats Stats => (PaladinStats)stats;
 
 
-    void Start()
-    {
-        baseAttack.ShowRange(true);
-    }
-
     void Update()
     {
         if (state.CanAttack())

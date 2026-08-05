@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwordsmanMovementController : KeyboardMovementController
 {
@@ -11,7 +12,10 @@ public class SwordsmanMovementController : KeyboardMovementController
     {
         GetDirection();
 
-        if (direction != Vector2.zero)
+        bool wasDirectionKeyPressed = Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame || 
+                                      Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame;
+
+        if (wasDirectionKeyPressed)
         {
             Unit.RollCTS?.Cancel();
         }
