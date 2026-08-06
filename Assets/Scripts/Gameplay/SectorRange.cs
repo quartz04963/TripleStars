@@ -12,6 +12,9 @@ public class SectorRange : MonoBehaviour
 
     private Mesh mesh;
 
+    public PolygonCollider2D Collider => polygonCollider;
+    
+
     void Awake()
     {
         mesh = new Mesh();

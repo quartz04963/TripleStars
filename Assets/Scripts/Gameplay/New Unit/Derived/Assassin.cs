@@ -70,7 +70,7 @@ public class Assassin : Unit
 
     public void IncreasePoisonStack(Enemy enemy)
     {
-        if (enemy is BossBody bossBody) enemy = bossBody.Boss;
+        if (enemy is BossBody bossBody) enemy = bossBody.boss;
 
         if (poisionStackDict.TryGetValue(enemy, out int stack))
         {
@@ -102,7 +102,7 @@ public class Assassin : Unit
 
             foreach (Enemy enemy in poisionStackDict.Keys)
             {
-                enemy.TakeDamage(Stats.poisonDmg * poisionStackDict[enemy] * state.AttackFactor, this);
+                enemy.state.TakeDamage(Stats.poisonDmg * poisionStackDict[enemy] * state.AttackFactor, this);
             }
         }
     }

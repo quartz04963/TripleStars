@@ -55,6 +55,6 @@ public class Paladin : Unit
         if (!bait.StartCooldown()) return;
         // 추후 애니메이션 넣기
 
-        GameplayManager.instance.boss.Target(this);
+        GameplayManager.instance.boss.targeting.SetTarget(this);
     }
 }

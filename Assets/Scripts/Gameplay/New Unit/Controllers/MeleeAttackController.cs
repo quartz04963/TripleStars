@@ -28,18 +28,18 @@ public class MeleeAttackController : UnitBaseAttackController
 
         if (target is BossBody bossBody)
         {
-            TurnAttackCollider(bossBody.Boss.transform);
+            TurnAttackCollider(bossBody.boss.transform);
 
             BossBody weakpoint = GetHitWeakpoint();
 
-            if (weakpoint == null) target.TakeDamage(damage * unit.state.AttackFactor, unit);
+            if (weakpoint == null) bossBody.TakeDamage(damage * unit.state.AttackFactor, unit);
             else weakpoint.TakeDamage(damage * unit.state.AttackFactor, unit);
         }
         else
         {
             TurnAttackCollider(target.transform);
 
-            target.TakeDamage(damage * unit.state.AttackFactor, unit);
+            target.state.TakeDamage(damage * unit.state.AttackFactor, unit);
         }
     }
 

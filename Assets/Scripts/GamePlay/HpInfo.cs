@@ -12,7 +12,7 @@ public class HpInfo : MonoBehaviour
     [SerializeField] TextMeshProUGUI hpTmp;
     [SerializeField] Image hpBarImg;
 
-    public float CurrentHP => currentHP;
+    public int CurrentHP => currentHP;
 
     public void Init(string unitName, int maxHP)
     {
@@ -30,6 +30,6 @@ public class HpInfo : MonoBehaviour
         currentHP = (int)(delta < 0 ? Math.Max(currentHP + delta, 0) : Math.Min(currentHP + delta, maxHP));
         
         hpTmp.SetText(currentHP + " / " + maxHP);
-        hpBarImg.fillAmount = currentHP / maxHP;
+        hpBarImg.fillAmount = currentHP / (float)maxHP;
     }
 }

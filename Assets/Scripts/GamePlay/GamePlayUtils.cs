@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public static class GameplayUtils
 {
     private const float MAGNITUDE = 100;
-    private const int FPS = 60;
+
+    private static List<Collider2D> colliders = new();
 
     public static ContactFilter2D unitFilter;
     public static ContactFilter2D wallFilter;
@@ -35,14 +36,6 @@ public static class GameplayUtils
             layerMask = LayerMask.GetMask("Wall"),
         };
     }
-    
-
-    private static List<Collider2D> colliders = new();
-
-    public static float ToSecondsFloat(int frame)
-    {
-        return frame / (float)FPS;
-    }
 
     public static float ToWorldDistance(float distance)
     {
@@ -66,16 +59,6 @@ public static class GameplayUtils
 
             await Task.Yield();
         }
-    }
-
-    public static async Task DelayForFrames(int frame)
-    {
-        await Task.Delay((int)(1000f * frame / FPS));
-    }
-
-    public static async Task DelayForFrames(int frame, CancellationToken token)
-    {
-        await DelayForSeconds(frame / FPS, token);
     }
 
     public static T FindNearest<T>(Transform transform, List<Collider2D> list) where T : Object

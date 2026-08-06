@@ -21,7 +21,7 @@ public class RangedAttackController : UnitBaseAttackController
         
         if (target is BossBody bossBody)
         {
-            projectile.Init(damage * unit.state.AttackFactor, unit, bossBody.Boss.transform);
+            projectile.Init(damage * unit.state.AttackFactor, unit, bossBody.boss.transform);
         }
         else
         {

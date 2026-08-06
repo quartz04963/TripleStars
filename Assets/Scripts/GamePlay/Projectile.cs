@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] protected float damage;
-    [SerializeField] protected float speed;
+    [SerializeField] protected float speed = 2000;
     [SerializeField] protected float lifeTime = 10;
     [SerializeField] protected Unit caster;
 
@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Hit(Enemy enemy)
     {
-        enemy.TakeDamage(damage, caster);
+        enemy.state.TakeDamage(damage, caster);
                 
         Destroy(gameObject);
     }

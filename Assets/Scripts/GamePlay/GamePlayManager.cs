@@ -14,6 +14,7 @@ public class GameplayManager : MonoBehaviour
     public Unit supporter;
 
     [Header("Info Classes")]
+    [SerializeField] HpInfo bossHpInfo;
     [SerializeField] HpInfo commanderHpInfo;
     [SerializeField] HpInfo attackerHpInfo;
     [SerializeField] HpInfo supporterHpInfo;
@@ -50,7 +51,9 @@ public class GameplayManager : MonoBehaviour
     {
         // TODO: 보스 코드에 따라 보스 소환하기
 
-        boss.Target(commander);
+        boss.targeting.SetTarget(commander);
+
+        boss.Init(bossHpInfo);
     }
 
     void InitUnits()

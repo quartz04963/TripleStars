@@ -92,7 +92,7 @@ public class Swordsman : Unit
 
         if (target is BossBody bossBody)
         {
-            BaseAttack.TurnAttackCollider(bossBody.Boss.transform);
+            BaseAttack.TurnAttackCollider(bossBody.boss.transform);
 
             BossBody weakpoint = BaseAttack.GetHitWeakpoint();
 
@@ -101,7 +101,7 @@ public class Swordsman : Unit
 
         for (int i = 0; i < Stats.flameSwordHitNumber; i++) // 첫 타가 치명타로 적중 시 나머지 타수도 치명타
         {
-            target.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
+            target.state.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
 
             await GameplayUtils.DelayForSeconds(Stats.flameSwordHitInterval); // 차징 종료 후 공격은 캔슬되지 않음
         }

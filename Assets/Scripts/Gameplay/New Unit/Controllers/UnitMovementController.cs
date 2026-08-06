@@ -11,7 +11,7 @@ public enum UnitSpeed
 
 abstract public class UnitMovementController : MonoBehaviour
 {
-    [SerializeField] protected Unit unit;
+    public Unit unit;
 
     [SerializeField] protected bool isMoving;
     [SerializeField] protected float moveSpeed;

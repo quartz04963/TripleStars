@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHP: 100
   moveSpeed: 360
   damageFactor: 0.8
-  baseAttackRange: 50
+  baseAttackRange: 100
   baseAttackDamage: 15
   baseAttackPeriod: 1
   shieldCooldown: 5

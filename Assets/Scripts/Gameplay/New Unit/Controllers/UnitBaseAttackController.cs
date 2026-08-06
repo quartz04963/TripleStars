@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer), typeof(CircleCollider2D))]
 abstract public class UnitBaseAttackController : MonoBehaviour
 {
-    [SerializeField] protected Unit unit;
+    public Unit unit;
 
     [SerializeField] protected int damage;
     [SerializeField] protected int range;

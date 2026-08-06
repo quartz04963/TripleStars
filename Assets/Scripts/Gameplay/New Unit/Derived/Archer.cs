@@ -40,8 +40,10 @@ public class Archer : Unit
     {
         // 스킬명: 도주
         // 효과: 어그로 끌렸을 때 이동속도 증가
+
+        bool isTargeted = GameplayManager.instance.boss.targeting.Target == this;
         
-        movement.MoveSpeed = (float)(GameplayManager.instance.boss.IsTargeting(this) ? Stats.flightMoveSpeed : Stats.moveSpeed);
+        movement.MoveSpeed = (float)(isTargeted ? Stats.flightMoveSpeed : Stats.moveSpeed);
     }
 
     void ExplosiveArrow()

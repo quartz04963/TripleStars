@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   damage: 300
-  speed: 8000
+  speed: 2000
   lifeTime: 5
   caster: {fileID: 0}
 --- !u!50 &469281969160390462

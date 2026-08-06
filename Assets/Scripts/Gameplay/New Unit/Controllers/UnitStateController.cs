@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class UnitStateController : MonoBehaviour
 {
-    [SerializeField] protected Unit unit;
+    public Unit unit;
 
     [SerializeField] protected HpInfo hp;
 
