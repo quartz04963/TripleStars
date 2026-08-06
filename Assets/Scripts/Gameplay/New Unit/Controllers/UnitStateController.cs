@@ -64,6 +64,8 @@ public class UnitStateController : MonoBehaviour
 
         hp.AddHp(-damage * damageFactor);
 
+        Debug.Log(unit.unitName + " , " + damage);
+
         if (hp.CurrentHP <= 0) Die();
 
         return true;

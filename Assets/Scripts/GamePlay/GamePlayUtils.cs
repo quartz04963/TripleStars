@@ -88,10 +88,10 @@ public static class GameplayUtils
         float minSqrDist = float.MaxValue;
 
         foreach (RaycastHit2D hit in list)
-        {
-            if (!hit.transform.TryGetComponent(out T t)) continue;
+        {            
+            if (!hit.collider.TryGetComponent(out T t)) continue;
 
-            float sqrDist = (hit.transform.position - transform.position).sqrMagnitude;
+            float sqrDist = (hit.collider.transform.position - transform.position).sqrMagnitude;
 
             if (sqrDist < minSqrDist)
             {

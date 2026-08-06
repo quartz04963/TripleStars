@@ -18,26 +18,20 @@ public class RangedAttackController : UnitBaseAttackController
         lastAttackTime = Time.time;
 
         Projectile projectile = Instantiate(projectilePrf, transform).GetComponent<Projectile>();
-        
-        if (target is BossBody bossBody)
-        {
-            projectile.Init(damage * unit.state.AttackFactor, unit, bossBody.boss.transform);
-        }
-        else
-        {
-            projectile.Init(damage * unit.state.AttackFactor, unit, target.transform);
-        }
+
+        projectile.Init(damage * unit.state.AttackFactor, unit, target.transform);
     }
 
     protected override void FindTarget()
     {
         rangeCollider.Overlap(GameplayUtils.enemyFilter, collidersInRange);
 
-        bool isInRange = collidersInRange.Exists(col => col.GetComponent<Enemy>() == target);
+        bool isInRange = collidersInRange.Exists(col => col.TryGetComponent(out BossBody body) && body.boss == target);
         
         if (target == null || !isInRange)
         {
-            target = GameplayUtils.FindNearest<Enemy>(transform, collidersInRange); 
+            var nearest = GameplayUtils.FindNearest<BossBody>(transform, collidersInRange);
+            target = nearest == null ? null : nearest.boss; 
         }
     }
 }

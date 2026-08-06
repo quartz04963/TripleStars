@@ -11,27 +11,47 @@ public enum BossState
     STANDING,
 }
 
-abstract public class BossStateController : EnemyStateController
+abstract public class BossStateController : MonoBehaviour
 {
+    public Boss boss;
+    
+    [SerializeField] protected HpInfo hp;
     [SerializeField] protected BossState bossState;
     
     protected readonly List<int> patternBalls = new();
     
-    public Boss Boss => (Boss)enemy;
     public BossState BossState {
         get => bossState;
         set => bossState = value;
     }
     
-
-    public override void TakeDamage(float damage, Unit unit)
+   
+    public virtual void SetHpInfo(HpInfo hpInfo)
     {
-        base.TakeDamage(damage, unit);
+        hp = hpInfo;
+
+        hpInfo.Init(boss.bossName, boss.stats.maxHP);
+    }
+
+    public virtual void TakeDamage(float damage, Unit unit)
+    {
+        hp.AddHp(-damage);
+
+        if (hp.CurrentHP <= 0) Die();
 
         if (unit == GameplayManager.instance.commander)
         {
-            Boss.targeting.HandleCommanderAggro(damage);
+            boss.targeting.HandleCommanderAggro(damage);
         }
+
+        // Debug.Log(damage);
+    }
+
+    protected virtual void Die()
+    {
+        // 추후 애니메이션 넣기
+        
+        boss.gameObject.SetActive(false);
     }
 
     public virtual int GetNextSpecialPattern()

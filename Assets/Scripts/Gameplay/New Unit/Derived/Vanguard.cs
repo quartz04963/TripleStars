@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
@@ -68,6 +69,7 @@ public class Vanguard : Unit
             unit.AddAttackFactor(Stats.atkBuffRate);
         }
 
+        state.AddAttackFactor(Stats.atkBuffRate);
 
         // 효과 2: 1초마다 범위 내 아군의 hp를 1씩 회복
 
@@ -84,6 +86,8 @@ public class Vanguard : Unit
                 unit.TakeHeal(Stats.healAmount);
             }
         }
+
+        state.TakeHeal(Stats.healAmount);
     }
 
     void Assemble()

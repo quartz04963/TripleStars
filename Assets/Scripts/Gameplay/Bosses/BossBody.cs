@@ -12,12 +12,9 @@ public class BossBody : Enemy
         set => isWeakPoint = value;
     }
     
-
-    public override void Init(HpInfo hp) {}
-
-    public void TakeDamage(float damage, Unit unit)
+    public override void TakeDamage(float damage, Unit unit)
     {
-        float finalDamage = damage * (isWeakPoint ? boss.BossStats.weakDamageFactor : 1f);
+        float finalDamage = damage * (isWeakPoint ? boss.stats.weakDamageFactor : 1f);
 
         boss.state.TakeDamage(finalDamage, unit);
     }

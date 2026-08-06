@@ -12,7 +12,7 @@ public class Assassin : Unit
 
     private float unmovedTime;
     private float lastPoisonTime;
-    private readonly Dictionary<Enemy, int> poisionStackDict = new();
+    private readonly Dictionary<Boss, int> poisionStacks = new();
 
     public AssassinStats Stats => (AssassinStats)stats;
     public AssassinStateController State => (AssassinStateController)state;
@@ -68,26 +68,21 @@ public class Assassin : Unit
         projectile.Init(0, this, baseAttack.Target.transform);
     }
 
-    public void IncreasePoisonStack(Enemy enemy)
+    public void IncreasePoisonStack(Boss boss)
     {
-        if (enemy is BossBody bossBody) enemy = bossBody.boss;
-
-        if (poisionStackDict.TryGetValue(enemy, out int stack))
+        if (poisionStacks.TryGetValue(boss, out int stack))
         {
-            if (stack < Stats.poisonMaxStack) poisionStackDict[enemy]++;
+            if (stack < Stats.poisonMaxStack) poisionStacks[boss]++;
         }
         else
         {
-            poisionStackDict[enemy] = 1;
+            poisionStacks[boss] = 1;
         }
     }
 
     public void ClearPoisonStack()
     {
-        foreach (var key in poisionStackDict.Keys)
-        {
-            poisionStackDict[key] = 0;
-        }
+        foreach (var key in poisionStacks.Keys.ToList()) poisionStacks[key] = 0;
     }
 
     void UpdatePoison()
@@ -96,13 +91,12 @@ public class Assassin : Unit
         {
             lastPoisonTime = Time.time;
 
-            var deadKeys = poisionStackDict.Keys.Where(enemy => enemy == null).ToList();
+            var deadKeys = poisionStacks.Keys.Where(enemy => enemy == null).ToList();
+            foreach (var key in deadKeys) poisionStacks.Remove(key);
 
-            foreach (var key in deadKeys) poisionStackDict.Remove(key);
-
-            foreach (Enemy enemy in poisionStackDict.Keys)
+            foreach (Boss boss in poisionStacks.Keys)
             {
-                enemy.state.TakeDamage(Stats.poisonDmg * poisionStackDict[enemy] * state.AttackFactor, this);
+                boss.state.TakeDamage(Stats.poisonDmg * poisionStacks[boss] * state.AttackFactor, this);
             }
         }
     }

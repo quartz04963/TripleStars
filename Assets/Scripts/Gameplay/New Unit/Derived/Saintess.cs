@@ -66,6 +66,8 @@ public class Saintess : Unit
                 unit.TakeHeal(Stats.healAmount);
             }
         }
+
+        state.TakeHeal(Stats.healAmount);
     }
 
     void Teleport()

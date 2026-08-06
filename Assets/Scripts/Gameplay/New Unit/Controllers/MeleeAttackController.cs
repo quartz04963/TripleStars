@@ -26,40 +26,32 @@ public class MeleeAttackController : UnitBaseAttackController
 
         lastAttackTime = Time.time;
 
-        if (target is BossBody bossBody)
-        {
-            TurnAttackCollider(bossBody.boss.transform);
+        TurnAttackCollider(target.transform);
 
-            BossBody weakpoint = GetHitWeakpoint();
+        BossBody weakpoint = GetHitWeakpoint();
 
-            if (weakpoint == null) bossBody.TakeDamage(damage * unit.state.AttackFactor, unit);
-            else weakpoint.TakeDamage(damage * unit.state.AttackFactor, unit);
-        }
-        else
-        {
-            TurnAttackCollider(target.transform);
-
-            target.state.TakeDamage(damage * unit.state.AttackFactor, unit);
-        }
+        if (weakpoint != null) weakpoint.TakeDamage(damage * unit.state.AttackFactor, unit);
+        else target.state.TakeDamage(damage * unit.state.AttackFactor, unit);
     }
 
     protected override void FindTarget()
     {
         rangeCollider.Overlap(GameplayUtils.enemyFilter, collidersInRange);
 
-        bool isInRange = collidersInRange.Exists(col => col.GetComponent<Enemy>() == target);
+        bool isInRange = collidersInRange.Exists(col => col.TryGetComponent(out BossBody body) && body.boss == target);
         
         if (target == null || !isInRange)
         {
-            target = GameplayUtils.FindNearest<Enemy>(transform, collidersInRange); 
+            var nearest = GameplayUtils.FindNearest<BossBody>(transform, collidersInRange);
+            target = nearest != null ? nearest.boss : null; 
         }
     }
 
     public void TurnAttackCollider(Transform target)
     {
-        Vector2 direction = target.position - transform.position;
+        Vector2 direction = target.position - unit.transform.position;
 
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         attackCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
@@ -79,19 +71,16 @@ public class MeleeAttackController : UnitBaseAttackController
         return null;
     }
 
-    public Enemy PeakNextTarget()
+    public Boss PeakNextTarget()
     {
         rangeCollider.Overlap(GameplayUtils.enemyFilter, collidersInRange);
 
-        bool isInRange = collidersInRange.Exists(col => col.GetComponent<Enemy>() == target);
+        bool isInRange = collidersInRange.Exists(col => col.TryGetComponent(out BossBody body) && body.boss == target);
         
-        if (target == null || !isInRange)
-        {
-            return GameplayUtils.FindNearest<Enemy>(transform, collidersInRange); 
-        }
-        else
-        {
-            return target;
-        }
+        if (target != null && isInRange) return target;
+
+        var nearest = GameplayUtils.FindNearest<BossBody>(transform, collidersInRange);
+        return nearest != null ? nearest.boss : null;
+
     }
 }

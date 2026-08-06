@@ -8,12 +8,12 @@ abstract public class UnitBaseAttackController : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] protected int range;
     [SerializeField] protected float period;
-    [SerializeField] protected Enemy target;
+    [SerializeField] protected Boss target;
 
     protected CircleCollider2D rangeCollider;
     protected LineRenderer rangeOutline;
 
-    public Enemy Target => target;
+    public Boss Target => target;
 
 
     protected virtual void Awake()

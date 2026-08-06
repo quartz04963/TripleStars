@@ -10,8 +10,10 @@ public class MouseMovementController : UnitMovementController
     private Vector2 destination;
 
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         lineRenderer = GetComponent<LineRenderer>();
     }
 
@@ -59,7 +61,7 @@ public class MouseMovementController : UnitMovementController
         Vector2 direction = destination - (Vector2)unit.transform.position;
         float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;
         
-        if (direction.sqrMagnitude < epsilon * epsilon)
+        if (IsBlocked(direction) || direction.sqrMagnitude < epsilon * epsilon)
         {
             StopMove();
             return;
@@ -83,5 +85,15 @@ public class MouseMovementController : UnitMovementController
         destination = unit.transform.position;
 
         ShowPath(false);
+    }
+
+    bool IsBlocked(Vector2 direction)
+    {
+        Vector2 normDirection = direction.normalized;
+        float delta = GameplayUtils.ToWorldDistance(moveSpeed * Time.fixedDeltaTime);
+
+        int count = bodyCollider.Cast(direction.normalized, hits, delta);
+
+        return count > 0;
     }
 }

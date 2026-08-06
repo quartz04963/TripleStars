@@ -78,7 +78,7 @@ public class Swordsman : Unit
         if (!flameSword.StartCooldown()) return;
 
         // 추후 애니메이션 넣기
-        Enemy target = baseAttack.Target;
+        Boss target = baseAttack.Target;
 
         flameSwordCTS = new CancellationTokenSource();
 
@@ -90,18 +90,14 @@ public class Swordsman : Unit
 
         if (target != BaseAttack.PeakNextTarget()) return;
 
-        if (target is BossBody bossBody)
-        {
-            BaseAttack.TurnAttackCollider(bossBody.boss.transform);
+        BaseAttack.TurnAttackCollider(target.transform);
 
-            BossBody weakpoint = BaseAttack.GetHitWeakpoint();
-
-            if (weakpoint != null) target = weakpoint;
-        }
+        BossBody weakpoint = BaseAttack.GetHitWeakpoint();
 
         for (int i = 0; i < Stats.flameSwordHitNumber; i++) // 첫 타가 치명타로 적중 시 나머지 타수도 치명타
         {
-            target.state.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
+            if (weakpoint != null) weakpoint.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
+            else target.state.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
 
             await GameplayUtils.DelayForSeconds(Stats.flameSwordHitInterval); // 차징 종료 후 공격은 캔슬되지 않음
         }

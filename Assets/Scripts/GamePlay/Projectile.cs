@@ -62,7 +62,14 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Hit(Enemy enemy)
     {
-        enemy.state.TakeDamage(damage, caster);
+        if (enemy is BossBody bossBody)
+        {
+            bossBody.TakeDamage(damage, caster);
+        }
+        else
+        {
+            enemy.TakeDamage(damage, caster);
+        }
                 
         Destroy(gameObject);
     }

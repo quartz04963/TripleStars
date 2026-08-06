@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0772809c9623344a9fa4c43ae7a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoarStateController
-  enemy: {fileID: 855895566}
+  boss: {fileID: 855895566}
   hp: {fileID: 0}
   bossState: 0
   head: {fileID: 1127868927}
@@ -1322,11 +1322,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855895562}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -1353,11 +1353,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0844cb4ee44a8634a90dfbb372ee3204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boar
-  enemyName: Boar
+  bossName: Boar
+  targeting: {fileID: 1762250827}
   stats: {fileID: 11400000, guid: da1515676dc7265418b5a3b65a3e3132, type: 2}
   state: {fileID: 285174598}
   movement: {fileID: 1459872309}
-  targeting: {fileID: 1762250827}
   headbuttSector: {fileID: 1048902817}
   headCollider: {fileID: 1127868926}
   rushCollider: {fileID: 241231019}
@@ -2208,10 +2208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd503acd4ea64e74f8140049beb5f247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBody
-  enemyName: Boar Head
-  stats: {fileID: 0}
-  state: {fileID: 0}
-  movement: {fileID: 0}
   boss: {fileID: 855895566}
   isWeakPoint: 0
 --- !u!212 &1127868928
@@ -2532,7 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb699b70f87f5214eb506ad92870fdd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoarMovementController
-  enemy: {fileID: 855895566}
+  boss: {fileID: 855895566}
   moveSpeed: 0
   rigidbody: {fileID: 855895565}
 --- !u!1001 &1513220314
@@ -3159,10 +3155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd503acd4ea64e74f8140049beb5f247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBody
-  enemyName: Boar Body
-  stats: {fileID: 0}
-  state: {fileID: 0}
-  movement: {fileID: 0}
   boss: {fileID: 855895566}
   isWeakPoint: 0
 --- !u!212 &1657560974

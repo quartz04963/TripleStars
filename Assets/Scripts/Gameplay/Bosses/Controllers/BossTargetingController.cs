@@ -19,7 +19,7 @@ public class BossTargetingController : MonoBehaviour
     protected virtual void Awake()
     {
         rangeCollider = GetComponent<CircleCollider2D>();
-        rangeCollider.radius = GameplayUtils.ToWorldDistance(boss.BossStats.attackRange);
+        rangeCollider.radius = GameplayUtils.ToWorldDistance(boss.stats.attackRange);
     }
 
     protected virtual void Update()

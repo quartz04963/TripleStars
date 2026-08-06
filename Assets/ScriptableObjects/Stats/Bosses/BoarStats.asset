@@ -42,7 +42,7 @@ MonoBehaviour:
   roarLastingDuration: 0.15
   roarStunDuration: 5.15
   roamFrequency: 4
-  roamDistance: 200
+  roamDistance: 500
   roamPostdelay: 1.1
   roamDuration: 1
   bodyScale: 400

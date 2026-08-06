@@ -15,14 +15,21 @@ public class BoarMovementController : BossMovementController
 
     private readonly List<RaycastHit2D> hitResults = new(); 
 
-    public Boar Boar => (Boar)enemy;
-    public BoarStats BoarStats => Boar.BoarStats;
-    public BoarStateController BoarState => Boar.BoarState;
+    public Boar Boar => (Boar)boss;
+    public BoarStats BoarStats => (BoarStats)boss.stats;
+    public BoarStateController BoarState => (BoarStateController)boss.state;
 
 
-    protected override void FixedUpdate()
+    void FixedUpdate()
     {
-        base.FixedUpdate();
+        if (BoarState.BossState == BossState.READY)
+        {
+            if (boss.targeting.Target != null && !boss.targeting.IsTargetInRange())
+            {
+                Chase();
+                return;
+            }
+        } 
 
         if (BoarState.BossState == BossState.ATTACKING)
         {
@@ -33,18 +40,20 @@ public class BoarMovementController : BossMovementController
             if (isRushing)
             {
                 UpdateRush();
+                return;
             } 
 
-            if (isRoaming && !isTargetInRoamRange) 
+            if (isRoaming)
             {
-                RoamMoveStaright();
-            }
-            if (isRoaming && isTargetInRoamRange)
-            {
-                RoamRevolve();
+                if (!isTargetInRoamRange) RoamMoveStaright();
+                else RoamRevolve();
+                return;
             }
         }
+
+        FixPositionAndRotation();
     }
+
 
     public async Task RushAim(float duration)
     {
@@ -92,7 +101,7 @@ public class BoarMovementController : BossMovementController
             return;
         }
 
-        count = Boar.HeadCollider.GetComponent<Collider2D>().Cast(delta.normalized, GameplayUtils.wallFilter, hitResults, delta.magnitude);
+        count = Boar.HeadCollider.Cast(delta.normalized, GameplayUtils.wallFilter, hitResults, delta.magnitude);
         if (count > 0)
         {            
             BoarState.IncreaseWallCrashCount();
@@ -126,6 +135,8 @@ public class BoarMovementController : BossMovementController
 
     void RoamMoveStaright()
     {
+        FaceTarget();
+
         Vector3 longitude = transform.position - roamCenter; 
 
         float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;

@@ -8,8 +8,8 @@ public class BoarStateController : BossStateController
 
     [SerializeField] int wallCrashCount = 0;
     
-    public Boar Boar => (Boar)Boss;
-    public BoarStats BoarStats => Boar.BoarStats;
+    public Boar Boar => (Boar)boss;
+    public BoarStats BoarStats => (BoarStats)boss.stats;
 
     protected virtual void Start()
     {
@@ -58,7 +58,7 @@ public class BoarStateController : BossStateController
 
     public void EnableWeakPoint(bool isEnabled)
     {
-        if (wallCrashCount > Boar.BoarStats.weakpointExposureThreshold) return;
+        if (wallCrashCount > Boar.Stats.weakpointExposureThreshold) return;
 
         // 추후 머리 스프라이트 변경;
 

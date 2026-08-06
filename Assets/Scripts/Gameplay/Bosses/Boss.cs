@@ -1,26 +1,34 @@
 using UnityEngine;
 
-abstract public class Boss : Enemy
+abstract public class Boss : MonoBehaviour
 {
+    public string bossName;
+
     public BossTargetingController targeting;
 
     protected int patternCount;
 
-    public BossStats BossStats => (BossStats)stats;
-    public BossStateController BossState => (BossStateController)state;
-    public BossMovementController BossMovement => (BossMovementController)movement;
+    public BossStats stats;
+    public BossStateController state;
+    public BossMovementController movement;
+    
 
     void Update()
     {
-        if (BossState.BossState == global::BossState.READY && targeting.IsTargetInRange()) 
+        if (state.BossState == BossState.READY && targeting.IsTargetInRange()) 
         {
             DoNextPattern(2, 1);
         }
     }
 
+    public virtual void Init(HpInfo hp)
+    {
+        state.SetHpInfo(hp);
+    }
+
     protected virtual void DoNextPattern(int normal = 2, int special = 1)
     {
-        BossState.BossState = global::BossState.ATTACKING;
+        state.BossState = BossState.ATTACKING;
 
         if (patternCount++ % (normal + special) < normal)
         {
@@ -28,7 +36,7 @@ abstract public class Boss : Enemy
         }
         else
         {
-            DoSpecialPattern(BossState.GetNextSpecialPattern());
+            DoSpecialPattern(state.GetNextSpecialPattern());
         }
     }
 

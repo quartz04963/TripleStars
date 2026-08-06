@@ -22,9 +22,9 @@ public class Boar : Boss
 
     private readonly List<Collider2D> collisionResults = new();
 
-    public BoarStats BoarStats => (BoarStats)stats;
-    public BoarStateController BoarState => (BoarStateController)state;
-    public BoarMovementController BoarMovement => (BoarMovementController)movement;
+    public BoarStats Stats => (BoarStats)stats;
+    public BoarStateController State => (BoarStateController)state;
+    public BoarMovementController Movement => (BoarMovementController)movement;
 
     public Collider2D HeadCollider => headCollider;
     public Collider2D RushCollider => rushCollider;
@@ -34,18 +34,18 @@ public class Boar : Boss
 
     async void Start()
     {
-        float headX = GameplayUtils.ToWorldDistance((BoarStats.headScale + BoarStats.bodyScale) / 2f);
-        headbuttSector.Init(BoarStats.headbuttRangeRadius, BoarStats.headbuttRangeAngle);
+        float headX = GameplayUtils.ToWorldDistance((Stats.headScale + Stats.bodyScale) / 2f);
+        headbuttSector.Init(Stats.headbuttRangeRadius, Stats.headbuttRangeAngle);
         headbuttSector.transform.position = transform.position + new Vector3(headX, 0, 0);
         headbuttSector.gameObject.SetActive(false);
 
-        float rushHeight = GameplayUtils.ToWorldDistance(BoarStats.headScale * 1.5f);
-        float rushWidth = GameplayUtils.ToWorldDistance(BoarStats.rushRangeWidth);
+        float rushHeight = GameplayUtils.ToWorldDistance(Stats.headScale * 1.5f);
+        float rushWidth = GameplayUtils.ToWorldDistance(Stats.rushRangeWidth);
         rushCollider.transform.localScale = new Vector3(rushHeight, rushWidth, 1);
         rushCollider.transform.position = transform.position + new Vector3(headX, 0, 0);
         rushCollider.gameObject.SetActive(false);
 
-        await BossState.Recover(5f);
+        await state.Recover(5f);
     }
 
     protected override async void DoNormalPattern()
@@ -68,11 +68,11 @@ public class Boar : Boss
     {
         Debug.Log("박치기");
 
-        BossMovement.FaceTarget();
+        Movement.FaceTarget();
 
         headbuttSector.gameObject.SetActive(true);
 
-        await GameplayUtils.DelayForSeconds(BoarStats.headbuttPredelay);
+        await GameplayUtils.DelayForSeconds(Stats.headbuttPredelay);
 
         // 피격 판정 처리
         headbuttSector.Collider.Overlap(GameplayUtils.unitFilter, collisionResults);
@@ -81,73 +81,74 @@ public class Boar : Boss
         {
             if (!col.TryGetComponent(out UnitStateController unit)) continue;
 
-            if (unit.TakeDamage(BoarStats.headbuttDamage))
+            if (unit.TakeDamage(Stats.headbuttDamage))
             {
                 Vector2 direction = transform.right; // 스프라이트가 오른쪽을 바라보고 있음 전제
 
-                unit.Knockback(direction, BoarStats.headbuttKnockbackDistance, BoarStats.headbuttChainDamage);
-                unit.Stun(BoarStats.headbuttStunDuration);
+                unit.Knockback(direction, Stats.headbuttKnockbackDistance, Stats.headbuttChainDamage);
+                unit.Stun(Stats.headbuttStunDuration);
             }
         }
 
         headbuttSector.gameObject.SetActive(false);
 
-        await BoarState.Recover(BoarStats.headbuttPostdelay, true);
+        await State.Recover(Stats.headbuttPostdelay, true);
     }
 
     private async Task Rush() // 특수 패턴 - 폭주 돌진
     {
         Debug.Log("폭주 돌진");
 
-        await BoarMovement.RushAim(BoarStats.rushAimingDuration);
+        await Movement.RushAim(Stats.rushAimingDuration);
 
         rushCollider.gameObject.SetActive(true);
 
-        await GameplayUtils.DelayForSeconds(BoarStats.rushPredelay - BoarStats.rushAimingDuration);
+        await GameplayUtils.DelayForSeconds(Stats.rushPredelay - Stats.rushAimingDuration);
 
-        BoarMovement.StartRush();
+        Movement.StartRush();
         rushCTS = new CancellationTokenSource();
 
         try
         {
-            await GameplayUtils.DelayForSeconds(BoarStats.rushLastingDuration, rushCTS.Token);
+            await GameplayUtils.DelayForSeconds(Stats.rushLastingDuration, rushCTS.Token);
         } 
+        catch {}
         finally
         {
-            BoarMovement.EndRush();
+            Movement.EndRush();
             rushCollider.gameObject.SetActive(false);
         }
 
-        await BoarState.Recover(BoarStats.rushPostdelay, true);
+        await State.Recover(Stats.rushPostdelay, true);
     }
 
     private async Task Roar() // 특수 패턴 - 포효
     {
         Debug.Log("포효");
 
-        await GameplayUtils.DelayForSeconds(BoarStats.roarPredelay);
+        await GameplayUtils.DelayForSeconds(Stats.roarPredelay);
 
         float time = 0;
-        while (time < BoarStats.roarLastingDuration)
+        while (time < Stats.roarLastingDuration)
         {
             time += Time.deltaTime;
 
             foreach (Unit unit in GameplayManager.instance.allUnits)
             {
-                unit.state.Stun(BoarStats.roarStunDuration);
+                unit.state.Stun(Stats.roarStunDuration);
             }
 
             await Task.Yield();
         }
 
-        await BoarState.Recover(BoarStats.roarPostdelay, true);
+        await State.Recover(Stats.roarPostdelay, true);
     }
 
     private async Task Roam() // 특수 패턴 - 돌아들어가기
     {
         Debug.Log("돌아들어가기");
 
-        BoarMovement.StartRoam();
+        Movement.StartRoam();
         roamCTS = new CancellationTokenSource();
 
         try
@@ -156,8 +157,8 @@ public class Boar : Boss
         }
         catch (OperationCanceledException)
         {
-            BoarMovement.EndRoam();
-            await BoarState.Recover(BoarStats.roamPostdelay);
+            Movement.EndRoam();
+            await State.Recover(Stats.roamPostdelay);
         }
     }
 

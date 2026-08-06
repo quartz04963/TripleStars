@@ -9,6 +9,7 @@ public enum UnitSpeed
     VERYFAST = 600,
 }
 
+[RequireComponent(typeof(Collider2D))]
 abstract public class UnitMovementController : MonoBehaviour
 {
     public Unit unit;
@@ -20,6 +21,7 @@ abstract public class UnitMovementController : MonoBehaviour
     [SerializeField] protected Collider2D knockbackChainCollider;
     [SerializeField] protected Rigidbody2D rigidbody;
 
+    protected Collider2D bodyCollider;
     protected readonly List<RaycastHit2D> hits = new();
 
     public bool IsMoving => isMoving;
@@ -27,7 +29,12 @@ abstract public class UnitMovementController : MonoBehaviour
         get => moveSpeed;
         set => moveSpeed = value;
     }
+    
 
+    protected virtual void Awake()
+    {
+        bodyCollider = GetComponent<Collider2D>();
+    }
     
     protected virtual void Start()
     {
@@ -73,12 +80,12 @@ abstract public class UnitMovementController : MonoBehaviour
 
         if (currentKnockbackChainDmg > 0)
         {
-            HandleHitUnit(hits);
-            HandleHitWall(hits);
+            if (HandleHitUnit(hits)) return;
+            if (HandleHitWall(hits)) return;
         }
     }
 
-    protected virtual void HandleHitUnit(List<RaycastHit2D> hits)
+    protected virtual bool HandleHitUnit(List<RaycastHit2D> hits)
     {
         Vector2 delta = rigidbody.linearVelocity * Time.fixedDeltaTime;
 
@@ -86,7 +93,7 @@ abstract public class UnitMovementController : MonoBehaviour
 
         for (int i = count - 1; i >= 0; i--)
         {
-            var unitState = hits[i].transform.GetComponent<UnitStateController>();
+            var unitState = hits[i].collider.GetComponent<UnitStateController>();
 
             if (unitState == null || unitState.IsKnockedBack) hits.RemoveAt(i);
         }
@@ -98,10 +105,14 @@ abstract public class UnitMovementController : MonoBehaviour
 
             unit.state.TakeDamage(currentKnockbackChainDmg);
             StopMove();
+            
+            return true;
         }
+
+        return false;
     }
 
-    protected virtual void HandleHitWall(List<RaycastHit2D> hits)
+    protected virtual bool HandleHitWall(List<RaycastHit2D> hits)
     {
         Vector2 delta = rigidbody.linearVelocity * Time.fixedDeltaTime;
 
@@ -111,7 +122,11 @@ abstract public class UnitMovementController : MonoBehaviour
         {
             unit.state.TakeDamage(currentKnockbackChainDmg);
             StopMove();
+
+            return true;
         }
+
+        return false;
     }
 
     public virtual void Teleport(Vector3 pos)

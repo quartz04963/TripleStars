@@ -1,45 +1,45 @@
 using UnityEngine;
 
-public class BossMovementController : EnemyMovementController
+public class BossMovementController : MonoBehaviour
 {
-    protected bool isRotationFixed;
+    public Boss boss;
+    
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected Rigidbody2D rigidbody;
+
     protected float fixedAngle;
     
-    public Boss Boss => (Boss)enemy;
 
-
-    protected virtual void FixedUpdate()
+    protected virtual void Start()
     {
-        if (Boss.BossState.BossState == BossState.READY && !Boss.targeting.IsTargetInRange() && Boss.targeting.Target != null)
-        {
-            Chase();
-            return;
-        } 
-
-        rigidbody.MoveRotation(fixedAngle);
-        rigidbody.linearVelocity = Vector2.zero;
+        moveSpeed = boss.stats.moveSpeed;
     }
+
 
     public virtual void Chase()
     {
-        isRotationFixed = false;
-
         FaceTarget();
 
-        Vector2 direction = (Boss.targeting.Target.transform.position - Boss.transform.position).normalized;
+        Vector2 direction = (boss.targeting.Target.transform.position - boss.transform.position).normalized;
 
         rigidbody.linearVelocity = direction * GameplayUtils.ToWorldDistance(moveSpeed);
     }
 
     public virtual void FaceTarget()
     {
-        if (Boss.targeting.Target == null) return;
+        if (boss.targeting.Target == null) return;
 
-        Vector2 longitude = Boss.targeting.Target.transform.position - Boss.transform.position;
+        Vector2 longitude = boss.targeting.Target.transform.position - boss.transform.position;
         float angle = Mathf.Atan2(longitude.y, longitude.x) * Mathf.Rad2Deg;
         
         rigidbody.MoveRotation(angle);
 
         fixedAngle = angle;
+    }
+
+    protected virtual void FixPositionAndRotation()
+    {
+        rigidbody.MoveRotation(fixedAngle);
+        rigidbody.linearVelocity = Vector2.zero;
     }
 }
