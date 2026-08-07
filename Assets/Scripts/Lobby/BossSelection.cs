@@ -16,7 +16,7 @@ public class BossSelection : MonoBehaviour
     [SerializeField] List<Sprite> bossSpriteList;
     public static Dictionary<BossCode, Sprite> bossSpriteDict;
 
-    public BossCode SelectedBoss => selectedBoss != null ? selectedBoss.BossCode : BossCode.NULL;
+    public BossCode SelectedBoss => selectedBoss != null ? selectedBoss.bossCode : BossCode.NULL;
 
     // 하드코딩, 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
     void InitLists()
@@ -75,9 +75,9 @@ public class BossSelection : MonoBehaviour
         BossLobbyData middleSlot = bossDataList[(slot + 1) % bossDataList.Count];
         BossLobbyData rightSlot = bossDataList[(slot + 2) % bossDataList.Count];
             
-        if (bossDataList.Count >= 1) bossPanel1.Init(leftSlot, bossSpriteDict[leftSlot.BossCode]);
-        if (bossDataList.Count >= 2) bossPanel2.Init(middleSlot, bossSpriteDict[middleSlot.BossCode]);
-        if (bossDataList.Count >= 3) bossPanel3.Init(rightSlot, bossSpriteDict[rightSlot.BossCode]);
+        if (bossDataList.Count >= 1) bossPanel1.Init(leftSlot, bossSpriteDict[leftSlot.bossCode]);
+        if (bossDataList.Count >= 2) bossPanel2.Init(middleSlot, bossSpriteDict[middleSlot.bossCode]);
+        if (bossDataList.Count >= 3) bossPanel3.Init(rightSlot, bossSpriteDict[rightSlot.bossCode]);
     }
 
     public void OnNextClicked()

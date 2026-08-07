@@ -23,6 +23,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Button goButton;
     [SerializeField] Button menuButton;
     [SerializeField] Button backButton;
+    [SerializeField] Button tutorialButton;
 
     public static LobbyManager instance;
 
@@ -50,6 +51,7 @@ public class LobbyManager : MonoBehaviour
         bool goActive = toState == LobbyState.BOSS_SELECTED || toState == LobbyState.READY ? true : false;
         bool menuActive = toState == LobbyState.SELECTING_UNIT ? false : true;
         bool backActive = toState == LobbyState.STANDBY || toState == LobbyState.SELECTING_UNIT ? false : true;
+        bool tutorialActive = toState == LobbyState.STANDBY ? true : false;
         bool bossSelectionActive = toState == LobbyState.SELECTING_BOSS ? true : false;
         bool unitSelectionActive = toState == LobbyState.SELECTING_UNIT ? true : false;
 
@@ -57,6 +59,7 @@ public class LobbyManager : MonoBehaviour
         goButton.gameObject.SetActive(goActive);
         menuButton.gameObject.SetActive(menuActive);
         backButton.gameObject.SetActive(backActive);
+        tutorialButton.gameObject.SetActive(tutorialActive);
         bossSelection.gameObject.SetActive(bossSelectionActive);
         unitSelection.gameObject.SetActive(unitSelectionActive);
 

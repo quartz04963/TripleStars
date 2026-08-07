@@ -22,33 +22,21 @@ public enum Role
 [Serializable]
 public class UnitLobbyData
 {
-    [SerializeField] bool isSelected = false;
-    [SerializeField] UnitCode unitCode;
-    [SerializeField] string name;
-    [SerializeField] Role role;
-    [SerializeField] string unitDescription;
-    [SerializeField] string skillDescription1;
-    [SerializeField] string skillDescription2;
+    public bool isSelected = false;
+    public UnitCode unitCode;
+    public string name;
+    public Role role;
+    public string unitDescription;
+    public string skill1Description;
+    public string skill2Description;
 
-    public bool IsSelected {
-        get => isSelected;
-        set => isSelected = value;
-    }
-
-    public UnitCode UnitCode => unitCode;
-    public string Name => name;
-    public Role Role => role;
-    public string UnitDescription => unitDescription;
-    public string SkillDescription1 => skillDescription1;
-    public string SkillDescription2 => skillDescription2;
-
-    public UnitLobbyData(UnitCode unitCode, string name, Role role, string unitDescription, string skillDescription1, string skillDescription2)
+    public UnitLobbyData(UnitCode unitCode, string name, Role role, string unitDescription, string skill1Description, string skill2Description)
     {
         this.unitCode = unitCode;
         this.name = name;
         this.role = role;
         this.unitDescription = unitDescription;
-        this.skillDescription1 = skillDescription1;
-        this.skillDescription2 = skillDescription2;
+        this.skill1Description = skill1Description;
+        this.skill2Description = skill2Description;
     }
 }

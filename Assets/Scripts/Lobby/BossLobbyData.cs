@@ -22,13 +22,9 @@ public enum Difficulty
 [Serializable]
 public class BossLobbyData
 {
-    [SerializeField] BossCode bossCode;
-    [SerializeField] string name;
-    [SerializeField] Difficulty difficulty;
-
-    public BossCode BossCode => bossCode;
-    public string Name => name;
-    public Difficulty Difficulty => difficulty;
+    public BossCode bossCode;
+    public string name;
+    public Difficulty difficulty;
 
     public BossLobbyData(BossCode bossCode, string name, Difficulty difficulty)
     {

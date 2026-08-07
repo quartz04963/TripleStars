@@ -21,9 +21,9 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] GameObject selectionChangePanel;
     [SerializeField] TextMeshProUGUI selectionChangeText;
 
-    public UnitCode SelectedCommander => selectedCommander != null ? selectedCommander.UnitData.UnitCode : UnitCode.NULL;
-    public UnitCode SelectedAttacker => selectedAttacker != null ? selectedAttacker.UnitData.UnitCode : UnitCode.NULL;
-    public UnitCode SelectedSupporter => selectedSupporter != null ? selectedSupporter.UnitData.UnitCode : UnitCode.NULL;
+    public UnitCode SelectedCommander => selectedCommander != null ? selectedCommander.UnitData.unitCode : UnitCode.NULL;
+    public UnitCode SelectedAttacker => selectedAttacker != null ? selectedAttacker.UnitData.unitCode : UnitCode.NULL;
+    public UnitCode SelectedSupporter => selectedSupporter != null ? selectedSupporter.UnitData.unitCode : UnitCode.NULL;
 
     // 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
     void ChangeState()
@@ -42,15 +42,15 @@ public class UnitSelection : MonoBehaviour
 
     void SetSelctionChangeText()
     {
-        Role role = currentUnit.UnitData.Role;
-        string selectedUnitName = role == Role.COMMANDER ? selectedCommander.UnitData.Name :
-                                  role == Role.ATTACKER ? selectedAttacker.UnitData.Name :
-                                  role == Role.SUPPORTER ? selectedSupporter.UnitData.Name : "ERROR";
+        Role role = currentUnit.UnitData.role;
+        string selectedUnitName = role == Role.COMMANDER ? selectedCommander.UnitData.name :
+                                  role == Role.ATTACKER ? selectedAttacker.UnitData.name :
+                                  role == Role.SUPPORTER ? selectedSupporter.UnitData.name : "ERROR";
 
         // 임시 문구
         selectionChangeText.SetText(
             "The " + role + " " + selectedUnitName + " was already selected. " +
-            "Will you change your selection with The " + role + " " + currentUnit.UnitData.Name + "?"
+            "Will you change your selection with The " + role + " " + currentUnit.UnitData.name + "?"
         );
     }
 
@@ -60,16 +60,16 @@ public class UnitSelection : MonoBehaviour
 
         UnitLobbyData unitData = unit.UnitData;
 
-        selectButton.gameObject.SetActive(!unitData.IsSelected);
-        deselectButton.gameObject.SetActive(unitData.IsSelected);   
+        selectButton.gameObject.SetActive(!unitData.isSelected);
+        deselectButton.gameObject.SetActive(unitData.isSelected);   
         
-        unitNameText.SetText(unitData.Name);
-        roleText.SetText(unitData.Role.ToString());
+        unitNameText.SetText(unitData.name);
+        roleText.SetText(unitData.role.ToString());
 
         // 추후 string table로 변경 가능
-        unitDescriptionText.SetText(unitData.UnitDescription);
-        skillDescriptionText1.SetText(unitData.SkillDescription1);
-        skillDescriptionText2.SetText(unitData.SkillDescription2);
+        unitDescriptionText.SetText(unitData.unitDescription);
+        skillDescriptionText1.SetText(unitData.skill1Description);
+        skillDescriptionText2.SetText(unitData.skill2Description);
 
         selectionChangePanel.SetActive(false);
     }
@@ -89,7 +89,7 @@ public class UnitSelection : MonoBehaviour
     #region 버튼 클릭
     public void Select()
     {
-        switch (currentUnit.UnitData.Role)
+        switch (currentUnit.UnitData.role)
         {
             case Role.COMMANDER: 
                 if (selectedCommander != null) selectedCommander.Deselect();
@@ -111,7 +111,7 @@ public class UnitSelection : MonoBehaviour
 
     public void Deselect()
     {
-        switch (currentUnit.UnitData.Role)
+        switch (currentUnit.UnitData.role)
         {
             case Role.COMMANDER: 
                 selectedCommander = null; 
@@ -130,9 +130,9 @@ public class UnitSelection : MonoBehaviour
     
     public void OnSelectClicked()
     {
-        bool isOccupied = (currentUnit.UnitData.Role == Role.COMMANDER && selectedCommander != null) || 
-                          (currentUnit.UnitData.Role == Role.ATTACKER && selectedAttacker != null) ||
-                          (currentUnit.UnitData.Role == Role.SUPPORTER && selectedSupporter != null);
+        bool isOccupied = (currentUnit.UnitData.role == Role.COMMANDER && selectedCommander != null) || 
+                          (currentUnit.UnitData.role == Role.ATTACKER && selectedAttacker != null) ||
+                          (currentUnit.UnitData.role == Role.SUPPORTER && selectedSupporter != null);
 
         if (isOccupied)
         {

@@ -1,14 +1,21 @@
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class LobbyUnit : MonoBehaviour
 {
     [SerializeField] UnitLobbyData unitData;
-    [SerializeField] JokeBalloon jokeBalloon;
+    [SerializeField] TextMeshProUGUI nameTmp;
+    // [SerializeField] JokeBalloon jokeBalloon;
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
     public UnitLobbyData UnitData => unitData; 
+
+    void Awake()
+    {
+        nameTmp.SetText(unitData.name);
+    }
 
     public async void OnClicked()
     {
@@ -28,13 +35,13 @@ public class LobbyUnit : MonoBehaviour
 
     public void Select()
     {
-        unitData.IsSelected = true;
+        unitData.isSelected = true;
         spriteRenderer.material.SetFloat("_OutlineEnabled", 1f);
     }
 
     public void Deselect()
     {
-        unitData.IsSelected = false;
+        unitData.isSelected = false;
         spriteRenderer.material.SetFloat("_OutlineEnabled", 0f);
     }
 }

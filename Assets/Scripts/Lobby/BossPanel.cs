@@ -14,8 +14,8 @@ public class BossPanel : MonoBehaviour
     {
         this.bossData = bossData;
         
-        nameText.SetText(bossData.Name);
-        difficultyText.SetText(bossData.Difficulty.ToString());
+        nameText.SetText(bossData.name);
+        difficultyText.SetText(bossData.difficulty.ToString());
 
         bossImg.sprite = sprite;
     }
