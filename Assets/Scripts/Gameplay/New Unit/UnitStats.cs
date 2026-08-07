@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
@@ -11,5 +12,8 @@ public class UnitStats : ScriptableObject
     public int baseAttackRange;
     public int baseAttackDamage;
     public float baseAttackPeriod;
+
+    [Header("부활 시간")]
+    public List<float> reviveTimes = new(){ 10, 30, 45, 60, 120 };
     
 }

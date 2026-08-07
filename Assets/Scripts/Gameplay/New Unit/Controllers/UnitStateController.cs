@@ -8,6 +8,7 @@ public class UnitStateController : MonoBehaviour
     public Unit unit;
 
     [SerializeField] protected HpInfo hp;
+    [SerializeField] protected int reviveCount;
 
     [Header("상태 변수")]
     [SerializeField] protected bool isAlive = true;
@@ -28,6 +29,8 @@ public class UnitStateController : MonoBehaviour
     protected Collider2D hitCollider;
     protected SpriteRenderer spriteRenderer;
 
+
+    public int ReviveCount => reviveCount;
     public bool IsAlive => isAlive;
     public bool IsStunned => isStunned;
     public bool IsKnockedBack => isKnockedBack;
@@ -58,6 +61,11 @@ public class UnitStateController : MonoBehaviour
         return isAlive;
     }
 
+    public virtual bool IsHealable()
+    {
+        return isAlive;
+    }
+
     public virtual bool TakeDamage(float damage, bool isDodgeable = true)
     {
         if (isImmune) return false;
@@ -66,22 +74,38 @@ public class UnitStateController : MonoBehaviour
 
         // Debug.Log(unit.unitName + " , " + damage);
 
-        if (hp.CurrentHP <= 0) Die();
+        if (hp.CurrentHP <= 0) Respawn();
 
         return true;
     }
 
-    protected virtual void Die()
+    protected virtual async void Respawn()
     {
         isAlive = false;
+        
+        spriteRenderer.sprite = stunnedSprite;
+        spriteRenderer.color = Color.gray;
 
-        // 추후 애니메이션 넣기
+        await Task.Yield(); // 넉백 판정을 위해 한 프레임 대기;
 
-        unit.gameObject.SetActive(false);
+        int idx = Mathf.Min(reviveCount++, unit.stats.reviveTimes.Count - 1);
+        float reviveTime = unit.stats.reviveTimes[idx];
+        
+        Immune(reviveTime);
+        await GameplayUtils.DelayForSeconds(reviveTime);
+
+        isAlive = true;
+
+        spriteRenderer.sprite = standingSprite;
+        spriteRenderer.color = Color.white;
+
+        TakeHeal(unit.stats.maxHP);
     }
 
     public virtual void TakeHeal(int heal)
     {
+        if (!IsHealable()) return;
+        
         hp.AddHp(heal);
     }
 
@@ -117,12 +141,12 @@ public class UnitStateController : MonoBehaviour
 
     public virtual bool CanMove()
     {
-        return !(isStunned || isKnockedBack || isPredelaying);
+        return isAlive && !(isStunned || isKnockedBack || isPredelaying);
     }
 
     public virtual bool CanAttack()
     {
-        return !(isStunned || isKnockedBack || isPredelaying);
+        return isAlive && !(isStunned || isKnockedBack || isPredelaying);
     }
 
     public virtual async void Stun(float duration)
@@ -136,7 +160,7 @@ public class UnitStateController : MonoBehaviour
 
         await GameplayUtils.DelayForSeconds(duration);
 
-        spriteRenderer.sprite = standingSprite;
+        if (isAlive) spriteRenderer.sprite = standingSprite;
         isStunned = false;
     }
 

@@ -1,18 +1,24 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
 public class GameplayManager : MonoBehaviour
 {
-    [SerializeField] SelectionData selectionData;
-    [SerializeField] GameObject[] bossPrefabs;
-    [SerializeField] GameObject[] unitPrefabs;
     public Boss boss;
     public Unit commander;
     public Unit attacker;
     public Unit supporter;
 
+    [SerializeField] float bossSpawnDelay;
+
+    [Header("데이터")]
+    [SerializeField] SelectionData selectionData;
+    [SerializeField] GameObject[] bossPrefabs;
+    [SerializeField] GameObject[] unitPrefabs;
+    
     [Header("Info Classes")]
     [SerializeField] HpInfo bossHpInfo;
     [SerializeField] HpInfo commanderHpInfo;
@@ -23,6 +29,12 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] SkillUseInfo attackerSkillInfo;
     [SerializeField] SkillUseInfo supporterSkill1Info;
     [SerializeField] SkillUseInfo supporterSkill2Info;
+
+    [Header("보스 스폰")]
+    [SerializeField] GameObject bossSpawnArea;
+    [SerializeField] GameObject bossSpawnWarning;
+    [SerializeField] TextMeshProUGUI bossSpawnWarningTmp;
+    [SerializeField] TextMeshProUGUI bossSpawnTimerTmp;
 
     private KeyControl commanderSkill1Key = Keyboard.current.spaceKey;
     private KeyControl commanderSkill2Key = Keyboard.current.qKey;
@@ -41,19 +53,41 @@ public class GameplayManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Start()
+    async void Start()
     {
         InitUnits();
-        InitBoss();
+
+        await SpawnBoss();
     }
 
-    void InitBoss()
+    async Task SpawnBoss()
     {
+        bossHpInfo.gameObject.SetActive(false);
+
+        bossSpawnWarning.SetActive(true);
+        bossSpawnArea.SetActive(true);
+
+        float time = 0;
+        while (time < bossSpawnDelay)
+        {
+            time += Time.deltaTime;
+
+            bossSpawnTimerTmp.SetText("" + (int)(bossSpawnDelay - time + 1));
+
+            await Task.Yield();
+        }
+
+        bossSpawnWarning.SetActive(false);
+        bossSpawnArea.SetActive(false);
+
         // TODO: 보스 코드에 따라 보스 소환하기
-
+        
+        boss.gameObject.transform.position = bossSpawnArea.transform.position;
+        boss.gameObject.SetActive(true);
         boss.targeting.SetTarget(commander);
-
         boss.Init(bossHpInfo);
+
+        bossHpInfo.gameObject.SetActive(true);
     }
 
     void InitUnits()

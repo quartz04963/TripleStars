@@ -32,7 +32,7 @@ public class Boar : Boss
     public CancellationTokenSource RushCTS => rushCTS;
     public CancellationTokenSource RoamCTS => roamCTS;
 
-    async void Start()
+    void Start()
     {
         float headX = GameplayUtils.ToWorldDistance((Stats.headScale + Stats.bodyScale) / 2f);
         headbuttSector.Init(Stats.headbuttRangeRadius, Stats.headbuttRangeAngle);
@@ -44,8 +44,6 @@ public class Boar : Boss
         rushCollider.transform.localScale = new Vector3(rushHeight, rushWidth, 1);
         rushCollider.transform.position = transform.position + new Vector3(headX, 0, 0);
         rushCollider.gameObject.SetActive(false);
-
-        await state.Recover(5f);
     }
 
     protected override async void DoNormalPattern()

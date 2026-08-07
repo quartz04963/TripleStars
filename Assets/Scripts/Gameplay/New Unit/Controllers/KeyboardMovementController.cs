@@ -36,6 +36,7 @@ public class KeyboardMovementController : UnitMovementController
     {
         isMoving = false;
         
-        rigidbody.linearVelocity = direction = Vector2.zero;
+        rigidbody.linearVelocity = Vector2.zero;
+        rigidbody.MovePosition(unit.transform.position);
     }
 }

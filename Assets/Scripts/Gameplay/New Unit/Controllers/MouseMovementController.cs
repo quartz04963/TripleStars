@@ -81,6 +81,7 @@ public class MouseMovementController : UnitMovementController
         isMoving = false;
 
         rigidbody.linearVelocity = Vector2.zero;
+        rigidbody.MovePosition(unit.transform.position);
         
         destination = unit.transform.position;
 

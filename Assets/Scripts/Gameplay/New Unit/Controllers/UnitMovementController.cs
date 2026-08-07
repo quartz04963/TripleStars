@@ -52,9 +52,15 @@ abstract public class UnitMovementController : MonoBehaviour
         if (unit.state.CanMove())
         {
             Move();
+            return;
+        }
+
+        if (!unit.state.IsAlive)
+        {
+            StopMove();
         }
     }
-
+    
 
     public virtual void StartKnockback(Vector2 direction, float distance, int chainDamage = 0)
     {
