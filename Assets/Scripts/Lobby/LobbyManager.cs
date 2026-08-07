@@ -84,7 +84,8 @@ public class LobbyManager : MonoBehaviour
     {
         if (state != LobbyState.READY) return;
 
-        selectionData.bossCode = bossSelection.SelectedBoss;
+        selectionData.bossCode = bossSelection.SelectedBossCode;
+        selectionData.difficulty = bossSelection.Difficulty;
         selectionData.commanderCode = unitSelection.SelectedCommander;
         selectionData.attackerCode = unitSelection.SelectedAttacker;
         selectionData.supporterCode = unitSelection.SelectedSupporter;

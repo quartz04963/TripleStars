@@ -68,6 +68,7 @@ public class Vanguard : Unit
             unit.AddAttackFactor(Stats.atkBuffRate);
         }
 
+        buffedUnitList.Add(state);
         state.AddAttackFactor(Stats.atkBuffRate);
 
         // 효과 2: 1초마다 범위 내 아군의 hp를 1씩 회복

@@ -37,6 +37,6 @@ public class SwordsmanMovementController : KeyboardMovementController
 
     public void StopRoll()
     {
-        rigidbody.linearVelocity = Vector2.zero;
+        if (!unit.state.IsKnockedBack) rigidbody.linearVelocity = Vector2.zero;
     }
 }

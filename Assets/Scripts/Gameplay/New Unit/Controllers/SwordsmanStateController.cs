@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwordsmanStateController : UnitStateController
+public class SwordsmanStateController : CommanderStateController
 {
     [SerializeField] bool isRolling;
 

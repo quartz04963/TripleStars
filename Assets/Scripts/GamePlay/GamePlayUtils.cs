@@ -54,6 +54,11 @@ public static class GameplayUtils
         }
     }
 
+    public static async Task DelayForSecondsRealTime(float seconds)
+    {
+        await Task.Delay((int)(seconds * 1000));
+    }
+
     public static async Task DelayForSeconds(float seconds, CancellationToken token)
     {
         float elapsed = 0;

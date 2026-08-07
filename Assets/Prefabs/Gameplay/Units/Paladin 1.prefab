@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Paladin
   unitName: Paladin
   stats: {fileID: 11400000, guid: 110d5d660b70be04b81b8d6d3a0ab511, type: 2}
-  state: {fileID: 5694632327235990975}
+  state: {fileID: 814275185479830110}
   movement: {fileID: 882333685478156084}
   baseAttack: {fileID: 8088661148652875727}
 --- !u!50 &21820676525510140
@@ -544,7 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1051161322707826084}
   - component: {fileID: 6794796514416877908}
-  - component: {fileID: 5694632327235990975}
+  - component: {fileID: 814275185479830110}
   - component: {fileID: 2173577972646682870}
   m_Layer: 6
   m_Name: State Controller
@@ -628,7 +628,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!114 &5694632327235990975
+--- !u!114 &814275185479830110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,11 +637,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8939482918654956539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94942cdd35bcd654caa25b3a41229a10, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f6a0fe818f1e864f975e55bab42e20c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitStateController
+  m_EditorClassIdentifier: Assembly-CSharp::CommanderStateController
   unit: {fileID: 223730779837755531}
   hp: {fileID: 0}
+  reviveCount: 0
   isAlive: 1
   isImmune: 0
   isPredelaying: 0

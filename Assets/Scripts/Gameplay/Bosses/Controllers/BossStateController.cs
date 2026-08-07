@@ -52,6 +52,8 @@ abstract public class BossStateController : MonoBehaviour
         // 추후 애니메이션 넣기
         
         boss.gameObject.SetActive(false);
+
+        GameplayManager.instance.StageClear();
     }
 
     public virtual int GetNextSpecialPattern()

@@ -7,19 +7,23 @@ using UnityEngine.InputSystem.Controls;
 
 public class GameplayManager : MonoBehaviour
 {
+    [Header("엔티티")]
     public Boss boss;
     public Unit commander;
     public Unit attacker;
     public Unit supporter;
 
+    [SerializeField] Popups popups;
+
+    [Header("플레이 진행 상황 변수")]
     [SerializeField] bool isPaused = false;
     [SerializeField] bool isBossSpawned = false;
     [SerializeField] float bossSpawnDelay;
     [SerializeField] float clearTime;
 
-
     [Header("데이터")]
     [SerializeField] SelectionData selectionData;
+    [SerializeField] float[] clearTimeThresholds = new float[]{ 180, 300, 420 };
     [SerializeField] GameObject[] bossPrefabs;
     [SerializeField] GameObject[] unitPrefabs;
     
@@ -70,6 +74,16 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         if (isBossSpawned) clearTime += Time.deltaTime;
+
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            StageClear();
+        }
+
+        else if (Keyboard.current.xKey.wasPressedThisFrame)
+        {
+            GameOver();
+        }
     }
 
 
@@ -143,13 +157,21 @@ public class GameplayManager : MonoBehaviour
         isPaused = false;
     }
 
-    public async void StageClear()
+    public void StageClear()
     {
-        
+        Pause();
+
+        bool condition2 = commander.state.ReviveCount + attacker.state.ReviveCount + supporter.state.ReviveCount == 0;
+        bool condition3 = clearTime <= clearTimeThresholds[(int)selectionData.difficulty];
+        int clearTimeThreshold = (int)(clearTimeThresholds[(int)selectionData.difficulty] / 60);
+
+        popups.EnableClearPopup(condition2, condition3, clearTimeThreshold);
     }
 
     public void GameOver()
     {
-        
+        Pause();
+
+        popups.EnableFailPopup();
     }
 }

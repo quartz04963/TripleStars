@@ -16,14 +16,15 @@ public class BossSelection : MonoBehaviour
     [SerializeField] List<Sprite> bossSpriteList;
     public static Dictionary<BossCode, Sprite> bossSpriteDict;
 
-    public BossCode SelectedBoss => selectedBoss != null ? selectedBoss.bossCode : BossCode.NULL;
+    public BossCode SelectedBossCode => selectedBoss != null ? selectedBoss.bossCode : BossCode.NULL;
+    public Difficulty Difficulty => selectedBoss != null ? selectedBoss.difficulty : Difficulty.EASY;
 
     // 하드코딩, 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
     void InitLists()
     {
         bossDataList = new List<BossLobbyData>
         {
-            new BossLobbyData(BossCode.BOSS_1, "Boar", Difficulty.EASY),
+            new BossLobbyData(BossCode.BOSS_1, "Boar", Difficulty.NORMAL),
             // new BossLobbyData(BossCode.BOSS_2, "Boss 2", Difficulty.EASY),
             // new BossLobbyData(BossCode.BOSS_3, "Boss 3", Difficulty.NORMAL),
             // new BossLobbyData(BossCode.BOSS_4, "Boss 4", Difficulty.NORMAL),

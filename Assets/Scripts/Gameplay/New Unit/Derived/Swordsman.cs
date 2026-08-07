@@ -77,7 +77,10 @@ public class Swordsman : Unit
 
         if (!flameSword.StartCooldown()) return;
 
+        movement.StopMove();
+
         // 추후 애니메이션 넣기
+        
         Boss target = baseAttack.Target;
 
         flameSwordCTS = new CancellationTokenSource();
