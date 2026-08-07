@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -8, y: -8}
+  m_SizeDelta: {x: -8, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1578198338017073063
 CanvasRenderer:
@@ -58,15 +58,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1333333, g: 0.5450981, b: 0.1333333, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -1094780165096277793, guid: 353d8c2825a19c04aa4cbfb37d1c9fa0, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -181,8 +181,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 348316925331398108}
-  - {fileID: 8356307038035500063}
   - {fileID: 2059821220347558745}
+  - {fileID: 8356307038035500063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -202,11 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baaeac64474cf54e9fda65e44550dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HpInfo
-  unitName: 
-  maxHp: 0
-  hp: 0
-  nameText: {fileID: 7472079516546980178}
-  hpText: {fileID: 343838553451804361}
+  maxHP: 0
+  currentHP: 0
+  nameTmp: {fileID: 0}
+  hpTmp: {fileID: 0}
   hpBarImg: {fileID: 620954950689902924}
 --- !u!1 &5492934268164405900
 GameObject:

@@ -10,6 +10,8 @@ public class BossTargetingController : MonoBehaviour
     [SerializeField] protected float commanderAccumulativeDamage;
     [SerializeField] protected float commanderAggroThreshold = 200;
 
+    protected bool wasTargetStunned = false;
+
     protected CircleCollider2D rangeCollider;
     protected readonly List<Collider2D> collidersInRange = new();
 
@@ -40,6 +42,12 @@ public class BossTargetingController : MonoBehaviour
 
     public virtual void UpdateTarget()
     {
+        if (wasTargetStunned) 
+        {
+            wasTargetStunned = target.state.IsStunned;
+            return;
+        }
+
         if (target.state.IsAlive && !target.state.IsStunned) return;
 
         List<Unit> candidates = GameplayManager.instance.allUnits.FindAll(unit => unit != target && unit.state.IsTargetable());
@@ -48,6 +56,8 @@ public class BossTargetingController : MonoBehaviour
         
         int next = Random.Range(0, candidates.Count);
         SetTarget(candidates[next]);
+
+        wasTargetStunned = candidates[next].state.IsStunned;
     }
 
     public virtual bool IsTargetInRange()

@@ -29,7 +29,8 @@ public class SkillUseInfo : MonoBehaviour
         if (remainCooldown > 0)
         {
             remainCooldown -= Time.deltaTime;
-            iconImg.fillAmount = 1f - remainCooldown / cooldown;
+
+            iconImg.fillAmount = remainCooldown / cooldown;
             iconTmp.SetText("" + (int)(remainCooldown + 1));
         }
         else

@@ -6,7 +6,7 @@ abstract public class Boss : MonoBehaviour
 
     public BossTargetingController targeting;
 
-    protected int patternCount;
+    protected int patternCount = 0;
 
     public BossStats stats;
     public BossStateController state;
