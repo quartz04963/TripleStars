@@ -13,7 +13,6 @@ public class UnitSelection : MonoBehaviour
 
     [SerializeField] Button selectButton;
     [SerializeField] Button deselectButton;
-    [SerializeField] Image unitImg;
     [SerializeField] TextMeshProUGUI unitNameText;
     [SerializeField] TextMeshProUGUI roleText;
     [SerializeField] TextMeshProUGUI unitDescriptionText;
@@ -22,27 +21,11 @@ public class UnitSelection : MonoBehaviour
     [SerializeField] GameObject selectionChangePanel;
     [SerializeField] TextMeshProUGUI selectionChangeText;
 
-    [SerializeField] List<Sprite> unitArtList;
-    public static Dictionary<UnitCode, Sprite> unitArtDict;
-
     public UnitCode SelectedCommander => selectedCommander != null ? selectedCommander.UnitData.UnitCode : UnitCode.NULL;
     public UnitCode SelectedAttacker => selectedAttacker != null ? selectedAttacker.UnitData.UnitCode : UnitCode.NULL;
     public UnitCode SelectedSupporter => selectedSupporter != null ? selectedSupporter.UnitData.UnitCode : UnitCode.NULL;
 
     // 추후 딕셔너리 정리 또는 ScriptableObject로 바꾸기
-    void InitLists()
-    {
-        unitArtDict = new Dictionary<UnitCode, Sprite>
-        {
-            {UnitCode.PALADIN, unitArtList[0]},
-            {UnitCode.ARCHER, unitArtList[1]},
-            {UnitCode.SAINTESS, unitArtList[2]},
-            {UnitCode.SWORDSMAN, unitArtList[3]},
-            {UnitCode.ASSASSIN, unitArtList[4]},
-            {UnitCode.VANGUARD, unitArtList[5]},
-        };
-    }
-
     void ChangeState()
     {
         LobbyManager.instance.Camera.ZoomAndMove(new Vector3(0, 0, -10), 5, 0f);
@@ -73,8 +56,6 @@ public class UnitSelection : MonoBehaviour
 
     public void ChangePanel(LobbyUnit unit)
     {
-        InitLists();
-
         currentUnit = unit;
 
         UnitLobbyData unitData = unit.UnitData;
@@ -82,8 +63,6 @@ public class UnitSelection : MonoBehaviour
         selectButton.gameObject.SetActive(!unitData.IsSelected);
         deselectButton.gameObject.SetActive(unitData.IsSelected);   
         
-        unitImg.sprite = unitArtDict[unitData.UnitCode];
-
         unitNameText.SetText(unitData.Name);
         roleText.SetText(unitData.Role.ToString());
 

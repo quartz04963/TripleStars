@@ -14,7 +14,7 @@ public class LobbyUnit : MonoBehaviour
     {
         if (LobbyManager.instance.State == LobbyState.STANDBY)
         {
-            jokeBalloon.Joke();
+            // jokeBalloon.Joke();
         }
         else if (LobbyManager.instance.State == LobbyState.BOSS_SELECTED || LobbyManager.instance.State == LobbyState.READY)
         {

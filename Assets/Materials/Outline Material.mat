@@ -57,7 +57,7 @@ Material:
     - _OutlineMode: 0
     - _OutlinePosition: 2
     - _OutlineShape: 0
-    - _Thickness: 8
+    - _Thickness: 5
     - _TileMode: 0
     - _Weight: 0.5
     - _ZWrite: 0
@@ -67,6 +67,6 @@ Material:
     - _GradientOutline2: {r: 1, g: 1, b: 1, a: 1}
     - _ImageOutline: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SolidOutline: {r: 0.4980392, g: 1, b: 0, a: 1}
+    - _SolidOutline: {r: 0.60784316, g: 0.8901961, b: 0.41568628, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
