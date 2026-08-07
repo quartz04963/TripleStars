@@ -74,12 +74,12 @@ public class UnitStateController : MonoBehaviour
 
         // Debug.Log(unit.unitName + " , " + damage);
 
-        if (hp.CurrentHP <= 0) Respawn();
+        if (hp.CurrentHP <= 0) Die();
 
         return true;
     }
 
-    protected virtual async void Respawn()
+    protected virtual async void Die()
     {
         isAlive = false;
         
@@ -88,6 +88,11 @@ public class UnitStateController : MonoBehaviour
 
         await Task.Yield(); // 넉백 판정을 위해 한 프레임 대기;
 
+        Respawn();
+    }
+
+    protected virtual async void Respawn()
+    {
         int idx = Mathf.Min(reviveCount++, unit.stats.reviveTimes.Count - 1);
         float reviveTime = unit.stats.reviveTimes[idx];
         
@@ -141,11 +146,15 @@ public class UnitStateController : MonoBehaviour
 
     public virtual bool CanMove()
     {
+        if (GameplayManager.instance.IsPaused) return false;
+
         return isAlive && !(isStunned || isKnockedBack || isPredelaying);
     }
 
     public virtual bool CanAttack()
     {
+        if (GameplayManager.instance.IsPaused) return false;
+        
         return isAlive && !(isStunned || isKnockedBack || isPredelaying);
     }
 

@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(LineRenderer))]
 public class MouseMovementController : UnitMovementController
@@ -26,6 +28,8 @@ public class MouseMovementController : UnitMovementController
 
     void Update()
     {
+        if (GameplayManager.instance.IsPaused) return;
+
         GetDestination();
     }
 
@@ -39,6 +43,9 @@ public class MouseMovementController : UnitMovementController
     {
         if (button.isPressed)
         {
+            GameObject clicked = EventSystem.current.currentSelectedGameObject;
+            if (clicked != null && clicked.GetComponent<Button>() != null) return;
+
             destination = GameplayUtils.MouseToWorldPoint();
         }
     }

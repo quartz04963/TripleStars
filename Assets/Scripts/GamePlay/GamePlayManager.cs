@@ -12,7 +12,11 @@ public class GameplayManager : MonoBehaviour
     public Unit attacker;
     public Unit supporter;
 
+    [SerializeField] bool isPaused = false;
+    [SerializeField] bool isBossSpawned = false;
     [SerializeField] float bossSpawnDelay;
+    [SerializeField] float clearTime;
+
 
     [Header("데이터")]
     [SerializeField] SelectionData selectionData;
@@ -47,6 +51,9 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager instance;
     public readonly List<Unit> allUnits = new();
 
+    public bool IsPaused => isPaused;
+
+
     void Awake()
     {
         if (instance == null) instance = this;
@@ -59,6 +66,12 @@ public class GameplayManager : MonoBehaviour
 
         await SpawnBoss();
     }
+
+    void Update()
+    {
+        if (isBossSpawned) clearTime += Time.deltaTime;
+    }
+
 
     async Task SpawnBoss()
     {
@@ -88,6 +101,8 @@ public class GameplayManager : MonoBehaviour
         boss.Init(bossHpInfo);
 
         bossHpInfo.gameObject.SetActive(true);
+
+        isBossSpawned = true;
     }
 
     void InitUnits()
@@ -112,5 +127,29 @@ public class GameplayManager : MonoBehaviour
     public void AddUnit(Unit unit)
     {
         allUnits.Add(unit);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+
+        isPaused = true;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+
+        isPaused = false;
+    }
+
+    public async void StageClear()
+    {
+        
+    }
+
+    public void GameOver()
+    {
+        
     }
 }

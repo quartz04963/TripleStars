@@ -8,6 +8,8 @@ public class KeyboardMovementController : UnitMovementController
 
     protected virtual void Update()
     {
+        if (GameplayManager.instance.IsPaused) return;
+        
         GetDirection();
     }
 
