@@ -1863,18 +1863,18 @@ PrefabInstance:
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 758852974}
+      objectReference: {fileID: 758852976}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: Title
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Pause, Assembly-CSharp
+      value: Popups, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -2014,18 +2014,18 @@ PrefabInstance:
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 758852974}
+      objectReference: {fileID: 758852976}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Pause, Assembly-CSharp
+      value: Popups, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2620315073280110611, guid: 7391a4241f581ac4ba0a0bb1ef86c499, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
