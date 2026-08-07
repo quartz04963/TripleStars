@@ -7025,7 +7025,7 @@ MonoBehaviour:
   popups: {fileID: 758852976}
   isPaused: 0
   isBossSpawned: 0
-  bossSpawnDelay: 5
+  bossSpawnDelay: 20
   clearTime: 0
   selectionData: {fileID: 11400000, guid: e74e16fa3762b624d8ad13d6b288e7f6, type: 2}
   clearTimeThresholds:

@@ -73,16 +73,9 @@ public class GameplayManager : MonoBehaviour
 
     void Update()
     {
-        if (isBossSpawned) clearTime += Time.deltaTime;
-
-        if (Keyboard.current.cKey.wasPressedThisFrame)
+        if (isBossSpawned) 
         {
-            StageClear();
-        }
-
-        else if (Keyboard.current.xKey.wasPressedThisFrame)
-        {
-            GameOver();
+            clearTime += Time.deltaTime;
         }
     }
 

@@ -135,7 +135,7 @@ public class BoarMovementController : BossMovementController
 
     void RoamMoveStaright()
     {
-        FaceTarget();
+        FacePos(roamCenter);
 
         Vector3 longitude = transform.position - roamCenter; 
 
@@ -167,7 +167,7 @@ public class BoarMovementController : BossMovementController
 
         rigidbody.linearVelocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * speed;
 
-        FaceTarget();
+        FacePos(roamCenter);
 
         if (rotationTime > 1f)
         {

@@ -37,6 +37,16 @@ public class BossMovementController : MonoBehaviour
         fixedAngle = angle;
     }
 
+    public virtual void FacePos(Vector3 pos)
+    {
+        Vector2 longitude = pos - boss.transform.position;
+        float angle = Mathf.Atan2(longitude.y, longitude.x) * Mathf.Rad2Deg;
+
+        rigidbody.MoveRotation(angle);
+
+        fixedAngle = angle;
+    }
+
     protected virtual void FixPositionAndRotation()
     {
         rigidbody.MoveRotation(fixedAngle);
