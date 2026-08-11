@@ -14,7 +14,8 @@ public enum PatternCode
 public class Boar : Boss
 {
     [SerializeField] SectorRange headbuttSector;
-    [SerializeField] Collider2D headCollider;
+    [SerializeField] BoxCollider2D headCollider;
+    [SerializeField] BoxCollider2D bodyCollider;
     [SerializeField] Collider2D rushCollider;
 
     private CancellationTokenSource rushCTS;
@@ -34,6 +35,13 @@ public class Boar : Boss
 
     void Start()
     {
+        float bodyScale = GameplayUtils.ToWorldDistance(Stats.bodyScale);
+        float headScale = GameplayUtils.ToWorldDistance(Stats.headScale);
+
+        headCollider.transform.position = transform.position + new Vector3((bodyScale + headScale) / 2f - 0.1f, 0, 0);
+        headCollider.size = new Vector2(headScale, headScale);
+        bodyCollider.size = new Vector2(bodyScale, bodyScale);
+
         float headX = GameplayUtils.ToWorldDistance((Stats.headScale + Stats.bodyScale) / 2f);
         headbuttSector.Init(Stats.headbuttRangeRadius, Stats.headbuttRangeAngle);
         headbuttSector.transform.position = transform.position + new Vector3(headX, 0, 0);
@@ -67,10 +75,12 @@ public class Boar : Boss
         Debug.Log("박치기");
 
         Movement.FaceTarget();
-
         headbuttSector.gameObject.SetActive(true);
+        state.PlayAnimation("Headbutt Charging");
 
         await GameplayUtils.DelayForSeconds(Stats.headbuttPredelay);
+
+        state.PlayAnimation("Headbutt");
 
         // 피격 판정 처리
         headbuttSector.Collider.Overlap(GameplayUtils.unitFilter, collisionResults);
@@ -97,6 +107,8 @@ public class Boar : Boss
     {
         Debug.Log("폭주 돌진");
 
+        state.PlayAnimation("Rush Charging");
+
         await Movement.RushAim(Stats.rushAimingDuration);
 
         rushCollider.gameObject.SetActive(true);
@@ -104,6 +116,8 @@ public class Boar : Boss
         await GameplayUtils.DelayForSeconds(Stats.rushPredelay - Stats.rushAimingDuration);
 
         Movement.StartRush();
+        state.PlayAnimation("Rush");
+    
         rushCTS = new CancellationTokenSource();
 
         try
@@ -116,8 +130,6 @@ public class Boar : Boss
             Movement.EndRush();
             rushCollider.gameObject.SetActive(false);
         }
-
-        await State.Recover(Stats.rushPostdelay, true);
     }
 
     private async Task Roar() // 특수 패턴 - 포효
@@ -147,6 +159,8 @@ public class Boar : Boss
         Debug.Log("돌아들어가기");
 
         Movement.StartRoam();
+        state.PlayAnimation("Move");
+
         roamCTS = new CancellationTokenSource();
 
         try

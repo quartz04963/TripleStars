@@ -13,10 +13,16 @@ public enum BossState
 
 abstract public class BossStateController : MonoBehaviour
 {
+    protected static readonly int StandingHash = Animator.StringToHash("Standing");
+    protected static readonly int GroggyHash = Animator.StringToHash("Groggy");
+    protected static readonly int MoveHash = Animator.StringToHash("Move");
+
     public Boss boss;
     
     [SerializeField] protected HpInfo hp;
     [SerializeField] protected BossState bossState;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Animator animator;
     
     protected readonly List<int> patternBalls = new();
     
@@ -49,7 +55,8 @@ abstract public class BossStateController : MonoBehaviour
 
     protected virtual void Die()
     {
-        // 추후 애니메이션 넣기
+        spriteRenderer.color = Color.gray;
+        animator.Play("Groggy");
         
         boss.gameObject.SetActive(false);
 
@@ -75,25 +82,31 @@ abstract public class BossStateController : MonoBehaviour
     public virtual async Task Recover(float duration)
     {
         bossState = BossState.RECOVERY;
-        // 추후 애니메이션 넣기
+        animator.Play(StandingHash);
 
         await GameplayUtils.DelayForSeconds(duration);
 
         bossState = BossState.READY;
+        animator.Play(MoveHash);
     }
 
     public virtual async Task Groggy(float groggyDuration, float standingDuration = 1f) // 그로기
     {
         bossState = BossState.GROGGY;
-        // 추후 애니메이션 넣기
+        animator.Play(GroggyHash);
 
         await GameplayUtils.DelayForSeconds(groggyDuration);
 
         bossState = BossState.STANDING;
-        // 추후 애니메이션 넣기
+        animator.Play(StandingHash);
 
         await GameplayUtils.DelayForSeconds(standingDuration);
 
         bossState = BossState.READY;
+    }
+
+    public virtual void PlayAnimation(string name)
+    {
+        animator.Play(name);
     }
 }
