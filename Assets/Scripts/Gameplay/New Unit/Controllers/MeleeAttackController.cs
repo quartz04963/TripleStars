@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeleeAttackController : UnitBaseAttackController
@@ -25,6 +26,8 @@ public class MeleeAttackController : UnitBaseAttackController
         if (target == null) return;
 
         lastAttackTime = Time.time;
+
+        unit.state.PlayAnimation("Attack");
 
         TurnAttackCollider(target.transform);
 

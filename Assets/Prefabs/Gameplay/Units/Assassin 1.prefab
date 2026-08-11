@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 4620641011502575686}
   - component: {fileID: 2140705832402501346}
   - component: {fileID: 7660709864428709444}
+  - component: {fileID: 8004870045507599742}
   m_Layer: 6
   m_Name: State Controller
   m_TagString: Untagged
@@ -675,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssassinStateController
   unit: {fileID: 5609343566231431020}
   hp: {fileID: 0}
+  reviveCount: 0
   isAlive: 1
   isImmune: 0
   isPredelaying: 0
@@ -732,3 +734,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &8004870045507599742
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728696886074438749}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fda07dee5495ece4a8be2db519c4afb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

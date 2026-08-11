@@ -2,9 +2,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D), typeof(Animator), typeof(SpriteRenderer))]
 public class UnitStateController : MonoBehaviour
 {
+    protected static readonly int IdleHash = Animator.StringToHash("Idle");
+    protected static readonly int StunnedHash = Animator.StringToHash("Stunned");
+
     public Unit unit;
 
     [SerializeField] protected HpInfo hp;
@@ -21,12 +24,9 @@ public class UnitStateController : MonoBehaviour
     [SerializeField] protected float damageFactor = 1.0f;
     [SerializeField] protected float attackFactor = 1.0f;
     [SerializeField] protected float moveSpeedFactor = 1.0f;
-    
-    [Header("스프라이트 관련")]
-    [SerializeField] protected Sprite standingSprite;
-    [SerializeField] protected Sprite stunnedSprite;
 
     protected Collider2D hitCollider;
+    protected Animator animator;
     protected SpriteRenderer spriteRenderer;
 
 
@@ -40,6 +40,7 @@ public class UnitStateController : MonoBehaviour
     protected virtual void Awake()
     {
         hitCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -83,7 +84,7 @@ public class UnitStateController : MonoBehaviour
     {
         isAlive = false;
         
-        spriteRenderer.sprite = stunnedSprite;
+        animator.Play(StunnedHash);
         spriteRenderer.color = Color.gray;
 
         await Task.Yield(); // 넉백 판정을 위해 한 프레임 대기;
@@ -101,7 +102,7 @@ public class UnitStateController : MonoBehaviour
 
         isAlive = true;
 
-        spriteRenderer.sprite = standingSprite;
+        animator.Play(IdleHash);
         spriteRenderer.color = Color.white;
 
         TakeHeal(unit.stats.maxHP);
@@ -163,13 +164,13 @@ public class UnitStateController : MonoBehaviour
         if (isImmune) return;
 
         isStunned = true;
-        spriteRenderer.sprite = stunnedSprite;
+        animator.Play(StunnedHash);
 
         if (!isKnockedBack) unit.movement.StopMove();
 
         await GameplayUtils.DelayForSeconds(duration);
 
-        if (isAlive) spriteRenderer.sprite = standingSprite;
+        if (isAlive) animator.Play(IdleHash);
         isStunned = false;
     }
 
@@ -190,6 +191,11 @@ public class UnitStateController : MonoBehaviour
     {
         if (direction.x < 0) spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         else if (direction.x > 0) spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    public virtual void PlayAnimation(string name)
+    {
+        animator.Play(name, 0, 0f);
     }
 
 }

@@ -8,7 +8,7 @@ public class CommanderStateController : UnitStateController
     {
         isAlive = false;
         
-        spriteRenderer.sprite = stunnedSprite;
+        animator.Play(StunnedHash);
         spriteRenderer.color = Color.gray;
 
         await Task.Yield();

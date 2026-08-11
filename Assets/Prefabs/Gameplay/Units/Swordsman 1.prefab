@@ -546,6 +546,7 @@ GameObject:
   - component: {fileID: 6911208776014458119}
   - component: {fileID: 5459957349460953812}
   - component: {fileID: 7837232469820159650}
+  - component: {fileID: 5926668750823453189}
   m_Layer: 6
   m_Name: State Controller
   m_TagString: Untagged
@@ -642,6 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordsmanStateController
   unit: {fileID: 8573264406549555021}
   hp: {fileID: 0}
+  reviveCount: 0
   isAlive: 1
   isImmune: 0
   isPredelaying: 0
@@ -699,3 +701,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &5926668750823453189
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010737861506292283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7a6da9a2ee5ecc441b4b22a98db8c368, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

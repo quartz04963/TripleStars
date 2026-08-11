@@ -17,6 +17,8 @@ public class RangedAttackController : UnitBaseAttackController
 
         lastAttackTime = Time.time;
 
+        unit.state.PlayAnimation("Attack");
+
         Projectile projectile = Instantiate(projectilePrf, transform).GetComponent<Projectile>();
 
         projectile.Init(damage * unit.state.AttackFactor, unit, target.transform);

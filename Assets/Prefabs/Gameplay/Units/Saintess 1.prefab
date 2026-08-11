@@ -570,6 +570,7 @@ GameObject:
   - component: {fileID: 3863628628421090391}
   - component: {fileID: 4391859962909982245}
   - component: {fileID: 5131134396366044185}
+  - component: {fileID: 325497019605049073}
   m_Layer: 6
   m_Name: State Controller
   m_TagString: Untagged
@@ -666,6 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStateController
   unit: {fileID: 3000234802076517457}
   hp: {fileID: 0}
+  reviveCount: 0
   isAlive: 1
   isImmune: 0
   isPredelaying: 0
@@ -722,6 +724,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &325497019605049073
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8856857225866434616}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c0f6a08274373d458fa28aeeba4a4e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8964646097961955125
 GameObject:
   m_ObjectHideFlags: 0
