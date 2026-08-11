@@ -6,6 +6,7 @@ public class BoarMovementController : BossMovementController
 {
     private bool isRushAiming;
     private bool isRushing;
+    private bool wasCrashedIntoWall;
 
     private bool isRoaming;
     private bool isClockwise;
@@ -18,6 +19,8 @@ public class BoarMovementController : BossMovementController
     public Boar Boar => (Boar)boss;
     public BoarStats BoarStats => (BoarStats)boss.stats;
     public BoarStateController BoarState => (BoarStateController)boss.state;
+
+    public bool WasCrashedIntoWall => wasCrashedIntoWall;
 
 
     void FixedUpdate()
@@ -67,6 +70,7 @@ public class BoarMovementController : BossMovementController
     public void StartRush()
     {
         isRushing = true;
+        wasCrashedIntoWall = false;
 
         Vector2 direction = transform.right; // 스프라이트가 오른쪽을 바라보고 있음 전제
         rigidbody.linearVelocity = direction * GameplayUtils.ToWorldDistance(BoarStats.rushDistance) / BoarStats.rushLastingDuration; // 등속도로 돌진
@@ -79,7 +83,7 @@ public class BoarMovementController : BossMovementController
         isRushing = false;
     }
 
-    async void UpdateRush()
+    void UpdateRush()
     {
         Vector2 delta = rigidbody.linearVelocity * Time.fixedDeltaTime;
 
@@ -93,10 +97,8 @@ public class BoarMovementController : BossMovementController
                 nearest.Knockback(delta, BoarStats.rushKnockbackDistance, BoarStats.rushChainDamage);
                 nearest.Stun(BoarStats.rushStunDuration);
             }
-
+            
             Boar.RushCTS.Cancel();
-
-            await BoarState.Recover(BoarStats.rushPostdelay, true);
 
             return;
         }
@@ -106,9 +108,8 @@ public class BoarMovementController : BossMovementController
         {            
             BoarState.IncreaseWallCrashCount();
 
+            wasCrashedIntoWall = true;
             Boar.RushCTS.Cancel();
-
-            await BoarState.Groggy(BoarStats.rushGroggyDuration);
 
             return;
         }

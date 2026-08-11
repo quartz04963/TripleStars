@@ -129,6 +129,15 @@ public class Boar : Boss
         {
             Movement.EndRush();
             rushCollider.gameObject.SetActive(false);
+
+            if (Movement.WasCrashedIntoWall)
+            {
+                await State.Groggy(Stats.rushGroggyDuration);
+            }
+            else 
+            {
+                await State.Recover(Stats.rushPostdelay, true);
+            }
         }
     }
 
