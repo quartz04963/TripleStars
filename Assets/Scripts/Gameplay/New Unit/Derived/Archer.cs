@@ -55,6 +55,8 @@ public class Archer : Unit
         
         if (!explosiveArrow.StartCooldown()) return;
 
+        state.PlayAnimation("Attack");
+
         var projectile = Instantiate(explosiveArrowPrf, transform).GetComponent<Projectile>();
 
         projectile.Init(Stats.explosiveArrowDmg * state.AttackFactor, this, baseAttack.Target.transform);

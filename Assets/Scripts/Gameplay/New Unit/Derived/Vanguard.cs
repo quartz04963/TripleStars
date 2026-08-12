@@ -23,7 +23,10 @@ public class Vanguard : Unit
     
     void Update()
     {
-        Heal();
+        if (state.IsAlive)
+        {
+            Heal();
+        }
 
         if (state.CanAttack())
         {

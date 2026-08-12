@@ -51,10 +51,9 @@ public class Swordsman : Unit
         // 효과: 사용 시 1초 간 구름
 
         if (!roll.StartCooldown()) return; // 스킬 사용 시작과 동시에 쿨다운
-        
-        // 추후 애니메이션 넣기
-        
+                
         State.Roll();
+        State.PlayAnimation("Roll");
 
         rollCTS = new CancellationTokenSource();
 

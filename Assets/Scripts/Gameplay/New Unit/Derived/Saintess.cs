@@ -22,7 +22,10 @@ public class Saintess : Unit
 
     void Update()
     {
-        Heal();
+        if (state.IsAlive)
+        {
+            Heal();
+        }
 
         if (state.CanAttack())
         {
@@ -76,7 +79,8 @@ public class Saintess : Unit
         // 효과: 지휘관에게 텔레포트
 
         if (!teleport.StartCooldown()) return;
-        // 추후 애니메이션 넣기
+
+        state.PlayAnimation("Teleport");
 
         movement.Teleport(GameplayManager.instance.commander.transform.position);
     }

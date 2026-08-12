@@ -63,6 +63,8 @@ public class Assassin : Unit
         
         if (!poisonShuriken.StartCooldown()) return;
         // 추후 애니메이션 넣기
+
+        state.PlayAnimation("Attack");
         
         Projectile projectile = Instantiate(posionShurikenPrf, transform).GetComponent<Projectile>();
         projectile.Init(0, this, baseAttack.Target.transform);

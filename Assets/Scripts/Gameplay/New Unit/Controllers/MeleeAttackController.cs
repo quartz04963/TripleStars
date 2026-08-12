@@ -27,6 +27,8 @@ public class MeleeAttackController : UnitBaseAttackController
 
         lastAttackTime = Time.time;
 
+        Vector2 direction = target.transform.position - unit.transform.position;
+        unit.state.FlipSprite(direction);
         unit.state.PlayAnimation("Attack");
 
         TurnAttackCollider(target.transform);

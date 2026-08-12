@@ -17,6 +17,8 @@ public class RangedAttackController : UnitBaseAttackController
 
         lastAttackTime = Time.time;
 
+        Vector2 direction = target.transform.position - unit.transform.position;
+        unit.state.FlipSprite(direction);
         unit.state.PlayAnimation("Attack");
 
         Projectile projectile = Instantiate(projectilePrf, transform).GetComponent<Projectile>();
