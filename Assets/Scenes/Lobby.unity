@@ -5361,6 +5361,7 @@ MonoBehaviour:
   nextButton: {fileID: 1325975460}
   bossDataList: []
   bossSpriteList:
+  - {fileID: 3013739278173431295, guid: 8e67c11f4dc968943823a5020a3454b7, type: 3}
   - {fileID: -1210373554552596563, guid: 675fc5feb31b1fd42b11a3e559f503ed, type: 3}
 --- !u!1 &1866447887
 GameObject:

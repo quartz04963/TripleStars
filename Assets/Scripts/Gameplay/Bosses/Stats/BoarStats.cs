@@ -41,7 +41,5 @@ public class BoarStats : BossStats
     public float roamDuration;
 
     [Header("기타")]
-    public int bodyScale;
-    public int headScale;
     public int weakpointExposureThreshold;
 }

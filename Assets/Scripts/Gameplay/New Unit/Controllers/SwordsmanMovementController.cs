@@ -32,7 +32,7 @@ public class SwordsmanMovementController : KeyboardMovementController
 
     public void StartRoll()
     {
-        rigidbody.linearVelocity = rollDirection * GameplayUtils.ToWorldDistance(Unit.Stats.rollSpeed);
+        rigidbody.linearVelocity = rollDirection * GameplayUtils.ToWorldDistance(Unit.Stats.rollSpeed) * Unit.state.MoveSpeedFactor;
     }
 
     public void StopRoll()

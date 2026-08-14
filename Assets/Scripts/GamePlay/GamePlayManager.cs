@@ -101,6 +101,9 @@ public class GameplayManager : MonoBehaviour
         bossSpawnArea.SetActive(false);
 
         // TODO: 보스 코드에 따라 보스 소환하기
+
+        GameObject bossPrf = bossPrefabs[(int)selectionData.bossCode - 1];
+        Instantiate(bossPrf).TryGetComponent(out boss);
         
         boss.gameObject.transform.position = bossSpawnArea.transform.position;
         boss.gameObject.SetActive(true);

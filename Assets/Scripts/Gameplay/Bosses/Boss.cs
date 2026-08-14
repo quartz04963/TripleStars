@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 abstract public class Boss : MonoBehaviour
@@ -12,14 +14,20 @@ abstract public class Boss : MonoBehaviour
     public BossStateController state;
     public BossMovementController movement;
     
+    protected virtual async void Start()
+    {
+        await state.Recover(3f);
+    }
 
-    void Update()
+
+    protected virtual void Update()
     {
         if (state.BossState == BossState.READY && targeting.IsTargetInRange()) 
         {
-            DoNextPattern(2, 1);
+            DoNextPattern(0, 1);
         }
     }
+    
 
     public virtual void Init(HpInfo hp)
     {

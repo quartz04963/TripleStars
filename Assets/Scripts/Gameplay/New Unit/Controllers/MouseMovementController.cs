@@ -66,7 +66,7 @@ public class MouseMovementController : UnitMovementController
     protected override void Move()
     {
         Vector2 direction = destination - (Vector2)unit.transform.position;
-        float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * Time.fixedDeltaTime;
+        float epsilon = GameplayUtils.ToWorldDistance(moveSpeed) * unit.state.MoveSpeedFactor * Time.fixedDeltaTime ;
         
         if (IsBlocked(direction) || direction.sqrMagnitude < epsilon * epsilon)
         {
@@ -76,7 +76,7 @@ public class MouseMovementController : UnitMovementController
 
         isMoving = true;
 
-        rigidbody.linearVelocity = direction.normalized * GameplayUtils.ToWorldDistance(moveSpeed);
+        rigidbody.linearVelocity = direction.normalized * GameplayUtils.ToWorldDistance(moveSpeed) * unit.state.MoveSpeedFactor;
 
         unit.state.FlipSprite(direction);
 
@@ -98,7 +98,7 @@ public class MouseMovementController : UnitMovementController
     bool IsBlocked(Vector2 direction)
     {
         Vector2 normDirection = direction.normalized;
-        float delta = GameplayUtils.ToWorldDistance(moveSpeed * Time.fixedDeltaTime);
+        float delta = GameplayUtils.ToWorldDistance(moveSpeed * unit.state.MoveSpeedFactor * Time.fixedDeltaTime);
 
         int count = bodyCollider.Cast(direction.normalized, hits, delta);
 

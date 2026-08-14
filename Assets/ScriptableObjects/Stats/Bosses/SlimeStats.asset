@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cbab1b40da91e428fed2474ca43920, type: 3}
+  m_Name: SlimeStats
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeStats
+  maxHP: 50000
+  moveSpeed: 1000
+  weakDamageFactor: 2
+  attackRange: 600
+  firstJumpRangeRadius: 200
+  firstJumpDamage: 5
+  firstJumpPredelay: 1
+  firstJumpPostdelay: 1.1
+  secondJumpRangeRadius: 300
+  secondJumpDamage: 5
+  secondJumpPredelay: 1.15
+  secondJumpPostdelay: 1.25
+  lastJumpRangeRadius: 500
+  lastJumpDamage: 20
+  lastJumpPredelay: 1.3
+  lastJumpPostdelay: 9.15
+  lastJumpStunDuration: 10
+  waveFrequency: 1
+  waveRangeRadius: 1000
+  waveDamage: 5
+  wavePredelay: 1.9
+  wavePostdelay: 6.45
+  waveSlowFactor: 0.5
+  waveSlowDuration: 12
+  shakeFrequency: 2
+  shakeSpreadRadius: 2000
+  shakeSlowAreaRadius: 200
+  shakeSlowAreaNumber: 3
+  shakePredelay: 0.5
+  shakePostdelay: 2
+  shakeSlowFactor: 0.5
+  explodeFrequency: 1
+  explodeBurstDamage: 15
+  explodeRangeRadius: 500
+  explodeDamageToSlime: 3000
+  explodeRangeForSlime: 200
+  explodeMucusSpeed: 1000
+  explodeMucusLifetime: 2
+  explodeMucusBurstDelay: 2
+  explodePredelay: 0.75
+  explodePostdelay: 6.3
+  explodeGroggyDuration: 10

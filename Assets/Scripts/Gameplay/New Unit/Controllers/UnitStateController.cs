@@ -35,7 +35,7 @@ public class UnitStateController : MonoBehaviour
     public bool IsStunned => isStunned;
     public bool IsKnockedBack => isKnockedBack;
     public float AttackFactor => attackFactor;
-    
+    public float MoveSpeedFactor => moveSpeedFactor;
 
     protected virtual void Awake()
     {
@@ -143,6 +143,16 @@ public class UnitStateController : MonoBehaviour
     public virtual void AddAttackFactor(float delta)
     {
         attackFactor += delta;
+    }
+
+    public virtual void AddMoveSpeedFactor(float delta)
+    {
+        moveSpeedFactor += delta;
+    }
+
+    public virtual void ResetMoveSpeedFactor()
+    {
+        moveSpeedFactor = 1f;
     }
 
     public virtual bool CanMove()

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,7 +30,7 @@ public class KeyboardMovementController : UnitMovementController
     {
         isMoving = direction != Vector2.zero;
 
-        rigidbody.linearVelocity = direction * GameplayUtils.ToWorldDistance(moveSpeed);
+        rigidbody.linearVelocity = direction * GameplayUtils.ToWorldDistance(moveSpeed) * unit.state.MoveSpeedFactor;
 
         unit.state.FlipSprite(direction);
     }

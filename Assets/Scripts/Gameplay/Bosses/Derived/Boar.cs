@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public enum PatternCode
+public enum BoarPattern
 {
     RUSH, // 돌진
     ROAR, // 포효
@@ -33,25 +33,16 @@ public class Boar : Boss
     public CancellationTokenSource RushCTS => rushCTS;
     public CancellationTokenSource RoamCTS => roamCTS;
 
-    void Start()
+    protected override void Start()
     {
-        float bodyScale = GameplayUtils.ToWorldDistance(Stats.bodyScale);
-        float headScale = GameplayUtils.ToWorldDistance(Stats.headScale);
-
-        headCollider.transform.position = transform.position + new Vector3((bodyScale + headScale) / 2f - 0.1f, 0, 0);
-        headCollider.size = new Vector2(headScale, headScale);
-        bodyCollider.size = new Vector2(bodyScale, bodyScale);
-
-        float headX = GameplayUtils.ToWorldDistance((Stats.headScale + Stats.bodyScale) / 2f);
         headbuttSector.Init(Stats.headbuttRangeRadius, Stats.headbuttRangeAngle);
-        headbuttSector.transform.position = transform.position + new Vector3(headX, 0, 0);
         headbuttSector.gameObject.SetActive(false);
 
-        float rushHeight = GameplayUtils.ToWorldDistance(Stats.headScale * 1.5f);
         float rushWidth = GameplayUtils.ToWorldDistance(Stats.rushRangeWidth);
-        rushCollider.transform.localScale = new Vector3(rushHeight, rushWidth, 1);
-        rushCollider.transform.position = transform.position + new Vector3(headX, 0, 0);
+        rushCollider.transform.localScale = new Vector3(rushCollider.transform.localScale.x, rushWidth, 1);
         rushCollider.gameObject.SetActive(false);
+
+        base.Start();
     }
 
     protected override async void DoNormalPattern()
@@ -61,11 +52,11 @@ public class Boar : Boss
 
     protected override async void DoSpecialPattern(int patternCode)
     {
-        switch ((PatternCode)patternCode)
+        switch ((BoarPattern)patternCode)
         {
-            case PatternCode.RUSH: await Rush(); break;
-            case PatternCode.ROAR: await Roar(); break;
-            case PatternCode.ROAM: await Roam(); break;
+            case BoarPattern.RUSH: await Rush(); break;
+            case BoarPattern.ROAR: await Roar(); break;
+            case BoarPattern.ROAM: await Roam(); break;
         }
     }
 
@@ -74,7 +65,7 @@ public class Boar : Boss
     {
         Debug.Log("박치기");
 
-        Movement.FaceTarget();
+        movement.FaceTarget();
         headbuttSector.gameObject.SetActive(true);
         state.PlayAnimation("Headbutt Charging");
 

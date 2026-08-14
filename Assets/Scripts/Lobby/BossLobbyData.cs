@@ -4,12 +4,8 @@ using UnityEngine;
 public enum BossCode
 {
     NULL,
-    BOSS_1,
-    BOSS_2,
-    BOSS_3,
-    BOSS_4,
-    BOSS_5,
-    BOSS_6,
+    SLIME,
+    BOAR,
 }
 
 public enum Difficulty

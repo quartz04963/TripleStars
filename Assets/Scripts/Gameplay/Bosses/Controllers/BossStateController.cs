@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ abstract public class BossStateController : MonoBehaviour
     [SerializeField] protected BossState bossState;
     [SerializeField] protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected BossBody weakpoint;
     
     protected readonly List<int> patternBalls = new();
     
@@ -90,6 +92,27 @@ abstract public class BossStateController : MonoBehaviour
         animator.Play(MoveHash);
     }
 
+    public virtual async Task Recover(float duration, CancellationToken token)
+    {
+        bossState = BossState.RECOVERY;
+        animator.Play(StandingHash);
+
+        await GameplayUtils.DelayForSeconds(duration, token);
+
+        bossState = BossState.READY;
+        animator.Play(MoveHash);
+    }
+
+    public virtual async Task Recover(float duration, bool isWeakened = false)
+    {
+        if (isWeakened) EnableWeakPoint(true);
+
+        await Recover(duration);
+
+        if (isWeakened) EnableWeakPoint(false);
+    }
+
+
     public virtual async Task Groggy(float groggyDuration, float standingDuration = 1f) // 그로기
     {
         bossState = BossState.GROGGY;
@@ -107,6 +130,12 @@ abstract public class BossStateController : MonoBehaviour
 
     public virtual void PlayAnimation(string name)
     {
-        animator.Play(name);
+        animator.Play(name, 0, 0f);
     }
+
+    public virtual void EnableWeakPoint(bool isEnabled)
+    {
+        weakpoint.IsWeakPoint = isEnabled;
+    }
+
 }
