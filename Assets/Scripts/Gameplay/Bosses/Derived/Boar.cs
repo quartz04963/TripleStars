@@ -136,6 +136,8 @@ public class Boar : Boss
     {
         Debug.Log("포효");
 
+        state.PlayAnimation("Roar");
+
         await GameplayUtils.DelayForSeconds(Stats.roarPredelay);
 
         float time = 0;
