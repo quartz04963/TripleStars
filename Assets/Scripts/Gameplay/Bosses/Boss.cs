@@ -24,7 +24,7 @@ abstract public class Boss : MonoBehaviour
     {
         if (state.BossState == BossState.READY && targeting.IsTargetInRange()) 
         {
-            DoNextPattern(0, 1);
+            DoNextPattern(2, 1);
         }
     }
     

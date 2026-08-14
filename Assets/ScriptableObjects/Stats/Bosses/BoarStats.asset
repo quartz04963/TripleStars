@@ -36,7 +36,7 @@ MonoBehaviour:
   rushLastingDuration: 0.95
   rushGroggyDuration: 5.15
   rushStunDuration: 4.5
-  roarFrequency: 0
+  roarFrequency: 1
   roarPredelay: 1.2
   roarPostdelay: 5.3
   roarLastingDuration: 0.15
@@ -45,6 +45,4 @@ MonoBehaviour:
   roamDistance: 500
   roamPostdelay: 1.1
   roamDuration: 1
-  bodyScale: 400
-  headScale: 300
   weakpointExposureThreshold: 2

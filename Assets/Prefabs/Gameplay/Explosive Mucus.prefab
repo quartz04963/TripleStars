@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5756374737122348395}
   - component: {fileID: 2356412390476720355}
   - component: {fileID: 5730832994517696561}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Burst Collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 5830018025079135214}
   - component: {fileID: 1897940449111736315}
   - component: {fileID: 1186547724352539765}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Explosive Mucus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExplosiveMucus
   burstCollider: {fileID: 988721096823350496}
   burstForSlimeCollider: {fileID: 5730832994517696561}
+  slimeStats: {fileID: 11400000, guid: 3619d9f9d8f6bea4186e252904cb81df, type: 2}
 --- !u!58 &5830018025079135214
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -337,7 +338,7 @@ GameObject:
   - component: {fileID: 3268925947819455779}
   - component: {fileID: 4758154884221675753}
   - component: {fileID: 988721096823350496}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Burst Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

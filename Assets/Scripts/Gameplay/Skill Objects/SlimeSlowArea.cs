@@ -14,14 +14,14 @@ public class SlimeSlowArea : MonoBehaviour
         slime = (Slime)GameplayManager.instance.boss;
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerStay2D(Collider2D other) 
     {
         if (!other.TryGetComponent(out UnitStateController unit)) return;
 
         slime.State.AddUnitOnSlowArea(unit.unit);
     }
 
-    void OnTriggerExit2D(Collider2D other) // 장판이 겹쳐 있을 때 문제가 생기긴 함.
+    void OnTriggerExit2D(Collider2D other)
     {
         if (!other.TryGetComponent(out UnitStateController unit)) return;
 

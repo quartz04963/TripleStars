@@ -149,15 +149,14 @@ public class Slime : Boss
     {
         Debug.Log("폭발성 점액");
 
-        movement.FaceTarget();
-
-        Vector2 direction = targeting.Target.transform.position - transform.position;
-
         state.PlayAnimation("Explode");
 
-        await GameplayUtils.DelayForSeconds(Stats.explodePredelay);
+        await Movement.ExplodeAim(Stats.explodePredelay);
 
-        var mucus = Instantiate(explosiveMucusPrf).GetComponent<ExplosiveMucus>();
+        Vector2 direction = Movement.Farthest.transform.position - transform.position;
+        Vector3 pos = transform.position + 2 * (Vector3)direction.normalized;
+
+        var mucus = Instantiate(explosiveMucusPrf, pos, transform.rotation).GetComponent<ExplosiveMucus>();
         mucus.Init(direction, this);
 
         explodeRecoveryCTS = new CancellationTokenSource();

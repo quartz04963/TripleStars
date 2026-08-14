@@ -6,6 +6,7 @@ public class ExplosiveMucus : MonoBehaviour
 {
     [SerializeField] CircleCollider2D burstCollider;
     [SerializeField] CircleCollider2D burstForSlimeCollider;
+    [SerializeField] SlimeStats slimeStats;
 
     private Rigidbody2D rigidbody;
     private Collider2D hitCollider;
@@ -14,7 +15,6 @@ public class ExplosiveMucus : MonoBehaviour
     private Unit target;
 
     private float time = 0;
-    private Vector3 offset;
     private readonly List<RaycastHit2D> hits = new();
     
 
@@ -24,18 +24,29 @@ public class ExplosiveMucus : MonoBehaviour
         hitCollider = GetComponent<Collider2D>();
     }
 
+    void Start()
+    {
+        float burstDiameter = 2 * GameplayUtils.ToWorldDistance(slimeStats.explodeBurstRangeRadius);
+        burstCollider.transform.localScale = new Vector3(burstDiameter, burstDiameter, 1);
+        burstCollider.gameObject.SetActive(false);
+
+        float burstForSlimeDiameter = 2 * GameplayUtils.ToWorldDistance(slimeStats.explodeBurstRangeForSlime);
+        burstForSlimeCollider.transform.localScale = new Vector3(burstForSlimeDiameter, burstForSlimeDiameter, 1);
+        burstForSlimeCollider.gameObject.SetActive(false);
+    }
+
     void Update()
     {
         if (slime == null) return;
 
         time += Time.deltaTime;
 
-        if (target == null && time >= slime.Stats.explodeMucusLifetime)
+        if (target == null && time >= slimeStats.explodeMucusLifetime)
         {
             Destroy(gameObject);
         }
 
-        if (target != null && time >= slime.Stats.explodeMucusBurstDelay)
+        if (target != null && time >= slimeStats.explodeMucusBurstDelay)
         {
             Explode();
         }
@@ -47,17 +58,11 @@ public class ExplosiveMucus : MonoBehaviour
         
         if (target == null)
         {
-            float delta = slime.Stats.explodeMucusSpeed / slime.Stats.explodeMucusLifetime * Time.fixedDeltaTime; 
-        
-            rigidbody.linearVelocity = Vector2.MoveTowards(rigidbody.linearVelocity, Vector2.zero, delta);
+            float dv = GameplayUtils.ToWorldDistance(slimeStats.explodeMucusSpeed) / slimeStats.explodeMucusLifetime * Time.fixedDeltaTime; 
+            rigidbody.linearVelocity = Vector2.MoveTowards(rigidbody.linearVelocity, Vector2.zero, dv);
 
-            int count = hitCollider.Cast
-            (
-                rigidbody.linearVelocity.normalized, 
-                GameplayUtils.unitFilter,
-                hits, 
-                rigidbody.linearVelocity.magnitude
-            );
+            float delta = rigidbody.linearVelocity.magnitude * Time.fixedDeltaTime;
+            int count = hitCollider.Cast(rigidbody.linearVelocity.normalized, GameplayUtils.unitFilter, hits, delta);
 
             if (count > 0)
             {
@@ -66,9 +71,7 @@ public class ExplosiveMucus : MonoBehaviour
                 if (nearest != null)
                 {
                     time = 0;
-
                     target = nearest.unit;
-                    offset = transform.position - target.transform.position;
                     
                     burstCollider.gameObject.SetActive(true);
                     burstForSlimeCollider.gameObject.SetActive(true);
@@ -77,7 +80,7 @@ public class ExplosiveMucus : MonoBehaviour
         }
         else
         {
-            transform.position = target.transform.position + offset;
+            transform.position = target.transform.position;
         }
     }
 
@@ -86,15 +89,7 @@ public class ExplosiveMucus : MonoBehaviour
     {
         this.slime = slime;
 
-        rigidbody.linearVelocity = direction.normalized * GameplayUtils.ToWorldDistance(slime.Stats.explodeMucusSpeed);
-
-        float burstDiameter = 2 * GameplayUtils.ToWorldDistance(slime.Stats.explodeRangeRadius);
-        burstCollider.transform.localScale = new Vector3(burstDiameter, burstDiameter, 1);
-        burstCollider.gameObject.SetActive(false);
-
-        float burstForSlimeDiameter = 2 * GameplayUtils.ToWorldDistance(slime.Stats.explodeRangeForSlime);
-        burstForSlimeCollider.transform.localScale = new Vector3(burstForSlimeDiameter, burstForSlimeDiameter, 1);
-        burstForSlimeCollider.gameObject.SetActive(false);
+        rigidbody.linearVelocity = direction.normalized * GameplayUtils.ToWorldDistance(slimeStats.explodeMucusSpeed);
     }
 
     void Explode()
@@ -111,7 +106,7 @@ public class ExplosiveMucus : MonoBehaviour
 
             if (unit.unit != target)
             {
-                unit.TakeDamage(slime.Stats.explodeBurstDamage);
+                unit.TakeDamage(slimeStats.explodeBurstDamage);
             }
         }
 
@@ -123,7 +118,7 @@ public class ExplosiveMucus : MonoBehaviour
 
             if (bossBody.boss == slime) 
             {
-                bossBody.TakeDamage(slime.Stats.explodeDamageToSlime, null);
+                bossBody.TakeDamage(slimeStats.explodeBurstDamageToSlime, null);
 
                 slime.ExplodeRecoveryCTS?.Cancel();
 

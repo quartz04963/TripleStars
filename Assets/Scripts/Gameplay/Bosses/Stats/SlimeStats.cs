@@ -41,9 +41,9 @@ public class SlimeStats : BossStats
     [Header("폭발성 점액")]
     public int explodeFrequency;
     public int explodeBurstDamage;
-    public int explodeRangeRadius;
-    public int explodeDamageToSlime;
-    public int explodeRangeForSlime;
+    public int explodeBurstRangeRadius;
+    public int explodeBurstDamageToSlime;
+    public int explodeBurstRangeForSlime;
     public int explodeMucusSpeed;
     public float explodeMucusLifetime;
     public float explodeMucusBurstDelay;
