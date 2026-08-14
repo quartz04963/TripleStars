@@ -29,14 +29,14 @@ MonoBehaviour:
   lastJumpPredelay: 1.3
   lastJumpPostdelay: 9.15
   lastJumpStunDuration: 10
-  waveFrequency: 0
-  waveRangeRadius: 1000
+  waveFrequency: 1
+  waveRangeRadius: 1200
   waveDamage: 5
   wavePredelay: 1.9
   wavePostdelay: 6.45
   waveSlowFactor: 0.5
   waveSlowDuration: 12
-  shakeFrequency: 0
+  shakeFrequency: 2
   shakeSpreadRadius: 2000
   shakeSlowAreaRadius: 200
   shakeSlowAreaNumber: 3
@@ -45,10 +45,10 @@ MonoBehaviour:
   shakeSlowFactor: 0.5
   explodeFrequency: 1
   explodeBurstDamage: 15
-  explodeBurstRangeRadius: 500
+  explodeBurstRangeRadius: 600
   explodeBurstDamageToSlime: 3000
   explodeBurstRangeForSlime: 200
-  explodeMucusSpeed: 1000
+  explodeMucusSpeed: 2000
   explodeMucusLifetime: 2
   explodeMucusBurstDelay: 2
   explodePredelay: 0.75
