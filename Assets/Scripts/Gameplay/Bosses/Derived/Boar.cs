@@ -17,6 +17,7 @@ public class Boar : Boss
     [SerializeField] BoxCollider2D headCollider;
     [SerializeField] BoxCollider2D bodyCollider;
     [SerializeField] Collider2D rushCollider;
+    [SerializeField] CircleCollider2D roarCollider;
 
     private CancellationTokenSource rushCTS;
     private CancellationTokenSource roamCTS;  
@@ -42,22 +43,54 @@ public class Boar : Boss
         rushCollider.transform.localScale = new Vector3(rushCollider.transform.localScale.x, rushWidth, 1);
         rushCollider.gameObject.SetActive(false);
 
+        float roarDiameter = 2 * GameplayUtils.ToWorldDistance(Stats.roarRangeRadius);
+        roarCollider.transform.localScale = new Vector3(roarDiameter, roarDiameter, 1); 
+        roarCollider.gameObject.SetActive(false);
+
         base.Start();
     }
 
-    protected override async void DoNormalPattern()
+    protected override async void DoNextPattern(int normal = 2, int special = 1)
     {
-        await Headbutt();
+        state.BossState = BossState.ATTACKING;
+
+        float p = UnityEngine.Random.Range(0f, Stats.headbuttChance + Stats.rushChance + Stats.roarChance + Stats.roamChance);
+
+        if (p < Stats.headbuttChance) 
+        {
+            await Headbutt();
+            return;
+        }
+
+        if (p < Stats.headbuttChance + Stats.rushChance)
+        {
+            await Rush();
+            return;
+        }
+
+        if (p < Stats.headbuttChance + Stats.rushChance + Stats.roarChance)
+        {
+            await Roar();
+            return;
+        }
+
+        await Roam();
+
     }
 
-    protected override async void DoSpecialPattern(int patternCode)
+    protected override void DoNormalPattern()
     {
-        switch ((BoarPattern)patternCode)
-        {
-            case BoarPattern.RUSH: await Rush(); break;
-            case BoarPattern.ROAR: await Roar(); break;
-            case BoarPattern.ROAM: await Roam(); break;
-        }
+        // await Headbutt();
+    }
+
+    protected override void DoSpecialPattern(int patternCode)
+    {
+        // switch ((BoarPattern)patternCode)
+        // {
+        //     case BoarPattern.RUSH: await Rush(); break;
+        //     case BoarPattern.ROAR: await Roar(); break;
+        //     case BoarPattern.ROAM: await Roam(); break;
+        // }
     }
 
     #region 멧돼지 고유 패턴
@@ -138,6 +171,8 @@ public class Boar : Boss
 
         state.PlayAnimation("Roar");
 
+        roarCollider.gameObject.SetActive(true);
+
         await GameplayUtils.DelayForSeconds(Stats.roarPredelay);
 
         float time = 0;
@@ -145,13 +180,17 @@ public class Boar : Boss
         {
             time += Time.deltaTime;
 
-            foreach (Unit unit in GameplayManager.instance.allUnits)
+            roarCollider.Overlap(GameplayUtils.unitFilter, collisionResults);
+
+            foreach (Collider2D col in collisionResults)
             {
-                unit.state.Stun(Stats.roarStunDuration);
+                if (col.TryGetComponent(out UnitStateController unit)) unit.Stun(Stats.roarStunDuration);
             }
 
             await Task.Yield();
         }
+
+        roarCollider.gameObject.SetActive(false);
 
         await State.Recover(Stats.roarPostdelay, true);
     }

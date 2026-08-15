@@ -14,8 +14,15 @@ public class BossBody : Enemy
     
     public override void TakeDamage(float damage, Unit unit)
     {
-        float finalDamage = damage * (isWeakPoint ? boss.stats.weakDamageFactor : 1f);
+        float finalDamage = damage;
+        if (isWeakPoint)
+        {
+            finalDamage *= boss.stats.weakDamageFactor;
+            
+            if (unit is Archer archer) finalDamage *= archer.Stats.criticalAttackFactor;
+        }
 
+        Debug.Log(finalDamage);
         boss.state.TakeDamage(finalDamage, unit);
     }
 }

@@ -14,8 +14,6 @@ public class Archer : Unit
 
     void Update()
     {
-        UpdateFlight();
-
         if (state.CanAttack())
         {
             if (explosiveArrow.SkillKey.isPressed)
@@ -34,16 +32,6 @@ public class Archer : Unit
 
         explosiveArrow = skill1;
         explosiveArrow.Init("Explosive Arrow", skill1Key, Stats.explosiveArrowCooldown);
-    }
-
-    void UpdateFlight()
-    {
-        // 스킬명: 도주
-        // 효과: 어그로 끌렸을 때 이동속도 증가
-
-        bool isTargeted = GameplayManager.instance.boss != null && GameplayManager.instance.boss.targeting.Target == this;
-        
-        movement.MoveSpeed = (float)(isTargeted ? Stats.flightMoveSpeed : Stats.moveSpeed);
     }
 
     void ExplosiveArrow()

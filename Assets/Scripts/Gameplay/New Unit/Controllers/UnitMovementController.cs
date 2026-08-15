@@ -1,13 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UnitSpeed
-{
-    SLOW = 240,
-    NORMAL = 360,
-    FAST = 480,
-    VERYFAST = 600,
-}
 
 [RequireComponent(typeof(Collider2D))]
 abstract public class UnitMovementController : MonoBehaviour

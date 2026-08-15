@@ -12,9 +12,9 @@ public class BoarStats : BossStats
     public float headbuttPredelay;
     public float headbuttPostdelay;
     public float headbuttStunDuration;
+    public float headbuttChance;
     
     [Header("폭주 돌진")]
-    public int rushFrequency;
     public int rushRangeWidth;
     public int rushDistance;
     public int rushKnockbackDistance;
@@ -26,19 +26,21 @@ public class BoarStats : BossStats
     public float rushLastingDuration;
     public float rushGroggyDuration;
     public float rushStunDuration;
+    public float rushChance;
 
     [Header("포효")]
-    public int roarFrequency;
+    public int roarRangeRadius;
     public float roarPredelay;
     public float roarPostdelay;
     public float roarLastingDuration;
     public float roarStunDuration;
+    public float roarChance;
 
     [Header("돌아들어가기")]
-    public int roamFrequency;
     public int roamDistance;
     public float roamPostdelay;
     public float roamDuration;
+    public float roamChance;
 
     [Header("기타")]
     public int weakpointExposureThreshold;

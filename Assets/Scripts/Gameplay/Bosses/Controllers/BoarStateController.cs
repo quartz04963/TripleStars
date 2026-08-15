@@ -11,9 +11,9 @@ public class BoarStateController : BossStateController
     {
         patternBalls.Clear();
 
-        for (int i = 0; i < BoarStats.rushFrequency; i++) patternBalls.Add((int)BoarPattern.RUSH);
-        for (int i = 0; i < BoarStats.roarFrequency; i++) patternBalls.Add((int)BoarPattern.ROAR);
-        for (int i = 0; i < BoarStats.roamFrequency; i++) patternBalls.Add((int)BoarPattern.ROAM);
+        for (int i = 0; i < BoarStats.rushChance; i++) patternBalls.Add((int)BoarPattern.RUSH);
+        for (int i = 0; i < BoarStats.roarChance; i++) patternBalls.Add((int)BoarPattern.ROAR);
+        for (int i = 0; i < BoarStats.roamChance; i++) patternBalls.Add((int)BoarPattern.ROAM);
     }
 
     public override async Task Groggy(float groggyDuration, float standingDuration = 1)
