@@ -16,19 +16,19 @@ MonoBehaviour:
   moveSpeed: 1000
   weakDamageFactor: 2
   attackRange: 600
-  firstJumpRangeRadius: 600
-  firstJumpDamage: 20
+  firstJumpRangeRadius: 400
+  firstJumpDamage: 15
   firstJumpPredelay: 1
   firstJumpPostdelay: 0.2
-  secondJumpRangeRadius: 600
-  secondJumpDamage: 20
+  secondJumpRangeRadius: 400
+  secondJumpDamage: 15
   secondJumpPredelay: 1
   secondJumpPostdelay: 0.2
-  lastJumpRangeRadius: 600
-  lastJumpDamage: 50
+  lastJumpRangeRadius: 500
+  lastJumpDamage: 40
   lastJumpPredelay: 2
   lastJumpPostdelay: 3
-  lastJumpStunDuration: 4
+  lastJumpStunDuration: 5
   waveFrequency: 1
   waveRangeRadius: 1200
   waveDamage: 5
@@ -44,7 +44,7 @@ MonoBehaviour:
   shakePostdelay: 1
   shakeSlowFactor: 0.5
   explodeFrequency: 1
-  explodeBurstDamage: 40
+  explodeBurstDamage: 25
   explodeBurstRangeRadius: 600
   explodeBurstDamageToSlime: 3000
   explodeBurstRangeForSlime: 200
