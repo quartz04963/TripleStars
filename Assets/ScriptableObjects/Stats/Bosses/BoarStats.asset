@@ -12,37 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e7fb7a7d403194a8ba554a4ffaaabd, type: 3}
   m_Name: BoarStats
   m_EditorClassIdentifier: Assembly-CSharp::BoarStats
-  maxHP: 60000
+  maxHP: 30000
   moveSpeed: 1500
   weakDamageFactor: 2
   attackRange: 600
-  headbuttRangeRadius: 400
+  headbuttRangeRadius: 700
   headbuttRangeAngle: 45
   headbuttKnockbackDistance: 1500
   headbuttDamage: 10
   headbuttChainDamage: 10
-  headbuttPredelay: 0.75
-  headbuttPostdelay: 5.3
-  headbuttStunDuration: 6
-  rushFrequency: 2
+  headbuttPredelay: 0.7
+  headbuttPostdelay: 3
+  headbuttStunDuration: 1
+  headbuttChance: 0.4
   rushRangeWidth: 600
   rushDistance: 3000
   rushKnockbackDistance: 3000
   rushDamage: 30
   rushChainDamage: 30
-  rushPredelay: 3
-  rushPostdelay: 3.8
-  rushAimingDuration: 1.35
-  rushLastingDuration: 0.95
+  rushPredelay: 2.5
+  rushPostdelay: 4
+  rushAimingDuration: 1.4
+  rushLastingDuration: 1
   rushGroggyDuration: 5.15
   rushStunDuration: 4.5
-  roarFrequency: 1
+  rushChance: 0.2
+  roarRangeRadius: 800
   roarPredelay: 1.2
-  roarPostdelay: 5.3
-  roarLastingDuration: 0.15
-  roarStunDuration: 5.15
-  roamFrequency: 4
+  roarPostdelay: 2
+  roarLastingDuration: 0.01
+  roarStunDuration: 2.4
+  roarChance: 0.2
   roamDistance: 500
   roamPostdelay: 1.1
   roamDuration: 1
+  roamChance: 0.2
   weakpointExposureThreshold: 2

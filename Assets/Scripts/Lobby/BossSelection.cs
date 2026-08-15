@@ -24,8 +24,8 @@ public class BossSelection : MonoBehaviour
     {
         bossDataList = new List<BossLobbyData>
         {
-            new BossLobbyData(BossCode.SLIME, "Slime", Difficulty.EASY),
-            new BossLobbyData(BossCode.BOAR, "Boar", Difficulty.NORMAL),
+            new BossLobbyData(BossCode.SLIME, "거대 슬라임", Difficulty.EASY),
+            new BossLobbyData(BossCode.BOAR, "폭주 멧돼지", Difficulty.NORMAL),
         };
 
         bossSpriteDict = new Dictionary<BossCode, Sprite>

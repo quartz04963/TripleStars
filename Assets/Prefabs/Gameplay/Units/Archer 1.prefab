@@ -118,8 +118,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: 2577268449247730905, guid: c01b02bf973332c4ca21204b9411af3c, type: 3}
-  stunnedSprite: {fileID: 5380303069368216328, guid: 5ab0b2b3a9d648645bad1f5f1c4f48f6, type: 3}
 --- !u!61 &8804494747394622542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -722,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd1270cbeacebb44b9632c56ad88053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Archer
-  unitName: Archer
+  unitName: "\uAD81\uC218"
   stats: {fileID: 11400000, guid: b09303eb31e318a4db28b9a7a986c292, type: 2}
   state: {fileID: 6221577215847015450}
   movement: {fileID: 6788916481551695620}

@@ -31,7 +31,7 @@ public class Archer : Unit
         Movement.SetButtonControl(mouseButton);
 
         explosiveArrow = skill1;
-        explosiveArrow.Init("Explosive Arrow", skill1Key, Stats.explosiveArrowCooldown);
+        explosiveArrow.Init("폭탄 화살", skill1Key, Stats.explosiveArrowCooldown);
     }
 
     void ExplosiveArrow()

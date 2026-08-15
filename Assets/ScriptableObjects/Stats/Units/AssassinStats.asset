@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: AssassinStats
   m_EditorClassIdentifier: Assembly-CSharp::AssassinStats
   maxHP: 50
-  moveSpeed: 600
+  moveSpeed: 370
   damageFactor: 1.8
   baseAttackRange: 850
   baseAttackDamage: 40
   baseAttackPeriod: 0.5
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
   hideThreshold: 3
   hideDodgeRate: 0.5
   poisonShurikenCooldown: 8

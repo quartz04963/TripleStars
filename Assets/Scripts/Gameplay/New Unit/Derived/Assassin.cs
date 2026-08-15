@@ -41,7 +41,7 @@ public class Assassin : Unit
         Movement.SetButtonControl(mouseButton);
 
         poisonShuriken = skill1;
-        poisonShuriken.Init("Poison Shuriken", skill1Key, Stats.poisonShurikenCooldown);
+        poisonShuriken.Init("독 수리검", skill1Key, Stats.poisonShurikenCooldown);
     }
 
     protected void UpdateHide()

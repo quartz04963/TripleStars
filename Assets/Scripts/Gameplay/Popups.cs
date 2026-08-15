@@ -11,7 +11,8 @@ public class Popups : MonoBehaviour
     [SerializeField] Image star2Img;
     [SerializeField] Image star3Img;
     [SerializeField] Sprite starOnSprite;
-    [SerializeField] TextMeshProUGUI condition3Tmp;
+    [SerializeField] TextMeshProUGUI clearCondition3Tmp;
+    [SerializeField] TextMeshProUGUI failCondition3Tmp;
     [SerializeField] TextMeshProUGUI clearPraiseTmp;
 
     [SerializeField] GameObject failPoupup;
@@ -21,7 +22,7 @@ public class Popups : MonoBehaviour
         clearPopup.SetActive(true);
         clearPraiseTmp.gameObject.SetActive(false);
 
-        condition3Tmp.SetText("Clear within " + clearTimeThreshold + "minutes");
+        clearCondition3Tmp.SetText(clearTimeThreshold + "분 안에 클리어");
         
         await GameplayUtils.DelayForSecondsRealTime(starInterval);
         star1Img.sprite = starOnSprite;
@@ -47,8 +48,9 @@ public class Popups : MonoBehaviour
         clearPraiseTmp.gameObject.SetActive(true);
     }
 
-    public void EnableFailPopup()
+    public void EnableFailPopup(float clearTimeThreshold)
     {
+        failCondition3Tmp.SetText(clearTimeThreshold + "분 안에 클리어");
         failPoupup.SetActive(true);
     }
 

@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3a92d5f3ff9df4ba9f3bfdb6108edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assassin
-  unitName: Assassin
+  unitName: "\uC554\uC0B4\uC790"
   stats: {fileID: 11400000, guid: 245599c4a2089134d90feca9e3a1bb6c, type: 2}
   state: {fileID: 2140705832402501346}
   movement: {fileID: 3835881018216446904}
@@ -685,8 +685,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: 7049366241650196796, guid: 864a59efb176e314fb06697a62a466ea, type: 3}
-  stunnedSprite: {fileID: 1140553132295235719, guid: c4b73c7e843784d4d913ba3c7ebeb44f, type: 3}
   isHiding: 0
 --- !u!61 &7660709864428709444
 BoxCollider2D:

@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: VanguardStats
   m_EditorClassIdentifier: Assembly-CSharp::VanguardStats
   maxHP: 70
-  moveSpeed: 360
+  moveSpeed: 340
   damageFactor: 1.8
-  baseAttackRange: 900
+  baseAttackRange: 360
   baseAttackDamage: 10
   baseAttackPeriod: 1
-  healRange: 900
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
+  healRange: 360
   healAmount: 1
   atkBuffRate: 0.1
   healPeriod: 1
-  assembleCooldown: 50
+  assembleCooldown: 15

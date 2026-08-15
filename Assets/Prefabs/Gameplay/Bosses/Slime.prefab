@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645f1114456b81c419ce582122bb9e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slime
-  bossName: Slime
+  bossName: "\uAC70\uB300 \uC2AC\uB77C\uC784"
   targeting: {fileID: 647483134986608362}
   stats: {fileID: 11400000, guid: 3619d9f9d8f6bea4186e252904cb81df, type: 2}
   state: {fileID: 989174353759870646}

@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: SaintessStats
   m_EditorClassIdentifier: Assembly-CSharp::SaintessStats
   maxHP: 60
-  moveSpeed: 480
+  moveSpeed: 350
   damageFactor: 1.6
-  baseAttackRange: 800
+  baseAttackRange: 320
   baseAttackDamage: 7
   baseAttackPeriod: 0.5
-  healRange: 800
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
+  healRange: 320
   healAmount: 1
   healPeriod: 0.5
   teleportCooldown: 30

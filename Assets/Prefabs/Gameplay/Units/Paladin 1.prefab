@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8251e2974696ba241ad388a76445bf02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paladin
-  unitName: Paladin
+  unitName: "\uC131\uAE30\uC0AC"
   stats: {fileID: 11400000, guid: 110d5d660b70be04b81b8d6d3a0ab511, type: 2}
   state: {fileID: 814275185479830110}
   movement: {fileID: 882333685478156084}
@@ -652,8 +652,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: -8958802310153707344, guid: b6d01bde99bfb5a419e55a90de697879, type: 3}
-  stunnedSprite: {fileID: -1773480081821654308, guid: 90cb5cb0fb84dcd4daf6a84be22b67fb, type: 3}
 --- !u!61 &2173577972646682870
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0844cb4ee44a8634a90dfbb372ee3204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boar
-  bossName: Boar
+  bossName: "\uD3ED\uC8FC \uBA67\uB3FC\uC9C0"
   targeting: {fileID: 3710977725317435654}
   stats: {fileID: 11400000, guid: da1515676dc7265418b5a3b65a3e3132, type: 2}
   state: {fileID: 1518986436093308024}

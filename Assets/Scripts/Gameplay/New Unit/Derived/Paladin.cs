@@ -30,10 +30,10 @@ public class Paladin : Unit
         state.SetHpInfo(hp);
 
         shield = skill1;
-        shield.Init("Shield", skill1Key, Stats.shieldCooldown);
+        shield.Init("방패 전개", skill1Key, Stats.shieldCooldown);
 
         bait = skill2;
-        bait.Init("I'm Your Opponent", skill2Key, Stats.baitCooldown);
+        bait.Init("네 상대는 나다", skill2Key, Stats.baitCooldown);
     }
 
     void Shield()

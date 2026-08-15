@@ -39,10 +39,10 @@ public class Swordsman : Unit
         state.SetHpInfo(hp);
 
         roll = skill1;
-        roll.Init("Roll", skill1Key, Stats.rollCooldown);
+        roll.Init("스텝", skill1Key, Stats.rollCooldown);
 
         flameSword = skill2;
-        flameSword.Init("Flame Sword", skill2Key, Stats.flameSwordCooldown);
+        flameSword.Init("화염검", skill2Key, Stats.flameSwordCooldown);
     }
 
     async void Roll()

@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4a69b14cc37f64087aa09e2573e088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Swordsman
-  unitName: Swordsman
+  unitName: "\uAC80\uC0AC"
   stats: {fileID: 11400000, guid: 0907ff15850d1dc4696231562e796ee3, type: 2}
   state: {fileID: 5459957349460953812}
   movement: {fileID: 5993128475616800950}
@@ -652,8 +652,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: -5335269204534298200, guid: fb5610668953959419ddbe7b768b0187, type: 3}
-  stunnedSprite: {fileID: -8222663150874014688, guid: a366b10a42b747a46a99ba3bb489299c, type: 3}
   isRolling: 0
 --- !u!61 &7837232469820159650
 BoxCollider2D:

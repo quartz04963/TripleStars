@@ -13,13 +13,13 @@ public class UnitSelection : MonoBehaviour
 
     [SerializeField] Button selectButton;
     [SerializeField] Button deselectButton;
-    [SerializeField] TextMeshProUGUI unitNameText;
-    [SerializeField] TextMeshProUGUI roleText;
-    [SerializeField] TextMeshProUGUI unitDescriptionText;
-    [SerializeField] TextMeshProUGUI skillDescriptionText1;
-    [SerializeField] TextMeshProUGUI skillDescriptionText2;
+    [SerializeField] TextMeshProUGUI unitNameTmp;
+    [SerializeField] TextMeshProUGUI roleTmp;
+    [SerializeField] TextMeshProUGUI unitDescriptionTmp;
+    [SerializeField] TextMeshProUGUI skillDescriptionTmp1;
+    [SerializeField] TextMeshProUGUI skillDescriptionTmp2;
     [SerializeField] GameObject selectionChangePanel;
-    [SerializeField] TextMeshProUGUI selectionChangeText;
+    [SerializeField] TextMeshProUGUI selectionChangeTmp;
 
     public UnitCode SelectedCommander => selectedCommander != null ? selectedCommander.UnitData.unitCode : UnitCode.NULL;
     public UnitCode SelectedAttacker => selectedAttacker != null ? selectedAttacker.UnitData.unitCode : UnitCode.NULL;
@@ -46,11 +46,15 @@ public class UnitSelection : MonoBehaviour
         string selectedUnitName = role == Role.COMMANDER ? selectedCommander.UnitData.name :
                                   role == Role.ATTACKER ? selectedAttacker.UnitData.name :
                                   role == Role.SUPPORTER ? selectedSupporter.UnitData.name : "ERROR";
+        
+        string roleText = role == Role.COMMANDER ? "지휘관" :
+                          role == Role.ATTACKER ? "원거리 딜러" :
+                          role == Role.SUPPORTER ? "지원가" : "ERROR";
 
         // 임시 문구
-        selectionChangeText.SetText(
-            "The " + role + " " + selectedUnitName + " was already selected. " +
-            "Will you change your selection with The " + role + " " + currentUnit.UnitData.name + "?"
+        selectionChangeTmp.SetText(
+            roleText + " " + selectedUnitName + "(이)가 이미 선택되었습니다. " +
+            roleText + " " + currentUnit.UnitData.name + "로 선택을 바꾸시겠습니까?"
         );
     }
 
@@ -63,13 +67,18 @@ public class UnitSelection : MonoBehaviour
         selectButton.gameObject.SetActive(!unitData.isSelected);
         deselectButton.gameObject.SetActive(unitData.isSelected);   
         
-        unitNameText.SetText(unitData.name);
-        roleText.SetText(unitData.role.ToString());
+        unitNameTmp.SetText("이름: " + unitData.name);
+
+        string roleText = unitData.role == Role.COMMANDER ? "지휘관" :
+                          unitData.role == Role.ATTACKER ? "원거리 딜러" :
+                          unitData.role == Role.SUPPORTER ? "지원가" : "ERROR";
+
+        roleTmp.SetText("역할: " + roleText);
 
         // 추후 string table로 변경 가능
-        unitDescriptionText.SetText(unitData.unitDescription);
-        skillDescriptionText1.SetText(unitData.skill1Description);
-        skillDescriptionText2.SetText(unitData.skill2Description);
+        unitDescriptionTmp.SetText(unitData.unitDescription);
+        skillDescriptionTmp1.SetText(unitData.skill1Description);
+        skillDescriptionTmp2.SetText(unitData.skill2Description);
 
         selectionChangePanel.SetActive(false);
     }
@@ -154,15 +163,6 @@ public class UnitSelection : MonoBehaviour
     public void OnBackClicked()
     {
         ChangeState();
-    }
-    #endregion
-
-    #region 디버깅용
-    public void ShowSelectedUnits()
-    {
-        Debug.Log(
-            selectedCommander + " / " + selectedAttacker + " / " + selectedSupporter
-        );
     }
     #endregion
 }

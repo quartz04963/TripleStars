@@ -44,7 +44,7 @@ public class Vanguard : Unit
         Movement.SetButtonControl(mouseButton);
 
         assemble = skill1;
-        assemble.Init("Assemble", skill1Key, Stats.assembleCooldown);
+        assemble.Init("집결", skill1Key, Stats.assembleCooldown);
 
         skill2.gameObject.SetActive(false);
     }

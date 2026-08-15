@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: ArcherStats
   m_EditorClassIdentifier: Assembly-CSharp::ArcherStats
   maxHP: 60
-  moveSpeed: 480
+  moveSpeed: 350
   damageFactor: 2
   baseAttackRange: 1000
   baseAttackDamage: 200
   baseAttackPeriod: 2
-  flightMoveSpeed: 600
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
+  criticalAttackFactor: 1.2
   explosiveArrowCooldown: 15
   explosiveArrowDmg: 300

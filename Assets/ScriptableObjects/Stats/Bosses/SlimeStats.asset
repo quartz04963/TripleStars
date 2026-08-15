@@ -12,39 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cbab1b40da91e428fed2474ca43920, type: 3}
   m_Name: SlimeStats
   m_EditorClassIdentifier: Assembly-CSharp::SlimeStats
-  maxHP: 50000
+  maxHP: 25000
   moveSpeed: 1000
   weakDamageFactor: 2
   attackRange: 600
-  firstJumpRangeRadius: 200
-  firstJumpDamage: 5
+  firstJumpRangeRadius: 600
+  firstJumpDamage: 20
   firstJumpPredelay: 1
-  firstJumpPostdelay: 1.1
-  secondJumpRangeRadius: 300
-  secondJumpDamage: 5
-  secondJumpPredelay: 1.15
-  secondJumpPostdelay: 1.25
-  lastJumpRangeRadius: 500
-  lastJumpDamage: 20
-  lastJumpPredelay: 1.3
-  lastJumpPostdelay: 9.15
-  lastJumpStunDuration: 10
+  firstJumpPostdelay: 0.2
+  secondJumpRangeRadius: 600
+  secondJumpDamage: 20
+  secondJumpPredelay: 1
+  secondJumpPostdelay: 0.2
+  lastJumpRangeRadius: 600
+  lastJumpDamage: 50
+  lastJumpPredelay: 2
+  lastJumpPostdelay: 3
+  lastJumpStunDuration: 4
   waveFrequency: 1
   waveRangeRadius: 1200
   waveDamage: 5
   wavePredelay: 1.9
-  wavePostdelay: 6.45
+  wavePostdelay: 3
   waveSlowFactor: 0.5
   waveSlowDuration: 12
   shakeFrequency: 2
   shakeSpreadRadius: 2000
   shakeSlowAreaRadius: 200
-  shakeSlowAreaNumber: 3
+  shakeSlowAreaNumber: 4
   shakePredelay: 0.5
-  shakePostdelay: 2
+  shakePostdelay: 1
   shakeSlowFactor: 0.5
   explodeFrequency: 1
-  explodeBurstDamage: 15
+  explodeBurstDamage: 40
   explodeBurstRangeRadius: 600
   explodeBurstDamageToSlime: 3000
   explodeBurstRangeForSlime: 200
@@ -52,5 +52,5 @@ MonoBehaviour:
   explodeMucusLifetime: 2
   explodeMucusBurstDelay: 2
   explodePredelay: 0.75
-  explodePostdelay: 6.3
+  explodePostdelay: 3
   explodeGroggyDuration: 10

@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: PaladinStats
   m_EditorClassIdentifier: Assembly-CSharp::PaladinStats
   maxHP: 100
-  moveSpeed: 360
+  moveSpeed: 480
   damageFactor: 0.8
   baseAttackRange: 100
   baseAttackDamage: 15
   baseAttackPeriod: 1
-  shieldCooldown: 5
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
+  shieldCooldown: 15
   shieldDuration: 1
   baitCooldown: 30

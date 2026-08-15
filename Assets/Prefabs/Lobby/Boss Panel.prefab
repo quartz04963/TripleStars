@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EASY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 826e50ec3dc97834c93687ff7ce5e783, type: 2}
+  m_sharedMaterial: {fileID: -1923139886044277788, guid: 826e50ec3dc97834c93687ff7ce5e783, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,8 +336,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Boss 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 826e50ec3dc97834c93687ff7ce5e783, type: 2}
+  m_sharedMaterial: {fileID: -1923139886044277788, guid: 826e50ec3dc97834c93687ff7ce5e783, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -573,6 +573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc42e4496818c34382eabaf5b77bb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossPanel
-  nameText: {fileID: 4365699953420888742}
-  difficultyText: {fileID: 3418809471356313562}
+  bossData:
+    bossCode: 0
+    name: 
+    difficulty: 0
+  nameTmp: {fileID: 4365699953420888742}
+  difficultyTmp: {fileID: 3418809471356313562}
   bossImg: {fileID: 5254771803478980067}

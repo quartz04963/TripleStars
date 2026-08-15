@@ -168,6 +168,8 @@ public class GameplayManager : MonoBehaviour
     {
         Pause();
 
-        popups.EnableFailPopup();
+        int clearTimeThreshold = (int)(clearTimeThresholds[(int)selectionData.difficulty] / 60);
+
+        popups.EnableFailPopup(clearTimeThreshold);
     }
 }

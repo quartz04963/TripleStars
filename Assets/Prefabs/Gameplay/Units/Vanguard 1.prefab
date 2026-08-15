@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadfcc1eb6629704290c98a82148e466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vanguard
-  unitName: Vanguard
+  unitName: "\uC120\uBD09\uC7A5"
   stats: {fileID: 11400000, guid: 0b3c6dedf15cbd54c91131336e0d89cc, type: 2}
   state: {fileID: 4272837865829135813}
   movement: {fileID: 7371411782108818979}
@@ -754,8 +754,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: -1781090697589121480, guid: 4b5a2451d45362a4ca3441048b5cc458, type: 3}
-  stunnedSprite: {fileID: 9158911500341885507, guid: 943cc161f1fa9a540b9f559a7e0dbd6d, type: 3}
 --- !u!61 &6499625024170729164
 BoxCollider2D:
   m_ObjectHideFlags: 0

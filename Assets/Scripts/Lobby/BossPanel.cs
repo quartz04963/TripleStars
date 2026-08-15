@@ -6,16 +6,20 @@ public class BossPanel : MonoBehaviour
 {
     [SerializeField] BossLobbyData bossData;
     
-    [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] TextMeshProUGUI difficultyText;
+    [SerializeField] TextMeshProUGUI nameTmp;
+    [SerializeField] TextMeshProUGUI difficultyTmp;
     [SerializeField] Image bossImg;
 
     public void Init(BossLobbyData bossData, Sprite sprite)
     {
         this.bossData = bossData;
         
-        nameText.SetText(bossData.name);
-        difficultyText.SetText(bossData.difficulty.ToString());
+        nameTmp.SetText(bossData.name);
+
+        string difficultyText = bossData.difficulty == Difficulty.EASY ? "★☆☆" :
+                                bossData.difficulty == Difficulty.NORMAL ? "★★☆" : "★★★";
+
+        difficultyTmp.SetText(difficultyText);
 
         bossImg.sprite = sprite;
     }

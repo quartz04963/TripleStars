@@ -44,7 +44,7 @@ public class Saintess : Unit
         Movement.SetButtonControl(mouseButton);
 
         teleport = skill1;
-        teleport.Init("Teleport", skill1Key, Stats.teleportCooldown);
+        teleport.Init("텔레포트", skill1Key, Stats.teleportCooldown);
 
         skill2.gameObject.SetActive(false);
     }

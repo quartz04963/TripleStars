@@ -13,14 +13,20 @@ MonoBehaviour:
   m_Name: SwordsmanStats
   m_EditorClassIdentifier: Assembly-CSharp::SwordsmanStats
   maxHP: 100
-  moveSpeed: 480
+  moveSpeed: 500
   damageFactor: 1
   baseAttackRange: 160
   baseAttackDamage: 22
   baseAttackPeriod: 1
+  reviveTimes:
+  - 10
+  - 30
+  - 45
+  - 60
+  - 120
   rollCooldown: 2
-  rollSpeed: 900
-  rollDuration: 1
+  rollSpeed: 3000
+  rollDuration: 0.25
   flameSwordCooldown: 15
   flameSwordDmg: 60
   flameSwordPredelay: 1.5

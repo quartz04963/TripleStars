@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90e717ef7bc5444cad6bb8a5e688e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Saintess
-  unitName: Saintess
+  unitName: "\uC131\uB140"
   stats: {fileID: 11400000, guid: e852b071e7e3be841901772e82ad0017, type: 2}
   state: {fileID: 4391859962909982245}
   movement: {fileID: 4038864319783928749}
@@ -676,8 +676,6 @@ MonoBehaviour:
   damageFactor: 1
   attackFactor: 1
   moveSpeedFactor: 1
-  standingSprite: {fileID: 8443060148952950916, guid: aa927ed838207224294d5a0cb9fe7a8d, type: 3}
-  stunnedSprite: {fileID: -8393783745649851230, guid: 6f8457efaeb58c246bbaa399b366b023, type: 3}
 --- !u!61 &5131134396366044185
 BoxCollider2D:
   m_ObjectHideFlags: 0
