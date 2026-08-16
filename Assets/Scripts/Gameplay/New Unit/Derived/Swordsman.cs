@@ -1,8 +1,11 @@
 using System.Threading;
+using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
 public class Swordsman : Unit
 {
+    [SerializeField] GameObject effectorPrf;
+
     private SkillUseInfo roll;
     private SkillUseInfo flameSword;
 
@@ -94,6 +97,13 @@ public class Swordsman : Unit
 
         BaseAttack.TurnAttackCollider(target.transform);
 
+        Vector2 direction = baseAttack.Target.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, angle - 90f);
+        var effector = Instantiate(effectorPrf, transform.position, rotation).GetComponent<Effector>();
+        effector.PlayEffect(2 * Stats.baseAttackRange, "Flame Slash", 1f);
+
         BossBody weakpoint = BaseAttack.GetHitWeakpoint();
 
         for (int i = 0; i < Stats.flameSwordHitNumber; i++) // 첫 타가 치명타로 적중 시 나머지 타수도 치명타
@@ -101,6 +111,7 @@ public class Swordsman : Unit
             if (weakpoint != null) weakpoint.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
             else target.state.TakeDamage(Stats.flameSwordDmg * state.AttackFactor, this);
 
+            
             await GameplayUtils.DelayForSeconds(Stats.flameSwordHitInterval); // 차징 종료 후 공격은 캔슬되지 않음
         }
 

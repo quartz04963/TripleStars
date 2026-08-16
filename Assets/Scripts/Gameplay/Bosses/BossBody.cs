@@ -22,7 +22,6 @@ public class BossBody : Enemy
             if (unit is Archer archer) finalDamage *= archer.Stats.criticalAttackFactor;
         }
 
-        Debug.Log(finalDamage);
         boss.state.TakeDamage(finalDamage, unit);
     }
 }

@@ -152,6 +152,7 @@ MonoBehaviour:
   state: {fileID: 814275185479830110}
   movement: {fileID: 882333685478156084}
   baseAttack: {fileID: 8088661148652875727}
+  effectorPrf: {fileID: 5064571008229660426, guid: 967c53e0bb142054ca411841e0e8eea4, type: 3}
 --- !u!50 &21820676525510140
 Rigidbody2D:
   serializedVersion: 5
@@ -643,7 +644,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CommanderStateController
   unit: {fileID: 223730779837755531}
   hp: {fileID: 0}
-  reviveCount: 0
   isAlive: 1
   isImmune: 0
   isPredelaying: 0

@@ -1,7 +1,10 @@
 using UnityEngine.InputSystem.Controls;
+using UnityEngine;
 
 public class Paladin : Unit
 {
+    [SerializeField] GameObject effectorPrf;
+
     private SkillUseInfo shield;
     private SkillUseInfo bait;
 
@@ -42,18 +45,27 @@ public class Paladin : Unit
         // 효과: 사용 시 1초 간 무적
 
         if (!shield.StartCooldown()) return;
-        // 추후 애니메이션 넣기
+
+        var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+        effector.PlayEffect(200, "Shield", 1f);
 
         state.Immune(Stats.shieldDuration);
     }
 
-    void Bait()
+    async void Bait()
     {
         // 스킬명: 네 상대는 나다
         // 효과: 보스 어그로 끌기
 
         if (!bait.StartCooldown()) return;
-        // 추후 애니메이션 넣기
+
+        for (int i = 0; i < 3; i++)
+        {
+            var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+            effector.PlayEffect(500, "Shockwave", 1f);
+
+            await GameplayUtils.DelayForSeconds(0.22f);
+        }
 
         GameplayManager.instance.boss.targeting.SetTarget(this);
     }
