@@ -175,6 +175,8 @@ public class Boar : Boss
 
         await GameplayUtils.DelayForSeconds(Stats.roarPredelay);
 
+        PlayShockWaveEffect(3, 0.22f);
+
         float time = 0;
         while (time < Stats.roarLastingDuration)
         {
@@ -213,6 +215,26 @@ public class Boar : Boss
             Movement.EndRoam();
             await State.Recover(Stats.roamPostdelay);
         }
+    }
+
+    private async void PlayShockWaveEffect(int number, float interval)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+            effector.PlayEffect(1000, "Shockwave", 1f);
+
+            await GameplayUtils.DelayForSeconds(interval);
+        }
+    }
+
+    public void PlayImpactEffect()
+    {
+        Vector3 position = transform.position + transform.right * 7f;
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 90f);
+
+        var effector = Instantiate(effectorPrf, position, rotation).GetComponent<Effector>();
+        effector.PlayEffect(500, "Impact", 1.5f);
     }
 
     #endregion

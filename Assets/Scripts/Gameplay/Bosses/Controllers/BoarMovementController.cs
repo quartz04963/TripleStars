@@ -106,9 +106,11 @@ public class BoarMovementController : BossMovementController
         count = Boar.HeadCollider.Cast(delta.normalized, GameplayUtils.wallFilter, hitResults, delta.magnitude);
         if (count > 0)
         {            
+            wasCrashedIntoWall = true;
+
             BoarState.IncreaseWallCrashCount();
 
-            wasCrashedIntoWall = true;
+            Boar.PlayImpactEffect();
             Boar.RushCTS.Cancel();
 
             return;

@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 abstract public class Boss : MonoBehaviour
@@ -13,6 +11,8 @@ abstract public class Boss : MonoBehaviour
     public BossStats stats;
     public BossStateController state;
     public BossMovementController movement;
+
+    public GameObject effectorPrf;
     
     protected virtual async void Start()
     {

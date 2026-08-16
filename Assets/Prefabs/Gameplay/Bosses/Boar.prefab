@@ -377,6 +377,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: da1515676dc7265418b5a3b65a3e3132, type: 2}
   state: {fileID: 1518986436093308024}
   movement: {fileID: 3334029270196089059}
+  effectorPrf: {fileID: 5064571008229660426, guid: 967c53e0bb142054ca411841e0e8eea4, type: 3}
   headbuttSector: {fileID: 1683024610660563962}
   headCollider: {fileID: 3306339738303541129}
   bodyCollider: {fileID: 1904296985883252170}

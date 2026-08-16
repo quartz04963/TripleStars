@@ -96,6 +96,9 @@ public class Slime : Boss
 
         await GameplayUtils.DelayForSeconds(Stats.wavePredelay);
 
+        var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+        effector.PlayEffect(2 * Stats.waveRangeRadius, "Blue Wave", 1.5f);
+
         // 피격 판정 처리
         Unit candidate = null;
 
@@ -129,6 +132,9 @@ public class Slime : Boss
         Debug.Log("털어내기");
 
         state.PlayAnimation("Shake");
+
+        var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+        effector.PlayEffect(2000, "Blue Splash", 1f);
 
         await GameplayUtils.DelayForSeconds(Stats.shakePredelay);
         

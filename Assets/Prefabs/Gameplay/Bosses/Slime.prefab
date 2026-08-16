@@ -218,6 +218,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 3619d9f9d8f6bea4186e252904cb81df, type: 2}
   state: {fileID: 989174353759870646}
   movement: {fileID: 8401264051505538750}
+  effectorPrf: {fileID: 5064571008229660426, guid: 967c53e0bb142054ca411841e0e8eea4, type: 3}
   waveCollider: {fileID: 7088001413317368790}
   jumpAreaPrf: {fileID: 4830799690779723534, guid: 604db961e5bb8a747b1ef03650cad8f2, type: 3}
   slowAreaPrf: {fileID: 6245761895375117059, guid: a2bffb6c77ae558489bcf7fe755ebb62, type: 3}
