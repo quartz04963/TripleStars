@@ -27,6 +27,8 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] SelectionData selectionData;
     [SerializeField] GameObject[] bossPrefabs;
     [SerializeField] GameObject[] unitPrefabs;
+    [SerializeField] Sprite[] backgroundSprites;
+    [SerializeField] Sprite[] wallSprites;
     
     [Header("Info Classes")]
     [SerializeField] HpInfo bossHpInfo;
@@ -44,6 +46,10 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] GameObject bossSpawnWarning;
     [SerializeField] TextMeshProUGUI bossSpawnWarningTmp;
     [SerializeField] TextMeshProUGUI bossSpawnTimerTmp;
+
+    [Header("기타")]
+    [SerializeField] SpriteRenderer backgroundSR;
+    [SerializeField] SpriteRenderer wallSR;
     [SerializeField] TextMeshProUGUI lifeCountTmp;
 
     private KeyControl commanderSkill1Key = Keyboard.current.spaceKey;
@@ -77,6 +83,7 @@ public class GameplayManager : MonoBehaviour
 
     async void Start()
     {
+        InitBackground();
         InitUnits();
 
         await SpawnBoss();
@@ -90,6 +97,11 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    void InitBackground()
+    {
+        backgroundSR.sprite = backgroundSprites[(int)selectionData.bossCode - 1];
+        wallSR.sprite = wallSprites[(int)selectionData.bossCode - 1];
+    }
 
     async Task SpawnBoss()
     {
