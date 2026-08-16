@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Popups : MonoBehaviour
@@ -62,18 +61,18 @@ public class Popups : MonoBehaviour
     public void Exit()
     {
         GameplayManager.instance.Resume();
-        SceneManager.LoadScene("Lobby");
+        TransitionManager.instance.Transit("Lobby");
     }
 
     public void Title()
     {
         GameplayManager.instance.Resume();
-        SceneManager.LoadScene("Title");
+        TransitionManager.instance.Transit("Title");
     }
 
     public void Retry()
     {
         GameplayManager.instance.Resume();
-        SceneManager.LoadScene("Gameplay");
+        TransitionManager.instance.Transit("Gameplay");
     }
 }

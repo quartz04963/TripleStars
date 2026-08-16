@@ -26,10 +26,11 @@ public class LobbyUnit : MonoBehaviour
         else if (LobbyManager.instance.State == LobbyState.BOSS_SELECTED || LobbyManager.instance.State == LobbyState.READY)
         {
             LobbyManager.instance.Camera.ZoomAndMove(transform.position + new Vector3(1.11f, -0.22f, -10f), 1.25f, 0.5f);
+            LobbyManager.instance.UnitSelection.ChangePanel(this);
+            
             await Task.Delay(500);
 
             LobbyManager.instance.ChangeState(LobbyState.SELECTING_UNIT);
-            LobbyManager.instance.UnitSelection.ChangePanel(this);
         }
     }
 

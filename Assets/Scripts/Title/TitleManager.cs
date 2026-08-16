@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
     public void GameStart()
     {
-        SceneManager.LoadScene("Lobby");
+        TransitionManager.instance.Transit("Lobby");
     }
 
     public void Quit()

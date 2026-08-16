@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum LobbyState
@@ -13,11 +12,14 @@ public enum LobbyState
 
 public class LobbyManager : MonoBehaviour
 {
+    [SerializeField] GameData gameData;
+    [SerializeField] Tutorial tutorial;
+    [SerializeField] LobbyCamera lobbyCamera;
+
     [SerializeField] LobbyState state;
     [SerializeField] SelectionData selectionData;
     [SerializeField] BossSelection bossSelection;
     [SerializeField] UnitSelection unitSelection;
-    [SerializeField] LobbyCamera lobbyCamera;
 
     [SerializeField] Button startButton;
     [SerializeField] Button goButton;
@@ -41,6 +43,12 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         ChangeState(LobbyState.STANDBY);
+
+        if (!gameData.isTutorialShowed)
+        {
+            gameData.isTutorialShowed = true;
+            tutorial.gameObject.SetActive(true);
+        }
     }
 
     public void ChangeState(LobbyState toState)
@@ -50,7 +58,7 @@ public class LobbyManager : MonoBehaviour
         bool startActive = toState == LobbyState.STANDBY ? true : false;
         bool goActive = toState == LobbyState.BOSS_SELECTED || toState == LobbyState.READY ? true : false;
         bool menuActive = toState == LobbyState.SELECTING_UNIT ? false : true;
-        bool backActive = toState == LobbyState.STANDBY || toState == LobbyState.SELECTING_UNIT ? false : true;
+        bool backActive = toState == LobbyState.SELECTING_UNIT ? false : true;
         bool tutorialActive = toState == LobbyState.STANDBY ? true : false;
         bool bossSelectionActive = toState == LobbyState.SELECTING_BOSS ? true : false;
         bool unitSelectionActive = toState == LobbyState.SELECTING_UNIT ? true : false;
@@ -90,13 +98,17 @@ public class LobbyManager : MonoBehaviour
         selectionData.attackerCode = unitSelection.SelectedAttacker;
         selectionData.supporterCode = unitSelection.SelectedSupporter;
 
-        SceneManager.LoadScene("Gameplay");
+        TransitionManager.instance.Transit("Gameplay");
     }
 
     public void Back()
     {
         switch (state)
         {
+            case LobbyState.STANDBY:
+                TransitionManager.instance.Transit("Title");
+                break;
+                
             case LobbyState.SELECTING_BOSS: 
             case LobbyState.BOSS_SELECTED:
             case LobbyState.READY: 
