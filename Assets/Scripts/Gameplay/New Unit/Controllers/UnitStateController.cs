@@ -11,6 +11,7 @@ public class UnitStateController : MonoBehaviour
     public Unit unit;
 
     [SerializeField] protected HpInfo hp;
+    [SerializeField] protected GameObject effectorPrf;
 
     [Header("상태 변수")]
     [SerializeField] protected bool isAlive = true;
@@ -114,6 +115,15 @@ public class UnitStateController : MonoBehaviour
         if (!IsHealable()) return;
         
         hp.AddHp(heal);
+
+        for (int i = 0; i < 3; i++)
+        {
+            var effector = Instantiate(effectorPrf, transform).GetComponent<Effector>();
+            float dx = Random.Range(-0.5f, 0.5f);
+            float dy = Random.Range(-0.5f, 0.5f);
+            effector.transform.localPosition = new Vector3(dx, dy, 0);
+            effector.PlayEffect(60, "Heal", 1f);
+        }
     }
 
     public virtual async void Immune(float duration)

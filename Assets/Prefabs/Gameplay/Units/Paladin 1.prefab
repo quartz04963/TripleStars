@@ -644,6 +644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CommanderStateController
   unit: {fileID: 223730779837755531}
   hp: {fileID: 0}
+  effectorPrf: {fileID: 5064571008229660426, guid: 967c53e0bb142054ca411841e0e8eea4, type: 3}
   isAlive: 1
   isImmune: 0
   isPredelaying: 0
