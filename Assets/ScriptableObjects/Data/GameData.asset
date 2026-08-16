@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: Assembly-CSharp::GameData
   isTutorialShowed: 0
+  lifeCount: 3
+  reviveTime_seconds: 10
+  clearTimeThresholds_minutes: 030000000500000007000000

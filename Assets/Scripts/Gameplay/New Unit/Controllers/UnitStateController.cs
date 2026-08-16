@@ -11,7 +11,6 @@ public class UnitStateController : MonoBehaviour
     public Unit unit;
 
     [SerializeField] protected HpInfo hp;
-    [SerializeField] protected int reviveCount;
 
     [Header("상태 변수")]
     [SerializeField] protected bool isAlive = true;
@@ -29,8 +28,6 @@ public class UnitStateController : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
 
-
-    public int ReviveCount => reviveCount;
     public bool IsAlive => isAlive;
     public bool IsStunned => isStunned;
     public bool IsKnockedBack => isKnockedBack;
@@ -89,13 +86,17 @@ public class UnitStateController : MonoBehaviour
 
         await Task.Yield(); // 넉백 판정을 위해 한 프레임 대기;
 
+        if (++GameplayManager.instance.DeathCount >= GameplayManager.instance.gameData.lifeCount)
+        {
+            GameplayManager.instance.GameOver();
+        }
+
         Respawn();
     }
 
     protected virtual async void Respawn()
     {
-        int idx = Mathf.Min(reviveCount++, unit.stats.reviveTimes.Count - 1);
-        float reviveTime = unit.stats.reviveTimes[idx];
+        float reviveTime = GameplayManager.instance.gameData.reviveTime_seconds;
         
         Immune(reviveTime);
         await GameplayUtils.DelayForSeconds(reviveTime);

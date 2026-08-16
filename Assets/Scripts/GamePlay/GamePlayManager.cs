@@ -18,12 +18,13 @@ public class GameplayManager : MonoBehaviour
     [Header("플레이 진행 상황 변수")]
     [SerializeField] bool isPaused = false;
     [SerializeField] bool isBossSpawned = false;
+    [SerializeField] int deathCount = 0;
     [SerializeField] float bossSpawnDelay;
     [SerializeField] float clearTime;
 
     [Header("데이터")]
+    [SerializeField] public GameData gameData;
     [SerializeField] SelectionData selectionData;
-    [SerializeField] float[] clearTimeThresholds = new float[]{ 180, 300, 420 };
     [SerializeField] GameObject[] bossPrefabs;
     [SerializeField] GameObject[] unitPrefabs;
     
@@ -43,6 +44,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] GameObject bossSpawnWarning;
     [SerializeField] TextMeshProUGUI bossSpawnWarningTmp;
     [SerializeField] TextMeshProUGUI bossSpawnTimerTmp;
+    [SerializeField] TextMeshProUGUI lifeCountTmp;
 
     private KeyControl commanderSkill1Key = Keyboard.current.spaceKey;
     private KeyControl commanderSkill2Key = Keyboard.current.qKey;
@@ -56,6 +58,15 @@ public class GameplayManager : MonoBehaviour
     public readonly List<Unit> allUnits = new();
 
     public bool IsPaused => isPaused;
+    public int DeathCount 
+    {
+        get => deathCount;
+        set 
+        {
+            deathCount = value;
+            lifeCountTmp.SetText("남은 목숨\n♥ x " + (gameData.lifeCount - deathCount));
+        }
+    }
 
 
     void Awake()
@@ -157,9 +168,9 @@ public class GameplayManager : MonoBehaviour
     {
         Pause();
 
-        bool condition2 = commander.state.ReviveCount + attacker.state.ReviveCount + supporter.state.ReviveCount == 0;
-        bool condition3 = clearTime <= clearTimeThresholds[(int)selectionData.difficulty];
-        int clearTimeThreshold = (int)(clearTimeThresholds[(int)selectionData.difficulty] / 60);
+        bool condition2 = deathCount == 0;
+        bool condition3 = clearTime <= gameData.clearTimeThresholds_minutes[(int)selectionData.difficulty] * 60f;
+        int clearTimeThreshold = gameData.clearTimeThresholds_minutes[(int)selectionData.difficulty];
 
         popups.EnableClearPopup(condition2, condition3, clearTimeThreshold);
     }
@@ -168,7 +179,7 @@ public class GameplayManager : MonoBehaviour
     {
         Pause();
 
-        int clearTimeThreshold = (int)(clearTimeThresholds[(int)selectionData.difficulty] / 60);
+        int clearTimeThreshold = gameData.clearTimeThresholds_minutes[(int)selectionData.difficulty];
 
         popups.EnableFailPopup(clearTimeThreshold);
     }
