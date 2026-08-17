@@ -67,6 +67,11 @@ public class Paladin : Unit
             await GameplayUtils.DelayForSeconds(0.22f);
         }
 
+        if (GameplayManager.instance.boss is Boar boar)
+        {
+            boar.WasBaited = true;
+        }
+
         GameplayManager.instance.boss.targeting.SetTarget(this);
     }
 }

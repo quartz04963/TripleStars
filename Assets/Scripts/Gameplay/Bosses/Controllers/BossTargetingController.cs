@@ -16,6 +16,11 @@ public class BossTargetingController : MonoBehaviour
     protected readonly List<Collider2D> collidersInRange = new();
 
     public Unit Target => target;
+    public bool WasTargetStunned
+    {
+        get => wasTargetStunned;
+        set => wasTargetStunned = value;
+    }
 
 
     protected virtual void Awake()
@@ -32,12 +37,12 @@ public class BossTargetingController : MonoBehaviour
 
     public virtual void SetTarget(Unit newTarget)
     {
-        target = newTarget;
-
         if (target == GameplayManager.instance.commander && newTarget != target)
         {
             commanderAccumulativeDamage = 0;
         }
+
+        target = newTarget;
     }
 
     public virtual void UpdateTarget()

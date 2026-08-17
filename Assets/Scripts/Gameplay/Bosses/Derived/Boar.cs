@@ -18,7 +18,8 @@ public class Boar : Boss
     [SerializeField] BoxCollider2D bodyCollider;
     [SerializeField] Collider2D rushCollider;
     [SerializeField] CircleCollider2D roarCollider;
-
+    
+    private bool wasBaited = false;
     private CancellationTokenSource rushCTS;
     private CancellationTokenSource roamCTS;  
 
@@ -33,6 +34,12 @@ public class Boar : Boss
     
     public CancellationTokenSource RushCTS => rushCTS;
     public CancellationTokenSource RoamCTS => roamCTS;
+
+    public bool WasBaited
+    {
+        get => wasBaited;
+        set => wasBaited = true;
+    }
 
     protected override void Start()
     {
@@ -172,6 +179,9 @@ public class Boar : Boss
         state.PlayAnimation("Roar");
 
         roarCollider.gameObject.SetActive(true);
+        
+        wasBaited = false;
+        var target = targeting.Target;
 
         await GameplayUtils.DelayForSeconds(Stats.roarPredelay);
 
@@ -193,6 +203,14 @@ public class Boar : Boss
         }
 
         roarCollider.gameObject.SetActive(false);
+
+        if (!wasBaited)
+        {
+            targeting.WasTargetStunned = true;
+            targeting.SetTarget(target);
+        }
+
+        // ForceToTarget(target, Stats.roarStunDuration + 0.01f);
 
         await State.Recover(Stats.roarPostdelay, true);
     }
