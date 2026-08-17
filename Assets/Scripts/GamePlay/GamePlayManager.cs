@@ -19,7 +19,6 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] bool isPaused = false;
     [SerializeField] bool isBossSpawned = false;
     [SerializeField] int deathCount = 0;
-    [SerializeField] float bossSpawnDelay;
     [SerializeField] float clearTime;
 
     [Header("데이터")]
@@ -111,11 +110,11 @@ public class GameplayManager : MonoBehaviour
         bossSpawnArea.SetActive(true);
 
         float time = 0;
-        while (time < bossSpawnDelay)
+        while (time < gameData.bossSpawnDelay_seconds)
         {
             time += Time.deltaTime;
 
-            bossSpawnTimerTmp.SetText("" + (int)(bossSpawnDelay - time + 1));
+            bossSpawnTimerTmp.SetText("" + (int)(gameData.bossSpawnDelay_seconds - time + 1));
 
             await Task.Yield();
         }

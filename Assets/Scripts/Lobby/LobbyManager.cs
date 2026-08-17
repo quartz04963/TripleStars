@@ -44,9 +44,9 @@ public class LobbyManager : MonoBehaviour
     {
         ChangeState(LobbyState.STANDBY);
 
-        if (!gameData.isTutorialShowed)
+        if (!gameData.IsTutorialShowed)
         {
-            gameData.isTutorialShowed = true;
+            gameData.IsTutorialShowed = true;
             tutorial.gameObject.SetActive(true);
         }
     }
