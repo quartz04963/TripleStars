@@ -6635,7 +6635,6 @@ MonoBehaviour:
   isPaused: 0
   isBossSpawned: 0
   deathCount: 0
-  bossSpawnDelay: 10
   clearTime: 0
   gameData: {fileID: 11400000, guid: 016f70ac222bde84ebb7c74da4dc57a5, type: 2}
   selectionData: {fileID: 11400000, guid: e74e16fa3762b624d8ad13d6b288e7f6, type: 2}

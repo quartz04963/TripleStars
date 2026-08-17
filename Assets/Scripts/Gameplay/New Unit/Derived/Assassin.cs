@@ -7,6 +7,7 @@ public class Assassin : Unit
 {
     [Header("Assassin")]
     [SerializeField] GameObject posionShurikenPrf;
+    [SerializeField] GameObject poisonMarkPrf;
 
     private SkillUseInfo poisonShuriken;
 
@@ -74,17 +75,30 @@ public class Assassin : Unit
     {
         if (poisionStacks.TryGetValue(boss, out int stack))
         {
-            if (stack < Stats.poisonMaxStack) poisionStacks[boss]++;
+            if (stack < Stats.poisonMaxStack) 
+            {
+                var mark = boss.GetComponentInChildren<PoisonMark>();
+                if (mark != null) mark.SetMarks(++poisionStacks[boss]);
+            }
         }
         else
         {
             poisionStacks[boss] = 1;
+
+            var mark = Instantiate(poisonMarkPrf, boss.transform).GetComponent<PoisonMark>();
+            mark.SetMarks(1);
         }
     }
 
     public void ClearPoisonStack()
     {
-        foreach (var key in poisionStacks.Keys.ToList()) poisionStacks[key] = 0;
+        foreach (var key in poisionStacks.Keys.ToList())
+        {
+            poisionStacks[key] = 0;
+
+            var mark = key.GetComponentInChildren<PoisonMark>();
+            if (mark != null) mark.SetMarks(0);
+        } 
     }
 
     void UpdatePoison()
